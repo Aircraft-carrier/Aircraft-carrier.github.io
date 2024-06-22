@@ -1,9 +1,6 @@
-Click to return to [🔗 my blog article directory](https://aircraft-carrier.github.io/#/toc)
-
 # self-introduction
 
-* catalogs
-{:toc}
+[TOC]
 
 [中文版](https://aircraft-carrier.github.io/blog/个人介绍)
 
