@@ -4,10 +4,13 @@ Click to return to [🔗 my blog article directory](https://aircraft-carrier.git
 
 * catalogs
 {:toc}
-
 [中文版](https://aircraft-carrier.github.io/blog/个人介绍)
 
 > The personal introduction will be divided into the following aspects: background, Academic Performance, Research and Competition Achievements, and hobbies.
+
+<div style="text-align: center;">
+  <img src="https://aircraft-carrier.github.io/blogImg/efec452a382b430fabeea4265d4c46f8.png" width="30%" alt="window" />
+</div>
 
 ## 🥑1background
 
@@ -16,6 +19,10 @@ My name is **Zheng Shuhang**, and I come from Quanzhou City, Fujian Province.
 - I attended the local ordinary middle school — Guifeng Middle School.
 - I studied at Quanzhou No. 7 High School, a provincial key high school.
 - I am currently studying at Harbin Institute of Technology during my undergraduate stage, majoring in **Artificial Intelligence**.
+
+<div style="text-align: center;">
+  <img src="https://aircraft-carrier.github.io/blogImg/d01502b485be49608977624328ce8563.png" width="30%" alt="window" />
+</div>
 
 ## 🍋2 Academic Performance
 
@@ -33,17 +40,21 @@ Minor in studying Statistics Mathematics.
 
 - Participated in the "Computer Design Competition" and qualified for the finals. 
 
-[Project git link](https://github.com/shuaiqibiren1/MutilVNet3d/tree/master)
+[Project git repository](https://github.com/shuaiqibiren1/MutilVNet3d/tree/master)
 
 Participated in the project "Multimodal Cardiac Image Segmentation", where my main responsibilities included training network construction and model training.
 
-
+<div style="text-align: center;">
+  <img src="https://aircraft-carrier.github.io/blogImg/a1c46ad0ac654f159098f3667849f17b.png" width="50%" alt="window" />
+</div>
 
 - Participated in the school's HITCRT club's "Logistics Robot Competition".
 
 Together with team members, completed the modeling, electronic control, communication, and visual control of a logistics robot car. My main responsibilities included serial communication of the car and developing a visual recognition system with Raspberry Pi.
 
-
+<div style="text-align: center;">
+  <img src="https://aircraft-carrier.github.io/blogImg/a9543c857dc9473eb2e71ac4abad5c11.png" width="50%" alt="window" />
+</div>
 
 ## 🍒 4 hobbies
 
