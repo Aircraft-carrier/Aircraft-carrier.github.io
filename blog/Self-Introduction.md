@@ -26,9 +26,9 @@ My name is **Zheng Shuhang**, and I come from Quanzhou City, Fujian Province.
 
 ## 🍋2 Academic Performance
 
-Currently studying at Harbin Institute of Technology, majoring in **Credit Weighted GPA Ranking**, ranked 14 out of 47 with a credit weighted GPA of 90.555.
+Currently studying at Harbin Institute of Technology, majoring in **Credit Weighted GPA Ranking**, ranked 14 out of 47 with a credit weighted GPA of 91.321.
 
-Achieved high scores in several major courses. For instance, Probability Theory 100, Formal Language and Automata 98.4, Calculus 96, Algorithm 91.6...
+Achieved high scores in several major courses. For instance, Probability Theory 100, Formal Language and Automata 98.4, Calculus 96, Algorithm 91.6,CSAPP 96.8...
 
 Minor in studying Statistics Mathematics.
 
