@@ -3,7 +3,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8" />
-    <title>Categories: visualization | Aircraft</title>
+    <title> | Aircraft</title>
     <meta name="author" content="Aircraft" />
     <meta name="description" content="谁替我上学 我可以替你睡觉" />
     <meta name="keywords" content="" />
@@ -37,6 +37,10 @@
 
 
 <script src="/js/lib/preview.js"></script>
+
+
+
+
 
 
 
@@ -150,183 +154,118 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <div id="archives">
-    
-    <div class="categories-tags">
-        
-        
-        
-        <span>
-            <a href="/categories/Paper/" style="background: #ffa2c4">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Paper
-            </a>
+            <div class="article">
+    <div>
+        <h1></h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2024/7/23
         </span>
-        
-        
-        
-        <span>
-            <a href="/categories/Learning-Notes/" style="background: #ff7d73">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Learning Notes
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/categories/Learning/" style="background: #00bcd4">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Learning
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/categories/Database/" style="background: #ff7d73">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Database
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/categories/Learning/Introduction/" style="background: #ffa2c4">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Introduction
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/categories/Blog/" style="background: #ff7d73">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Blog
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/categories/codeforces/" style="background: #00a596">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                codeforces
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/categories/Database/Learning-Notes/" style="background: #ffa2c4">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Learning Notes
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/categories/General/" style="background: #03a9f4">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                General
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/categories/Learning/visualization/" style="background: linear-gradient(120deg, #9abbf7 0%, #ffbbf4 100%)">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                visualization
-            </a>
-        </span>
-        
-        
         
         
     </div>
     
-    <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2024/7/12</div>
-            <a href="/2024/07/12/paddle-visualdl/">
-                <h3>paddle-visualdl</h3>
-            </a>
-            <div class="info">
-                
-                <span class="category">
-                    <a href="/categories/Learning/">
-                        <span class="icon">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </span>
-                        Learning
-                    </a>
-                </span>
-                
-                
-                <span class="tags">
-                    <span class="icon">
-                        <i class="fa-solid fa-tags fa-fw"></i>
-                    </span>
-                    
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/PaddlePaddle/" style="color: #ff7d73">
-                            PaddlePaddle
-                        </a>
-                    </span>
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/deep-learning/" style="color: #ffa2c4">
-                            deep learning
-                        </a>
-                    </span>
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/AI/" style="color: #03a9f4">
-                            AI
-                        </a>
-                    </span>
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/visualdl/" style="color: #00a596">
-                            visualdl
-                        </a>
-                    </span>
-                    
-                </span>
-                
-            </div>
-        </div>
+    <div class="content" v-pre>
+        <hr>
+<p>title: vue_1<br>date: 2024-07-23 21:46:53<br>tags:</p>
+<pre><code> - Vue3
+</code></pre><p>categories:</p>
+<pre><code> - Learning Notes
+</code></pre><p>description: Vue learning notes 1</p>
+<pre><code class="lang-html">&lt;!-- &lt;body&gt;
+    &lt;div id=&quot;app&quot;&gt;
+
+        文章分类: &lt;input type=&quot;text&quot; v-model=&quot;searchConditions.category&quot;&gt;
+
+        发布状态: &lt;input type=&quot;text&quot;  v-model=&quot;searchConditions.state&quot;&gt;
+
+        &lt;button v-on:click=&quot;search&quot;&gt;搜索&lt;/button&gt;
+
+        &lt;br /&gt;
+        &lt;br /&gt;
+        &lt;table border=&quot;1 solid&quot; colspa=&quot;0&quot; cellspacing=&quot;0&quot;&gt;
+            &lt;tr&gt;
+                &lt;th&gt;文章标题&lt;/th&gt;
+                &lt;th&gt;分类&lt;/th&gt;
+                &lt;th&gt;发表时间&lt;/th&gt;
+                &lt;th&gt;状态&lt;/th&gt;
+                &lt;th&gt;操作&lt;/th&gt;
+            &lt;/tr&gt;
+            &lt;tr v-for=&quot;(article,index) in articleList&quot;&gt;
+                &lt;td&gt;&#123;&#123;article.title&#125;&#125;&lt;/td&gt;
+                &lt;td&gt;&#123;&#123;article.category&#125;&#125;&lt;/td&gt;
+                &lt;td&gt;&#123;&#123;article.time&#125;&#125;&lt;/td&gt;
+                &lt;td&gt;&#123;&#123;article.state&#125;&#125;&lt;/td&gt;
+                &lt;td&gt;
+                    &lt;button&gt;编辑&lt;/button&gt;
+                    &lt;button&gt;删除&lt;/button&gt;
+                &lt;/td&gt;
+            &lt;/tr&gt;
+
+        &lt;/table&gt;
+    &lt;/div&gt;
+    &lt;!-- 导入axios的js文件 --&gt;
+    &lt;script src=&quot;https://unpkg.com/axios/dist/axios.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script type=&quot;module&quot;&gt;
+        //导入vue模块
+        import &#123;createApp&#125; from &#39;https://unpkg.com/vue@3/dist/vue.esm-browser.js&#39;;
+        //创建vue应用实例
+        createApp(&#123;
+            data()&#123;
+                return &#123;
+                    articleList:[],
+                    searchConditions:&#123;
+                        category:&#39;&#39;,
+                        state:&#39;&#39;
+                    &#125;
+                &#125;
+            &#125;,
+            methods:&#123;
+                //声明方法
+                search:function()&#123;
+                    //发送请求,完成搜索,携带搜索条件
+                    axios.get(&#39;http://localhost:8080/article/search?category=&#39;+this.searchConditions.category+&#39;&amp;state=&#39;+this.searchConditions.state)
+                    .then(result=&gt;&#123;
+                        //成功回调 result.data
+                        //把得到的数据赋值给articleList
+                        this.articleList=result.data
+                    &#125;).catch(err=&gt;&#123;
+                        console.log(err);
+                    &#125;);
+                &#125;
+            &#125;,
+            //钩子函数mounted中,获取所有文章数据
+            mounted:function()&#123;
+                //发送异步请求  axios
+                axios.get(&#39;http://localhost:8080/article/getAll&#39;).then(result=&gt;&#123;
+                    //成功回调
+                    //console.log(result.data);
+                    this.articleList=result.data;
+                &#125;).catch(err=&gt;&#123;
+                    //失败回调
+                    console.log(err);
+                &#125;);
+            &#125;
+        &#125;).mount(&#39;#app&#39;);//控制html元素
+    &lt;/script&gt;
+&lt;/body&gt; --&gt;
+</code></pre>
+
     </div>
+    
+    
+    
+    
+    <div id="comment">
+        <div id="giscus-container" class="giscus"></div>
+    </div>
+    
+    
+    
     
 </div>
 
@@ -358,6 +297,33 @@
         
     </div>
     <script src="/js/main.js"></script>
+    
+    
+<script
+    src="https://giscus.app/client.js"
+    data-repo="Aircraft-carrier/git-discussions-"
+    data-repo-id="R_kgDOMSMEYQ"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOMSMEYc4CglYu"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="light_tritanopia"
+    data-lang="zh-CN"
+    crossorigin
+    async
+></script>
+
+
+
+
+
+
+
+
+
     
 
     <canvas

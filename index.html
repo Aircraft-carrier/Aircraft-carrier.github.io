@@ -181,6 +181,120 @@
         
 
 <div class="post">
+    <a href="/2024/07/23/vue-1/">
+        <h2 class="post-title"></h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2024/7/23
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <hr>
+<p>title: vue_1<br>date: 2024-07-23 21:46:53<br>tags:</p>
+<pre><code> - Vue3
+</code></pre><p>categories:</p>
+<pre><code> - Learning Notes
+</code></pre><p>description: Vue learning notes 1</p>
+<pre><code class="lang-html">&lt;!-- &lt;body&gt;
+    &lt;div id=&quot;app&quot;&gt;
+
+        文章分类: &lt;input type=&quot;text&quot; v-model=&quot;searchConditions.category&quot;&gt;
+
+        发布状态: &lt;input type=&quot;text&quot;  v-model=&quot;searchConditions.state&quot;&gt;
+
+        &lt;button v-on:click=&quot;search&quot;&gt;搜索&lt;/button&gt;
+
+        &lt;br /&gt;
+        &lt;br /&gt;
+        &lt;table border=&quot;1 solid&quot; colspa=&quot;0&quot; cellspacing=&quot;0&quot;&gt;
+            &lt;tr&gt;
+                &lt;th&gt;文章标题&lt;/th&gt;
+                &lt;th&gt;分类&lt;/th&gt;
+                &lt;th&gt;发表时间&lt;/th&gt;
+                &lt;th&gt;状态&lt;/th&gt;
+                &lt;th&gt;操作&lt;/th&gt;
+            &lt;/tr&gt;
+            &lt;tr v-for=&quot;(article,index) in articleList&quot;&gt;
+                &lt;td&gt;&#123;&#123;article.title&#125;&#125;&lt;/td&gt;
+                &lt;td&gt;&#123;&#123;article.category&#125;&#125;&lt;/td&gt;
+                &lt;td&gt;&#123;&#123;article.time&#125;&#125;&lt;/td&gt;
+                &lt;td&gt;&#123;&#123;article.state&#125;&#125;&lt;/td&gt;
+                &lt;td&gt;
+                    &lt;button&gt;编辑&lt;/button&gt;
+                    &lt;button&gt;删除&lt;/button&gt;
+                &lt;/td&gt;
+            &lt;/tr&gt;
+
+        &lt;/table&gt;
+    &lt;/div&gt;
+    &lt;!-- 导入axios的js文件 --&gt;
+    &lt;script src=&quot;https://unpkg.com/axios/dist/axios.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script type=&quot;module&quot;&gt;
+        //导入vue模块
+        import &#123;createApp&#125; from &#39;https://unpkg.com/vue@3/dist/vue.esm-browser.js&#39;;
+        //创建vue应用实例
+        createApp(&#123;
+            data()&#123;
+                return &#123;
+                    articleList:[],
+                    searchConditions:&#123;
+                        category:&#39;&#39;,
+                        state:&#39;&#39;
+                    &#125;
+                &#125;
+            &#125;,
+            methods:&#123;
+                //声明方法
+                search:function()&#123;
+                    //发送请求,完成搜索,携带搜索条件
+                    axios.get(&#39;http://localhost:8080/article/search?category=&#39;+this.searchConditions.category+&#39;&amp;state=&#39;+this.searchConditions.state)
+                    .then(result=&gt;&#123;
+                        //成功回调 result.data
+                        //把得到的数据赋值给articleList
+                        this.articleList=result.data
+                    &#125;).catch(err=&gt;&#123;
+                        console.log(err);
+                    &#125;);
+                &#125;
+            &#125;,
+            //钩子函数mounted中,获取所有文章数据
+            mounted:function()&#123;
+                //发送异步请求  axios
+                axios.get(&#39;http://localhost:8080/article/getAll&#39;).then(result=&gt;&#123;
+                    //成功回调
+                    //console.log(result.data);
+                    this.articleList=result.data;
+                &#125;).catch(err=&gt;&#123;
+                    //失败回调
+                    console.log(err);
+                &#125;);
+            &#125;
+        &#125;).mount(&#39;#app&#39;);//控制html元素
+    &lt;/script&gt;
+&lt;/body&gt; --&gt;
+</code></pre>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+        
+    </div>
+    <a href="/2024/07/23/vue-1/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
     <a href="/2024/07/23/SpringBoot-5/">
         <h2 class="post-title">SpringBoot 5</h2>
     </a>
@@ -222,17 +336,17 @@
         
         <span class="tag">
             
-            <a href="/tags/SpringBoot/" style="color: #ffa2c4">SpringBoot</a>
+            <a href="/tags/SpringBoot/" style="color: #00a596">SpringBoot</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/Vue3/" style="color: #ff7d73">Vue3</a>
+            <a href="/tags/Vue3/" style="color: #03a9f4">Vue3</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/lab/" style="color: #03a9f4">lab</a>
+            <a href="/tags/lab/" style="color: #00bcd4">lab</a>
         </span>
         
     </div>
@@ -281,7 +395,7 @@
         
         <span class="tag">
             
-            <a href="/tags/SpringBoot/" style="color: #03a9f4">SpringBoot</a>
+            <a href="/tags/SpringBoot/" style="color: #00bcd4">SpringBoot</a>
         </span>
         
         <span class="tag">
@@ -291,7 +405,7 @@
         
         <span class="tag">
             
-            <a href="/tags/Bean/" style="color: #00bcd4">Bean</a>
+            <a href="/tags/Bean/" style="color: #00a596">Bean</a>
         </span>
         
     </div>
@@ -340,7 +454,7 @@
         
         <span class="tag">
             
-            <a href="/tags/SpringBoot/" style="color: #03a9f4">SpringBoot</a>
+            <a href="/tags/SpringBoot/" style="color: #ff7d73">SpringBoot</a>
         </span>
         
         <span class="tag">
@@ -350,7 +464,7 @@
         
         <span class="tag">
             
-            <a href="/tags/MyBatis/" style="color: #00a596">MyBatis</a>
+            <a href="/tags/MyBatis/" style="color: #ff7d73">MyBatis</a>
         </span>
         
     </div>
@@ -399,17 +513,17 @@
         
         <span class="tag">
             
-            <a href="/tags/SpringBoot/" style="color: #03a9f4">SpringBoot</a>
+            <a href="/tags/SpringBoot/" style="color: #ffa2c4">SpringBoot</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/Vue3/" style="color: #00bcd4">Vue3</a>
+            <a href="/tags/Vue3/" style="color: #03a9f4">Vue3</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/Maven/" style="color: #00a596">Maven</a>
+            <a href="/tags/Maven/" style="color: #ffa2c4">Maven</a>
         </span>
         
     </div>
@@ -458,7 +572,7 @@
         
         <span class="tag">
             
-            <a href="/tags/PaddlePaddle/" style="color: #00a596">PaddlePaddle</a>
+            <a href="/tags/PaddlePaddle/" style="color: #03a9f4">PaddlePaddle</a>
         </span>
         
         <span class="tag">
@@ -468,12 +582,12 @@
         
         <span class="tag">
             
-            <a href="/tags/AI/" style="color: #ff7d73">AI</a>
+            <a href="/tags/AI/" style="color: #00bcd4">AI</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/visualdl/" style="color: #00bcd4">visualdl</a>
+            <a href="/tags/visualdl/" style="color: #ff7d73">visualdl</a>
         </span>
         
     </div>
@@ -521,7 +635,7 @@
         
         <span class="tag">
             
-            <a href="/tags/ComputerNetWork/" style="color: #ffa2c4">ComputerNetWork</a>
+            <a href="/tags/ComputerNetWork/" style="color: #03a9f4">ComputerNetWork</a>
         </span>
         
     </div>
@@ -570,17 +684,17 @@
         
         <span class="tag">
             
-            <a href="/tags/MySQL/" style="color: #03a9f4">MySQL</a>
+            <a href="/tags/MySQL/" style="color: #ffa2c4">MySQL</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/SQL/" style="color: #ff7d73">SQL</a>
+            <a href="/tags/SQL/" style="color: #00bcd4">SQL</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/Database/" style="color: #00a596">Database</a>
+            <a href="/tags/Database/" style="color: #ff7d73">Database</a>
         </span>
         
     </div>
@@ -629,12 +743,12 @@
         
         <span class="tag">
             
-            <a href="/tags/SpringBoot/" style="color: #ff7d73">SpringBoot</a>
+            <a href="/tags/SpringBoot/" style="color: #00bcd4">SpringBoot</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/Vue3/" style="color: #00bcd4">Vue3</a>
+            <a href="/tags/Vue3/" style="color: #00a596">Vue3</a>
         </span>
         
     </div>
@@ -688,65 +802,6 @@
         
         <span class="tag">
             
-            <a href="/tags/deep-learning/" style="color: #ff7d73">deep learning</a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/AI/" style="color: #ffa2c4">AI</a>
-        </span>
-        
-    </div>
-    <a href="/2024/07/07/paddelpaddel2/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2024/07/07/PaddlePaddle1/">
-        <h2 class="post-title">PaddlePaddle 1</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/Learning/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Learning
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2024/7/7
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <p>PaddlePaddle learning notes 1</p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/PaddlePaddle/" style="color: #00a596">PaddlePaddle</a>
-        </span>
-        
-        <span class="tag">
-            
             <a href="/tags/deep-learning/" style="color: #ffa2c4">deep learning</a>
         </span>
         
@@ -756,7 +811,7 @@
         </span>
         
     </div>
-    <a href="/2024/07/07/PaddlePaddle1/" class="go-post">阅读全文</a>
+    <a href="/2024/07/07/paddelpaddel2/" class="go-post">阅读全文</a>
 </div>
 
 
