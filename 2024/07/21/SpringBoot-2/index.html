@@ -1,0 +1,425 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>SpringBoot 2 | Aircraft</title>
+    <meta name="author" content="Aircraft" />
+    <meta name="description" content="谁替我上学 我可以替你睡觉" />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>AIRCRAFT</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;AIRCRAFT</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>SpringBoot 2</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2024/7/21
+        </span>
+        
+        <span class="category">
+            <a href="/categories/Learning-Notes/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Learning Notes
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/SpringBoot/" style="color: #ff7d73">
+                    SpringBoot
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/Vue3/" style="color: #ffa2c4">
+                    Vue3
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/Maven/" style="color: #ff7d73">
+                    Maven
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h1 id="SpringBoot"><a href="#SpringBoot" class="headerlink" title="SpringBoot"></a>SpringBoot</h1><p><a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1LMQD7FangseCC-GV1iLw2A?pwd=zzl1">网盘</a><br><a target="_blank" rel="noopener" href="https://aircraft-carrier.github.io/2024/07/11/SpringBoot_1/">SpringBoot 1</a></p>
+<p><a target="_blank" rel="noopener" href="https://springdoc.cn/spring-boot/">Spring Boot 中文文档 (springdoc.cn)</a></p>
+<h2 id="🏜️依赖和配置文件"><a href="#🏜️依赖和配置文件" class="headerlink" title="🏜️依赖和配置文件"></a>🏜️依赖和配置文件</h2><h3 id="依赖文件："><a href="#依赖文件：" class="headerlink" title="依赖文件："></a>依赖文件：</h3><p><code>pom.xml</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/b3ae8c360218f1775f25093b35563e1.png" alt=""></p>
+<p><code>Maven</code>坐标</p>
+<p>Maven坐标是Maven项目管理工具用来唯一标识项目的一种标识方式，它由三个主要部分组成：group ID（组织ID）、artifact ID（项目ID）和version（版本号）。</p>
+<ol>
+<li><p>Group ID（组织ID）：表示项目所属的组织或者团队，通常是组织的域名倒序，例如com.example。</p>
+</li>
+<li><p>Artifact ID（项目ID）：表示项目的唯一标识符，通常用于区分不同的项目，例如app或者library。</p>
+</li>
+<li><p>Version（版本号）：表示项目的具体版本信息，用于区分不同的项目版本，通常采用数字或字母组合，例如1.0.0。</p>
+</li>
+</ol>
+<p>Maven坐标的格式为：groupID:artifactID:version。通过这种方式，Maven可以识别并下载项目依赖的jar包，保证项目构建的依赖关系和版本控制。</p>
+<p><a target="_blank" rel="noopener" href="https://mvnrepository.com/">Maven Repository</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240721145419238.png" alt=""></p>
+<p>配置本地仓库：将</p>
+<p><code>D:\java_env\apache-maven-3.9.8\conf</code>下<code>settings.xml</code>中添加：</p>
+<pre><code class="lang-xml">&lt;localRepository&gt;/path/to/local/repo&lt;/localRepository&gt;
+</code></pre>
+<p>远程仓库：</p>
+<p>中央仓库不修改：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/795295e7a7f098aadf1c168557e3305.png" alt=""></p>
+<p>添加镜像仓库：</p>
+<p><code>D:\java_env\apache-maven-3.9.8\conf</code>下<code>settings.xml</code>中添加：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/7c5a3e294f0a42ab28071d300efb54e.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240721155851872.png" alt=""></p>
+<h3 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h3><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV14z4y1N7pg?p=5&amp;vd_source=d3bc4c959fab1a2090edcb9ed0b9d2e5">配置文件学习</a></p>
+<ul>
+<li><code>application.properties</code>配置</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://springdoc.cn/spring-boot/application-properties.html#appendix.application-properties">官方ApplicationProperties文档</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240721110855853.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240721111615954.png" alt=""></p>
+<pre><code class="lang-yml">spring.application.name=springboot_quickstart
+server.port=9090
+server.servlet.context-path=/start
+spring.datasource.url=jdbc:mysql://localhost:3306/your_database  
+spring.datasource.username=your_username  
+spring.datasource.password=your_password  
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+</code></pre>
+<blockquote>
+<p>使用‘  .  ’来做层级划分</p>
+</blockquote>
+<ul>
+<li><code>application.yml</code>配置</li>
+</ul>
+<pre><code class="lang-yml">server:
+  port: 9191
+  servlet:
+    context-path: /start2
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/mybatis
+    username: root
+    password: 1234
+</code></pre>
+<blockquote>
+<p>使用换行做层级划分</p>
+</blockquote>
+<ul>
+<li><p>书写三方技术需要的信息根据官方文档</p>
+</li>
+<li><p>自定义配置信息</p>
+</li>
+</ul>
+<p>获取自定义配置信息</p>
+<pre><code class="lang-java">/* 写死 */
+public class EmailProperties &#123;
+    // 发件人邮箱
+    public String user = &quot;2451752823@qq.com&quot;;
+
+    // 授权码
+    public String code = &quot;daafadededadxa&quot;;
+
+    // 发件人邮箱对应服务
+    public String host = &quot;smtp.qq.com&quot;;
+
+    // 发送邮箱前，是否进行身份认证
+    private boolean auth = true;
+&#125;
+/* 配置文件输入 */
+public class EmailProperties &#123;
+    // 发件人邮箱
+    @value(&quot;$&#123;email.user&#125;&quot;)
+    public String user;
+
+    // 授权码
+    @value(&quot;$&#123;email.code&#125;&quot;)
+    public String code;
+
+    ...
+&#125;
+/* 前缀注解 */
+@ConfigurationProperties(prefix = &quot;email&quot;)
+public class EmailProperties &#123;
+    // 发件人邮箱
+    public String user;
+
+    // 授权码
+    public String code;
+
+    ...
+&#125;
+</code></pre>
+<p><code>application.yml</code></p>
+<pre><code class="lang-yml">email:
+    user: 2451752823@qq.com
+    code: daafadededadxa
+    host: smtp.qq.com
+    auth: true
+
+habbies:
+    - 打篮球
+    - 游泳
+</code></pre>
+<blockquote>
+<p>配置信息存放在配置文件中，而不是直接写道java类中，再修改配置的使用就不需要重新调试运行</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://aircraft-carrier.github.io/2024/07/22/SpringBoot-3/">SpringBoot 3</a></p>
+
+    </div>
+    
+    
+    
+    
+    <div id="comment">
+        <div id="giscus-container" class="giscus"></div>
+    </div>
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2024 Aircraft
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Aircraft
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+<script
+    src="https://giscus.app/client.js"
+    data-repo="Aircraft-carrier/git-discussions-"
+    data-repo-id="R_kgDOMSMEYQ"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOMSMEYc4CglYu"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="light_tritanopia"
+    data-lang="zh-CN"
+    crossorigin
+    async
+></script>
+
+
+
+
+
+
+
+
+
+    
+
+    <canvas
+        id="fireworks"
+        style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 32767"
+    ></canvas>
+    <script src="https://s4.zstatic.net/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="/js/fireworks.min.js"></script>  
+
+    <canvas
+        id="background"
+        style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: -1"
+    ></canvas>
+    <script src="/js/background.min.js"></script>
+
+    <div id="cursor"></div>
+    <link rel="stylesheet" href="/css/cursor.min.css" />
+    <script src="/js/cursor.min.js"></script>
+
+</body>
+</html>

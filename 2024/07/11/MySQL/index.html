@@ -1,0 +1,373 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>MySQL | Aircraft</title>
+    <meta name="author" content="Aircraft" />
+    <meta name="description" content="谁替我上学 我可以替你睡觉" />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>AIRCRAFT</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;AIRCRAFT</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>MySQL</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2024/7/11
+        </span>
+        
+        <span class="category">
+            <a href="/categories/Database/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Database
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/MySQL/" style="color: #ffa2c4">
+                    MySQL
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/SQL/" style="color: #ff7d73">
+                    SQL
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/Database/" style="color: #03a9f4">
+                    Database
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h1 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h1><h2 id="关系型数据库（RDBMS）"><a href="#关系型数据库（RDBMS）" class="headerlink" title="关系型数据库（RDBMS）"></a>关系型数据库（RDBMS）</h2><p><strong>概念</strong> ：建立再关系模型基础上，由多张相互连接的二维表组成的数据库。</p>
+<p>特点：</p>
+<ul>
+<li>使用表存储数据，格式统一，便于维护。</li>
+<li>使用SQL语言操作，标准统一，使用方便。</li>
+</ul>
+<h2 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a>SQL</h2><h3 id="SQL通用语法"><a href="#SQL通用语法" class="headerlink" title="SQL通用语法"></a>SQL通用语法</h3><ol>
+<li>SQL语句可以单行或多行书写，以分号结尾。</li>
+<li>SQL语句可以使用空格/缩进来增强语句的可读性。</li>
+<li>MySQL数据库的SQL语句不区分大小写，关键字建议使用大写。</li>
+<li>注释：<ul>
+<li>单行注释：<code>--</code> 注释内容 或 <code>#</code> 注释内容</li>
+<li>多行注释：<code>/*</code>注释内容<code>`*/</code></li>
+</ul>
+</li>
+</ol>
+<h3 id="SQL语句分类"><a href="#SQL语句分类" class="headerlink" title="SQL语句分类"></a>SQL语句分类</h3><ol>
+<li><code>DDL(Data Definition Language)</code> ：数据定义语言，用来定义数据库对象（数据库，表，字段）。</li>
+<li><code>DML(Data Manipulation)</code>：数据库操作语言，用来对数据库表中的数据进行增删改。</li>
+<li><code>DQL(Data Query Language)</code>：数据查询语言，用来查询数据库中表的记录。</li>
+<li><code>DCL(Data Control Language)</code>：数据控制语言用来创建数据库用户、控制数据库的访问权限。</li>
+</ol>
+<pre><code class="lang-bash">mysql -u root -p
+</code></pre>
+<h3 id="DDL"><a href="#DDL" class="headerlink" title="DDL"></a>DDL</h3><p><strong>数据库操作</strong></p>
+<p>查询</p>
+<pre><code class="lang-sql">show databases;
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240722134321043.png" alt=""></p>
+<pre><code>select database();  # 查询当前数据库
+</code></pre><p>创建</p>
+<pre><code class="lang-sql">create database &lt;dbname&gt;;
+# create database if not exists &lt;dbname&gt;;
+# create database &lt;dbname&gt; default charset utf8mb4;
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240722134517408.png" alt=""></p>
+<p>删除</p>
+<pre><code class="lang-sql">drop database &lt;dbname&gt;;
+# drop database if exists &lt;dbname&gt;;
+</code></pre>
+<p>使用</p>
+<pre><code class="lang-sql">use &lt;dbname&gt;
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240722135039444.png" alt=""></p>
+<p><strong>表操作</strong></p>
+<p>查询当前数据库所有表</p>
+<pre><code class="lang-sql">show tables;
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240722135457630.png" alt=""></p>
+<p>查询表结构</p>
+<pre><code class="lang-sql">desc &lt;table_name&gt;
+</code></pre>
+<p>查询指定表的建表语句</p>
+<pre><code class="lang-sql">show create table &lt;table_name&gt;
+</code></pre>
+<p>表创建</p>
+<pre><code class="lang-sql">create table &lt;table_name&gt;&#123;
+    字段1 字段1类型[comment 字段1注释],
+    字段2 字段2类型[comment 字段2注释],
+    字段3 字段3类型[comment 字段3注释]
+&#125;[comment 表注释];
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240722140310634.png" alt=""></p>
+<p>表修改</p>
+<p>插入新字段</p>
+<pre><code class="lang-sql">alter table &lt;table_name&gt; add &lt;field_name&gt; 类型(长度);
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240722140908947.png" alt=""></p>
+<p>修改数据类型</p>
+<pre><code class="lang-sql">alter table &lt;table_name&gt; change &lt;field_name_pre&gt; &lt;field_name_now&gt; 类型(长度)
+</code></pre>
+<h2 id="DataGrip"><a href="#DataGrip" class="headerlink" title="DataGrip"></a>DataGrip</h2><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Kr4y1i7ru?p=11&amp;vd_source=d3bc4c959fab1a2090edcb9ed0b9d2e5">MySQL连接</a></p>
+
+    </div>
+    
+    
+    
+    
+    <div id="comment">
+        <div id="giscus-container" class="giscus"></div>
+    </div>
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2024 Aircraft
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Aircraft
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+<script
+    src="https://giscus.app/client.js"
+    data-repo="Aircraft-carrier/git-discussions-"
+    data-repo-id="R_kgDOMSMEYQ"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOMSMEYc4CglYu"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="light_tritanopia"
+    data-lang="zh-CN"
+    crossorigin
+    async
+></script>
+
+
+
+
+
+
+
+
+
+    
+
+    <canvas
+        id="fireworks"
+        style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 32767"
+    ></canvas>
+    <script src="https://s4.zstatic.net/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="/js/fireworks.min.js"></script>  
+
+    <canvas
+        id="background"
+        style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: -1"
+    ></canvas>
+    <script src="/js/background.min.js"></script>
+
+    <div id="cursor"></div>
+    <link rel="stylesheet" href="/css/cursor.min.css" />
+    <script src="/js/cursor.min.js"></script>
+
+</body>
+</html>

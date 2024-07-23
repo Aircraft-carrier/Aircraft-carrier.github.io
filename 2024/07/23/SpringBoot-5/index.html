@@ -1,0 +1,947 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>SpringBoot_5 | Aircraft</title>
+    <meta name="author" content="Aircraft" />
+    <meta name="description" content="谁替我上学 我可以替你睡觉" />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>AIRCRAFT</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;AIRCRAFT</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>SpringBoot_5</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2024/7/23
+        </span>
+        
+        <span class="category">
+            <a href="/categories/Learning-Notes/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Learning Notes
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/SpringBoot/" style="color: #ffa2c4">
+                    SpringBoot
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/Vue3/" style="color: #00bcd4">
+                    Vue3
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/lab/" style="color: #ff7d73">
+                    lab
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h1 id="SpringBoot"><a href="#SpringBoot" class="headerlink" title="SpringBoot"></a>SpringBoot</h1><p><a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1LMQD7FangseCC-GV1iLw2A?pwd=zzl1">网盘</a></p>
+<p><a target="_blank" rel="noopener" href="https://aircraft-carrier.github.io/2024/07/22/SpringBoot-4/">SpringBoot 4</a></p>
+<p><a target="_blank" rel="noopener" href="https://springdoc.cn/spring-boot/">Spring Boot 中文文档 (springdoc.cn)</a></p>
+<h2 id="1-接口文档"><a href="#1-接口文档" class="headerlink" title="1 接口文档"></a>1 接口文档</h2><p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240723164802725.png" alt=""></p>
+<h2 id="2-环境搭建"><a href="#2-环境搭建" class="headerlink" title="2 环境搭建"></a>2 环境搭建</h2><ul>
+<li>执行资料中的<code>big_event.sql</code>脚本，准备数据库表。</li>
+</ul>
+<pre><code class="lang-sql">-- 创建数据库
+create database big_event;
+
+-- 使用数据库
+use big_event;
+
+-- 用户表
+create table user (
+                      id int unsigned primary key auto_increment comment &#39;ID&#39;,
+                      username varchar(20) not null unique comment &#39;用户名&#39;,
+                      password varchar(32)  comment &#39;密码&#39;,
+                      nickname varchar(10)  default &#39;&#39; comment &#39;昵称&#39;,
+                      email varchar(128) default &#39;&#39; comment &#39;邮箱&#39;,
+                      user_pic varchar(128) default &#39;&#39; comment &#39;头像&#39;,
+                      create_time datetime not null comment &#39;创建时间&#39;,
+                      update_time datetime not null comment &#39;修改时间&#39;
+) comment &#39;用户表&#39;;
+
+-- 分类表
+create table category(
+                         id int unsigned primary key auto_increment comment &#39;ID&#39;,
+                         category_name varchar(32) not null comment &#39;分类名称&#39;,
+                         category_alias varchar(32) not null comment &#39;分类别名&#39;,
+                         create_user int unsigned not null comment &#39;创建人ID&#39;,
+                         create_time datetime not null comment &#39;创建时间&#39;,
+                         update_time datetime not null comment &#39;修改时间&#39;,
+                         constraint fk_category_user foreign key (create_user) references user(id) -- 外键约束
+);
+
+......
+</code></pre>
+<ul>
+<li>创建<code>springboot工程</code>，引入对应的依赖（<code>web、mybatis、mysql</code>驱动）</li>
+</ul>
+<p><img src="SpringBoot实战.assets/image-20240723165057604.png" alt="image-20240723165057604"></p>
+<ul>
+<li>配置文件<code>application.yml</code>中引入<code>mybatis</code>的配置信息</li>
+</ul>
+<pre><code class="lang-yml">spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/big_event
+    username: root
+    password: 123456
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true #开启驼峰命名和下划线命名的自动转换
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+server:
+  port: 8080
+</code></pre>
+<ul>
+<li>创建包结构，并准备实体类</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240723165155184.png" alt=""></p>
+<h2 id="3-用户相关接口实现"><a href="#3-用户相关接口实现" class="headerlink" title="3 用户相关接口实现"></a>3 用户相关接口实现</h2><pre><code class="lang-java">// UserController
+@RestController
+@RequestMapping(&quot;/user&quot;)
+@Validated
+public class UserController &#123;
+
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
+
+    ......
+
+&#125;
+
+// UserServiceImpl
+@Service
+public class UserServiceImpl implements UserService &#123;
+    @Autowired
+    private UserMapper userMapper;
+
+    ......
+&#125;
+
+// UserMapper
+@Mapper
+public interface UserMapper &#123;
+    ......
+&#125;
+
+// pojo.User
+//lombok  在编译阶段,为实体类自动生成setter  getter toString
+// pom 文件中引入依赖   在实体类上添加注解
+@Data
+public class User &#123;
+    @NotNull
+    private Integer id;//主键ID
+    private String username;//用户名
+    @JsonIgnore//让springmvc把当前对象转换成json字符串的时候,忽略password,最终的json字符串中就没有password这个属性了
+    private String password;//密码
+
+
+    @NotEmpty
+    @Pattern(regexp = &quot;^\\S&#123;1,10&#125;$&quot;)
+    private String nickname;//昵称
+
+    @NotEmpty
+    @Email
+    private String email;//邮箱
+    private String userPic;//用户头像地址
+    private LocalDateTime createTime;//创建时间
+    private LocalDateTime updateTime;//更新时间
+&#125;
+</code></pre>
+<h3 id="lombok"><a href="#lombok" class="headerlink" title="lombok"></a>lombok</h3><p>在Spring Boot中，Lombok是一个非常方便的工具，可以通过简单的注解来简化Java开发中的样板代码，例如getter、setter、构造函数等。通过引入Lombok依赖，可以避免编写大量重复的样板代码，提高代码的可读性和可维护性。</p>
+<p>要在Spring Boot项目中使用Lombok，首先需要在项目的pom.xml文件中添加Lombok的依赖：</p>
+<pre><code class="lang-xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;
+    &lt;artifactId&gt;lombok&lt;/artifactId&gt;
+    &lt;version&gt;1.18.22&lt;/version&gt;
+    &lt;scope&gt;provided&lt;/scope&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p>接下来，在Java类中使用Lombok注解来简化代码。以下是几个常用的Lombok注解示例：</p>
+<ol>
+<li>@Data：在类上添加@Data注解，会自动生成getter、setter、equals、hashCode和toString等方法。</li>
+</ol>
+<pre><code class="lang-java">import lombok.Data;
+
+@Data
+public class User &#123;
+    private Long id;
+    private String name;
+&#125;
+</code></pre>
+<ol>
+<li>@NoArgsConstructor：生成无参构造函数。</li>
+</ol>
+<pre><code class="lang-java">import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+public class User &#123;
+    private Long id;
+    private String name;
+&#125;
+</code></pre>
+<ol>
+<li>@AllArgsConstructor：生成全参构造函数。</li>
+</ol>
+<pre><code class="lang-java">import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
+public class User &#123;
+    private Long id;
+    private String name;
+&#125;
+</code></pre>
+<ol>
+<li>@Slf4j：简化日志打印。</li>
+</ol>
+<pre><code class="lang-java">import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+public class MyService &#123;
+    public void doSomething() &#123;
+        log.info(&quot;Doing something...&quot;);
+    &#125;
+&#125;
+</code></pre>
+<p>通过使用这些Lombok注解，可以减少Java类中样板代码的编写，提高开发效率。需要注意的是，在使用Lombok的注解时，IDE中需要安装Lombok插件才能正常显示生成的方法。安装Lombok插件后，就可以像普通类一样调用生成的方法，而不用编写这些常见的代码了。</p>
+<h3 id="3-1-注册"><a href="#3-1-注册" class="headerlink" title="3.1 注册"></a>3.1 注册</h3><pre><code class="lang-java">// UserController
+    @PostMapping(&quot;/register&quot;)
+    public Result register(@Pattern(regexp = &quot;^\\S&#123;5,16&#125;$&quot;) String username, @Pattern(regexp = &quot;^\\S&#123;5,16&#125;$&quot;) String password) &#123;
+
+        //查询用户
+        User u = userService.findByUserName(username);
+        if (u == null) &#123;
+            //没有占用
+            //注册
+            userService.register(username, password);
+            return Result.success();
+        &#125; else &#123;
+            //占用
+            return Result.error(&quot;用户名已被占用&quot;);
+        &#125;
+    &#125;
+
+// UserServiceImpl
+    @Override
+    public User findByUserName(String username) &#123;
+        User u = userMapper.findByUserName(username);
+        return u;
+    &#125;
+
+    @Override
+    public void register(String username, String password) &#123;
+        //加密
+        String md5String = Md5Util.getMD5String(password);
+        //添加
+        userMapper.add(username,md5String);
+    &#125;
+
+// UserMapper
+    //根据用户名查询用户
+    @Select(&quot;select * from user where username=#&#123;username&#125;&quot;)
+    User findByUserName(String username);
+
+    //添加
+    @Insert(&quot;insert into user(username,password,create_time,update_time)&quot; +
+            &quot; values(#&#123;username&#125;,#&#123;password&#125;,now(),now())&quot;)
+    void add(String username, String password);
+
+
+//`UserMapper`使用了`MyBatis`的注解来映射数据库操作:
+//
+//        1. `@Select(&quot;select * from user where username=#&#123;username&#125;&quot;)`:
+//        - 这是`MyBatis`中的`@Select`注解，用于执行查询操作，括号中的内容为SQL查询语句。
+//        - `select * from user where username=#&#123;username&#125;`表示在数据库表`User`中根据用户名查询用户信息，其中`#&#123;username&#125;`是一个占位符，会在SQL执行时被具体的参数替代。
+//
+//        2. `@Insert(&quot;insert into user(username,password,create_time,update_time) values(#&#123;username&#125;,#&#123;password&#125;,now(),now())&quot;)`:
+//        - 这是`MyBatis`中的`@Insert`注解，用于执行插入操作，括号中的内容为SQL插入语句。
+//        - `insert into user(username,password,create_time,update_time) values(#&#123;username&#125;,#&#123;password&#125;,now(),now())`表示向数据库表&quot;User&quot;中插入用户信息，包括用户名、加密后的密码以及创建时间和更新时间。
+//        - `#&#123;username&#125;`和`#&#123;password&#125;`是占位符，会在SQL执行时被具体的参数替代。
+//        - `now()`表示当前时间，用于设置创建时间和更新时间为当前操作的时间。
+</code></pre>
+<ol>
+<li><strong>UserController</strong>:<ul>
+<li><code>@PostMapping(&quot;/register&quot;)</code>: 这是一个用于处理POST请求的方法，路径为<code>/register</code>。</li>
+<li><code>public Result register(@Pattern(regexp = &quot;^\\S&#123;5,16&#125;$&quot;) String username, @Pattern(regexp = &quot;^\\S&#123;5,16&#125;$&quot;) String password)</code>: 这个方法接收两个参数，用户名和密码，分别使用正则表达式验证了输入的内容格式。</li>
+<li>首先通过<code>userService.findByUserName(username)</code>查询数据库中是否已存在相同用户名的用户。</li>
+<li>如果用户不存在，则调用<code>userService.register(username, password)</code>方法进行用户注册，将明文密码加密后保存到数据库，并返回成功的结果。</li>
+<li>如果用户已存在，则返回一个包含错误信息的Result对象。</li>
+</ul>
+</li>
+<li><strong>UserServiceImpl</strong>:<ul>
+<li><code>findByUserName(String username)</code>: 根据用户名查询用户，调用<code>userMapper.findByUserName(username)</code>查询数据库并返回结果。</li>
+<li><code>register(String username, String password)</code>: 注册用户，对密码进行MD5加密后，调用<code>userMapper.add(username, md5String)</code>将用户信息插入数据库。</li>
+</ul>
+</li>
+<li><strong>UserMapper</strong>:<ul>
+<li><code>findByUserName(String username)</code>: 根据用户名查询用户，使用SQL语句查询数据库中的用户信息。</li>
+<li><code>add(String username, String password)</code>: 添加用户，使用SQL语句将用户名、加密后的密码以及创建时间和更新时间插入到数据库中。</li>
+</ul>
+</li>
+</ol>
+<p><img src="SpringBoot实战.assets/image-20240723171744966.png" alt="image-20240723171744966"></p>
+<h3 id="3-2-登录"><a href="#3-2-登录" class="headerlink" title="3.2 登录"></a>3.2 登录</h3><pre><code class="lang-java">// UserController
+    @PostMapping(&quot;/login&quot;)
+    public Result&lt;String&gt; login(@Pattern(regexp = &quot;^\\S&#123;5,16&#125;$&quot;) String username, @Pattern(regexp = &quot;^\\S&#123;5,16&#125;$&quot;) String password) &#123;
+        //根据用户名查询用户
+        User loginUser = userService.findByUserName(username);
+        //判断该用户是否存在
+        if (loginUser == null) &#123;
+            return Result.error(&quot;用户名错误&quot;);
+        &#125;
+
+        //判断密码是否正确  loginUser对象中的password是密文
+        if (Md5Util.getMD5String(password).equals(loginUser.getPassword())) &#123;
+            //登录成功
+            Map&lt;String, Object&gt; claims = new HashMap&lt;&gt;();
+            claims.put(&quot;id&quot;, loginUser.getId());
+            claims.put(&quot;username&quot;, loginUser.getUsername());
+            String token = JwtUtil.genToken(claims);
+            //把token存储到redis中
+            ValueOperations&lt;String, String&gt; operations = stringRedisTemplate.opsForValue();
+            operations.set(token,token,1, TimeUnit.HOURS);
+            return Result.success(token);
+        &#125;
+        return Result.error(&quot;密码错误&quot;);
+    &#125;
+//
+</code></pre>
+<h3 id="3-3-获取用户详细信息"><a href="#3-3-获取用户详细信息" class="headerlink" title="3.3 获取用户详细信息"></a>3.3 获取用户详细信息</h3><pre><code class="lang-java">// UserController
+    @GetMapping(&quot;/userInfo&quot;)
+    public Result&lt;User&gt; userInfo(/*@RequestHeader(name = &quot;Authorization&quot;) String token*/) &#123;
+        //根据用户名查询用户
+        Map&lt;String, Object&gt; map = ThreadLocalUtil.get();
+        String username = (String) map.get(&quot;username&quot;);
+        User user = userService.findByUserName(username);
+        return Result.success(user);
+    &#125;
+</code></pre>
+<h3 id="3-4-更新用户密码"><a href="#3-4-更新用户密码" class="headerlink" title="3.4 更新用户密码"></a>3.4 更新用户密码</h3><pre><code class="lang-java">// UserController
+    @PatchMapping(&quot;/updatePwd&quot;)
+    public Result updatePwd(@RequestBody Map&lt;String, String&gt; params,@RequestHeader(&quot;Authorization&quot;) String token) &#123;
+        //1.校验参数
+        String oldPwd = params.get(&quot;old_pwd&quot;);
+        String newPwd = params.get(&quot;new_pwd&quot;);
+        String rePwd = params.get(&quot;re_pwd&quot;);
+
+        if (!StringUtils.hasLength(oldPwd) || !StringUtils.hasLength(newPwd) || !StringUtils.hasLength(rePwd)) &#123;
+            return Result.error(&quot;缺少必要的参数&quot;);
+        &#125;
+
+        //原密码是否正确
+        //调用userService根据用户名拿到原密码,再和old_pwd比对
+        Map&lt;String,Object&gt; map = ThreadLocalUtil.get();
+        String username = (String) map.get(&quot;username&quot;);
+        User loginUser = userService.findByUserName(username);
+        if (!loginUser.getPassword().equals(Md5Util.getMD5String(oldPwd)))&#123;
+            return Result.error(&quot;原密码填写不正确&quot;);
+        &#125;
+
+        //newPwd和rePwd是否一样
+        if (!rePwd.equals(newPwd))&#123;
+            return Result.error(&quot;两次填写的新密码不一样&quot;);
+        &#125;
+
+        //2.调用service完成密码更新
+        userService.updatePwd(newPwd);
+        //删除redis中对应的token
+        ValueOperations&lt;String, String&gt; operations = stringRedisTemplate.opsForValue();
+        operations.getOperations().delete(token);
+        return Result.success();
+    &#125;
+
+// UserServiceImpl
+    @Override
+    public void updatePwd(String newPwd) &#123;
+        Map&lt;String,Object&gt; map = ThreadLocalUtil.get();
+        Integer id = (Integer) map.get(&quot;id&quot;);
+        userMapper.updatePwd(Md5Util.getMD5String(newPwd),id);
+    &#125;
+
+// UserMapper
+  @Update(&quot;update user set password=#&#123;md5String&#125;,update_time=now() where id=#&#123;id&#125;&quot;)
+    void updatePwd(String md5String, Integer id);
+</code></pre>
+<p>这段代码展示了一个用户密码更新的过程，包括控制器（UserController）、服务实现类（UserServiceImpl）和数据访问层（UserMapper）：</p>
+<ol>
+<li><p><strong>UserController</strong>:</p>
+<ul>
+<li><code>@PatchMapping(&quot;/updatePwd&quot;)</code> 注解表示该方法用于处理 PATCH 请求，路径为 “/updatePwd”。</li>
+<li><code>updatePwd</code> 方法接收一个包含参数和请求头的 Map 对象和一个名为 “Authorization” 的请求头，用于更新用户密码。</li>
+<li>首先校验参数，包括旧密码、新密码和确认密码是否存在。</li>
+<li>从 <code>ThreadLocalUtil</code> 中获取用户信息（在拦截器中存储的业务数据），获取用户名，然后通过用户名查询数据库获取用户信息。</li>
+<li>检查旧密码是否正确，如果不正确则返回错误信息。</li>
+<li>检查新密码和确认密码是否一致，如果不一致则返回错误信息。</li>
+<li>调用 <code>userService.updatePwd(newPwd)</code> 方法更新用户密码，然后从 Redis 中删除对应的令牌，最后返回成功的结果。</li>
+</ul>
+</li>
+<li><p><strong>UserServiceImpl</strong>:</p>
+<ul>
+<li><code>updatePwd</code> 方法用于更新用户密码，接收一个新密码参数。</li>
+<li>从 <code>ThreadLocalUtil</code> 中获取用户信息，获取用户 ID。</li>
+<li>调用 <code>userMapper.updatePwd(Md5Util.getMD5String(newPwd), id)</code> 方法更新用户密码，使用 MD5 加密存储密码。</li>
+</ul>
+</li>
+<li><p><strong>UserMapper</strong>:</p>
+<ul>
+<li><code>@Update(&quot;update user set password=#&#123;md5String&#125;,update_time=now() where id=#&#123;id&#125;&quot;)</code> 是 MyBatis 的注解，表示执行更新用户密码的 SQL 语句。</li>
+<li><code>updatePwd</code> 方法用于更新用户密码，接收一个经过 MD5 加密的新密码和用户 ID，更新用户密码和更新时间。</li>
+</ul>
+</li>
+</ol>
+<h2 id="4-工具类介绍"><a href="#4-工具类介绍" class="headerlink" title="4 工具类介绍"></a>4 工具类介绍</h2><h3 id="4-1-Result"><a href="#4-1-Result" class="headerlink" title="4.1 Result"></a>4.1 Result</h3><pre><code class="lang-java">package com.itheima.pojo;
+
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+//统一响应结果
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+public class Result&lt;T&gt; &#123;
+    private Integer code;//业务状态码  0-成功  1-失败
+    private String message;//提示信息
+    private T data;//响应数据
+
+    //快速返回操作成功响应结果(带响应数据)
+    public static &lt;E&gt; Result&lt;E&gt; success(E data) &#123;
+        return new Result&lt;&gt;(0, &quot;操作成功&quot;, data);
+    &#125;
+
+    //快速返回操作成功响应结果
+    public static Result success() &#123;
+        return new Result(0, &quot;操作成功&quot;, null);
+    &#125;
+
+    public static Result error(String message) &#123;
+        return new Result(1, message, null);
+    &#125;
+&#125;
+</code></pre>
+<p>在<code>Spring Boot</code>中给<code>post</code>请求返回<code>json</code>可以通过<code>@RestController</code>注解来实现。这个注解表示这个类中的方法会默认返回json格式的数据。</p>
+<h3 id="4-2-Md5Util"><a href="#4-2-Md5Util" class="headerlink" title="4.2 Md5Util"></a>4.2 Md5Util</h3><pre><code class="lang-java">public class Md5Util &#123;
+    /**
+     * 默认的密码字符串组合，用来将字节转换成 16 进制表示的字符,apache校验下载的文件的正确性用的就是默认的这个组合
+     */
+    protected static char hexDigits[] = &#123;&#39;0&#39;, &#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;, &#39;6&#39;, &#39;7&#39;, &#39;8&#39;, &#39;9&#39;, &#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;, &#39;f&#39;&#125;;
+
+    protected static MessageDigest messagedigest = null;
+
+    static &#123;
+        try &#123;
+            messagedigest = MessageDigest.getInstance(&quot;MD5&quot;);
+        &#125; catch (NoSuchAlgorithmException nsaex) &#123;
+            System.err.println(Md5Util.class.getName() + &quot;初始化失败，MessageDigest不支持MD5Util。&quot;);
+            nsaex.printStackTrace();
+        &#125;
+    &#125;
+
+    /**
+     * 生成字符串的md5校验值
+     *
+     * @param s
+     * @return
+     */
+    public static String getMD5String(String s) &#123;
+        return getMD5String(s.getBytes());
+    &#125;
+
+    /**
+     * 判断字符串的md5校验码是否与一个已知的md5码相匹配
+     *
+     * @param password  要校验的字符串
+     * @param md5PwdStr 已知的md5校验码
+     * @return
+     */
+    public static boolean checkPassword(String password, String md5PwdStr) &#123;
+        String s = getMD5String(password);
+        return s.equals(md5PwdStr);
+    &#125;
+
+
+    public static String getMD5String(byte[] bytes) &#123;
+        messagedigest.update(bytes);
+        return bufferToHex(messagedigest.digest());
+    &#125;
+
+    private static String bufferToHex(byte bytes[]) &#123;
+        return bufferToHex(bytes, 0, bytes.length);
+    &#125;
+
+    private static String bufferToHex(byte bytes[], int m, int n) &#123;
+        StringBuffer stringbuffer = new StringBuffer(2 * n);
+        int k = m + n;
+        for (int l = m; l &lt; k; l++) &#123;
+            appendHexPair(bytes[l], stringbuffer);
+        &#125;
+        return stringbuffer.toString();
+    &#125;
+
+    private static void appendHexPair(byte bt, StringBuffer stringbuffer) &#123;
+        char c0 = hexDigits[(bt &amp; 0xf0) &gt;&gt; 4];// 取字节中高 4 位的数字转换, &gt;&gt;&gt;
+        // 为逻辑右移，将符号位一起右移,此处未发现两种符号有何不同
+        char c1 = hexDigits[bt &amp; 0xf];// 取字节中低 4 位的数字转换
+        stringbuffer.append(c0);
+        stringbuffer.append(c1);
+    &#125;
+
+&#125;
+</code></pre>
+<h3 id="4-3-JwtUtil"><a href="#4-3-JwtUtil" class="headerlink" title="4.3 JwtUtil"></a>4.3 JwtUtil</h3><p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240723175735654.png" alt=""></p>
+<pre><code class="lang-java">
+public class JwtUtil &#123;
+
+    private static final String KEY = &quot;itheima&quot;;
+
+    //接收业务数据,生成token并返回
+    public static String genToken(Map&lt;String, Object&gt; claims) &#123;
+        return JWT.create()
+                .withClaim(&quot;claims&quot;, claims)
+                .withExpiresAt(new Date(System.currentTimeMillis() + 1000 * 60 * 60 ))
+                .sign(Algorithm.HMAC256(KEY));
+    &#125;
+
+    //接收token,验证token,并返回业务数据
+    public static Map&lt;String, Object&gt; parseToken(String token) &#123;
+        return JWT.require(Algorithm.HMAC256(KEY))
+                .build()
+                .verify(token)
+                .getClaim(&quot;claims&quot;)
+                .asMap();
+    &#125;
+
+&#125;
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240723175812935.png" alt=""></p>
+<h3 id="4-4-ThreadLocalUtil"><a href="#4-4-ThreadLocalUtil" class="headerlink" title="4.4 ThreadLocalUtil"></a>4.4 ThreadLocalUtil</h3><p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240723180516342.png" alt=""></p>
+<pre><code class="lang-java">@SuppressWarnings(&quot;all&quot;)
+public class ThreadLocalUtil &#123;
+    //提供ThreadLocal对象,
+    private static final ThreadLocal THREAD_LOCAL = new ThreadLocal();
+
+    //根据键获取值
+    public static &lt;T&gt; T get()&#123;
+        return (T) THREAD_LOCAL.get();
+    &#125;
+
+    //存储键值对
+    public static void set(Object value)&#123;
+        THREAD_LOCAL.set(value);
+    &#125;
+
+
+    //清除ThreadLocal 防止内存泄漏
+    public static void remove()&#123;
+        THREAD_LOCAL.remove();
+    &#125;
+&#125;
+</code></pre>
+<h3 id="4-5-LoginInterceptor"><a href="#4-5-LoginInterceptor" class="headerlink" title="4.5 LoginInterceptor"></a>4.5 LoginInterceptor</h3><p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240723175907245.png" alt=""></p>
+<p><code>interceptors.LoginInterceptor</code></p>
+<pre><code class="lang-java">@Component
+public class LoginInterceptor implements HandlerInterceptor &#123;
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
+    @Override
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception &#123;
+        //令牌验证
+        String token = request.getHeader(&quot;Authorization&quot;);
+        //验证token
+        try &#123;
+            //从redis中获取相同的token
+            ValueOperations&lt;String, String&gt; operations = stringRedisTemplate.opsForValue();
+            String redisToken = operations.get(token);
+            if (redisToken==null)&#123;
+                //token已经失效了
+                throw new RuntimeException();
+            &#125;
+            Map&lt;String, Object&gt; claims = JwtUtil.parseToken(token);
+
+            //把业务数据存储到ThreadLocal中
+            ThreadLocalUtil.set(claims);
+            //放行
+            return true;
+        &#125; catch (Exception e) &#123;
+            //http响应状态码为401
+            response.setStatus(401);
+            //不放行
+            return false;
+        &#125;
+    &#125;
+
+    @Override
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception &#123;
+        //清空ThreadLocal中的数据
+        ThreadLocalUtil.remove();
+    &#125;
+&#125;
+</code></pre>
+<p><code>cofig.webConfig</code></p>
+<pre><code class="lang-java">@Configuration
+public class WebConfig implements WebMvcConfigurer &#123;
+
+    @Autowired
+    private LoginInterceptor loginInterceptor;
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) &#123;
+        //登录接口和注册接口不拦截
+        registry.addInterceptor(loginInterceptor).excludePathPatterns(&quot;/user/login&quot;,&quot;/user/register&quot;);
+    &#125;
+&#125;
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240723175830846.png" alt=""></p>
+<p>代码展示了一个基于Spring框架的拦截器实现:</p>
+<ol>
+<li><code>LoginInterceptor</code> 类实现了Spring框架的 <code>HandlerInterceptor</code> 接口，用于拦截请求并进行登录验证操作。</li>
+<li>在 <code>LoginInterceptor</code> 中，<code>preHandle</code> 方法用于在请求处理之前执行验证操作。它首先获取请求中的名为 “<code>Authorization</code>“ 的头部信息作为令牌。</li>
+<li>然后，它通过注入的 <code>StringRedisTemplate</code> 来访问 Redis 存储，检查该令牌是否存在于 Redis 中。如果 Redis 中不存在该令牌，说明令牌已失效，则抛出异常并返回 HTTP 状态码 401。</li>
+<li>如果令牌有效，它调用 <code>JwtUtil.parseToken(token)</code> 方法来解析令牌，并将业务数据存储到 <code>ThreadLocal</code> 中，以便后续请求处理使用。</li>
+<li><p><code>afterCompletion</code> 方法用于清除 <code>ThreadLocal</code> 中的数据，以确保不发生内存泄漏问题。</p>
+</li>
+<li><p><code>WebConfig</code> 类实现了 <code>WebMvcConfigurer</code> 接口，用于配置拦截器。在 <code>addInterceptors</code> 方法中，将 <code>LoginInterceptor</code> 添加到拦截器注册表中，并排除 <code>/user/login</code> 和 <code>/user/register</code> 接口，即登录和注册接口不会被该拦截器拦截。</p>
+</li>
+</ol>
+<p>代码的作用是实现了一个基于令牌验证的登录拦截器，用于保护特定的接口不被未认证的用户访问。</p>
+<h2 id="5-文件上传"><a href="#5-文件上传" class="headerlink" title="5 文件上传"></a>5 文件上传</h2><p><code>FileUploadController</code></p>
+<pre><code class="lang-java">@RestController
+public class FileUploadController &#123;
+
+    @PostMapping(&quot;/upload&quot;)
+    public Result&lt;String&gt; upload(MultipartFile file) throws Exception &#123;
+        //把文件的内容存储到本地磁盘上
+        String originalFilename = file.getOriginalFilename();
+        //保证文件的名字是唯一的,从而防止文件覆盖
+        String filename = UUID.randomUUID().toString()+originalFilename.substring(originalFilename.lastIndexOf(&quot;.&quot;));
+        String url = AliOssUtil.uploadFile(filename,file.getInputStream());
+        return Result.success(url);
+    &#125;
+&#125;
+</code></pre>
+<p><code>AliOssUtil</code></p>
+<pre><code class="lang-java">public class AliOssUtil &#123;
+
+    // Endpoint以华东1（杭州）为例，其它Region请按实际情况填写。
+    private static final String ENDPOINT = &quot;https://oss-cn-beijing.aliyuncs.com&quot;;
+    // 从环境变量中获取访问凭证。运行本代码示例之前，请确保已设置环境变量OSS_ACCESS_KEY_ID和OSS_ACCESS_KEY_SECRET。
+    //EnvironmentVariableCredentialsProvider credentialsProvider = CredentialsProviderFactory.newEnvironmentVariableCredentialsProvider();
+    private static final String ACCESS_KEY_ID=&quot;&quot;;
+    private static final String ACCESS_KEY_SECRET=&quot;&quot;;
+    // 填写Bucket名称，例如examplebucket。
+    private static final String BUCKET_NAME = &quot;big-event&quot;;
+
+    public static String uploadFile(String objectName, InputStream in) throws Exception &#123;
+
+
+        // 创建OSSClient实例。
+        OSS ossClient = new OSSClientBuilder().build(ENDPOINT,ACCESS_KEY_ID, ACCESS_KEY_SECRET);
+        String url = &quot;&quot;;
+        try &#123;
+            // 填写字符串。
+            String content = &quot;Hello OSS，你好世界&quot;;
+
+            // 创建PutObjectRequest对象。
+            PutObjectRequest putObjectRequest = new PutObjectRequest(BUCKET_NAME, objectName, in);
+
+            // 上传字符串。
+            PutObjectResult result = ossClient.putObject(putObjectRequest);
+            //url组成: https://bucket名称.区域节点/objectName
+            url = &quot;https://&quot;+BUCKET_NAME+&quot;.&quot;+ENDPOINT.substring(ENDPOINT.lastIndexOf(&quot;/&quot;)+1)+&quot;/&quot;+objectName;
+        &#125; catch (OSSException oe) &#123;
+            System.out.println(&quot;Caught an OSSException, which means your request made it to OSS, &quot;
+                    + &quot;but was rejected with an error response for some reason.&quot;);
+            System.out.println(&quot;Error Message:&quot; + oe.getErrorMessage());
+            System.out.println(&quot;Error Code:&quot; + oe.getErrorCode());
+            System.out.println(&quot;Request ID:&quot; + oe.getRequestId());
+            System.out.println(&quot;Host ID:&quot; + oe.getHostId());
+        &#125; catch (ClientException ce) &#123;
+            System.out.println(&quot;Caught an ClientException, which means the client encountered &quot;
+                    + &quot;a serious internal problem while trying to communicate with OSS, &quot;
+                    + &quot;such as not being able to access the network.&quot;);
+            System.out.println(&quot;Error Message:&quot; + ce.getMessage());
+        &#125; finally &#123;
+            if (ossClient != null) &#123;
+                ossClient.shutdown();
+            &#125;
+        &#125;
+
+        return url;
+    &#125;
+&#125;
+</code></pre>
+<h2 id="6-Postman测试"><a href="#6-Postman测试" class="headerlink" title="6 Postman测试"></a>6 Postman测试</h2><p><a target="_blank" rel="noopener" href="https://postman.org.cn/">PostMan中文文档</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240723163745170.png" alt=""></p>
+
+    </div>
+    
+    
+    
+    
+    <div id="comment">
+        <div id="giscus-container" class="giscus"></div>
+    </div>
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2024 Aircraft
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Aircraft
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+<script
+    src="https://giscus.app/client.js"
+    data-repo="Aircraft-carrier/git-discussions-"
+    data-repo-id="R_kgDOMSMEYQ"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOMSMEYc4CglYu"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="light_tritanopia"
+    data-lang="zh-CN"
+    crossorigin
+    async
+></script>
+
+
+
+
+
+
+
+
+
+    
+
+    <canvas
+        id="fireworks"
+        style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 32767"
+    ></canvas>
+    <script src="https://s4.zstatic.net/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="/js/fireworks.min.js"></script>  
+
+    <canvas
+        id="background"
+        style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: -1"
+    ></canvas>
+    <script src="/js/background.min.js"></script>
+
+    <div id="cursor"></div>
+    <link rel="stylesheet" href="/css/cursor.min.css" />
+    <script src="/js/cursor.min.js"></script>
+
+</body>
+</html>

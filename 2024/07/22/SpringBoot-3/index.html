@@ -1,0 +1,523 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>SpringBoot 3 | Aircraft</title>
+    <meta name="author" content="Aircraft" />
+    <meta name="description" content="谁替我上学 我可以替你睡觉" />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>AIRCRAFT</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;AIRCRAFT</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>SpringBoot 3</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2024/7/22
+        </span>
+        
+        <span class="category">
+            <a href="/categories/Learning-Notes/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Learning Notes
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/SpringBoot/" style="color: #ffa2c4">
+                    SpringBoot
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/Vue3/" style="color: #ff7d73">
+                    Vue3
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/MyBatis/" style="color: #00a596">
+                    MyBatis
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h1 id="SpringBoot"><a href="#SpringBoot" class="headerlink" title="SpringBoot"></a>SpringBoot</h1><p><a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1LMQD7FangseCC-GV1iLw2A?pwd=zzl1">网盘</a></p>
+<p><a target="_blank" rel="noopener" href="https://aircraft-carrier.github.io/2024/07/21/SpringBoot-2/">SpringBoot 2</a></p>
+<p><a target="_blank" rel="noopener" href="https://springdoc.cn/spring-boot/">Spring Boot 中文文档 (springdoc.cn)</a></p>
+<h2 id="整合MyBatis"><a href="#整合MyBatis" class="headerlink" title="整合MyBatis"></a>整合MyBatis</h2><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Kr4y1i7ru?p=3&amp;vd_source=d3bc4c959fab1a2090edcb9ed0b9d2e5">基础-概述-MySQL安装及启动_哔哩哔哩_bilibili</a></p>
+<ul>
+<li><code>MySQL</code>下载</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://www.mysql.com/cn/downloads/">MySQL Downloads</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240722120656460.png" alt=""></p>
+<p>使用系统登录是不需要密码的使用<code>enter</code>即可</p>
+<blockquote>
+<p>要给MySQL添加登录密码，可以按照以下步骤操作：</p>
+<ol>
+<li>连接到MySQL服务器：<br>使用终端或命令行工具连接到您的MySQL服务器。您可以使用以下命令连接到MySQL，如果没有密码保护，直接按下Enter键即可访问。</li>
+</ol>
+<pre><code>mysql -u root
+</code></pre><ol>
+<li>更改root用户密码：<br>连接到MySQL服务器后，可以使用以下命令更改root用户的密码：</li>
+</ol>
+<pre><code>ALTER USER &#39;root&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;new_password&#39;;
+</code></pre><p>将 <code>new_password</code> 替换为您要设置的新密码。</p>
+<ol>
+<li>刷新权限：<br>更改密码后，使用以下命令刷新权限以使更改生效：</li>
+</ol>
+<pre><code>FLUSH PRIVILEGES;
+</code></pre><ol>
+<li>退出MySQL：<br>退出MySQL服务器连接，可以使用以下命令：</li>
+</ol>
+<pre><code>quit;
+</code></pre><ol>
+<li>使用新密码登录：<br>现在您可以使用新密码连接到MySQL服务器：</li>
+</ol>
+<pre><code>mysql -u root -p
+</code></pre><p>系统将提示输入密码，输入您刚刚设置的新密码。</p>
+<p>通过执行以上步骤，您可以为MySQL添加登录密码并确保数据库安全。记得妥善保管好您的密码。</p>
+</blockquote>
+<p>终端客户端连接<code>MySQL</code>需要将<code>..\MySQL\MySQL_server\bin</code>添加到系统的<code>path</code>环境变量中。在命令行使用</p>
+<pre><code class="lang-bash">mysql -u root -p
+</code></pre>
+<p><code>-u</code> 后是用户名</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240722130910468.png" alt=""></p>
+<ul>
+<li>打开<code>database</code>窗口</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240722102409983.png" alt=""></p>
+<ul>
+<li>在<code>Idea</code>中配置<code>MySQL</code>数据库连接</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_35500719/article/details/126068630?ops_request_misc=%7B%22request%5Fid%22%3A%22172162902516800222853734%22%2C%22scm%22%3A%2220140713.130102334..%22%7D&amp;request_id=172162902516800222853734&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-2-126068630-null-null.142^v100^pc_search_result_base2&amp;utm_term=idea连接mysql&amp;spm=1018.2226.3001.4187">IDEA连接MySQL数据库并执行SQL语句使用数据</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240722105219112.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240722105258159.png" alt=""></p>
+<p>打开控制台，添加SQL语句全选后点击左上角的运行。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240722142918405.png" alt=""></p>
+<p>引入<code>mybatis</code>的起步依赖和驱动依赖（记得刷新<code>Maven</code>）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240722143240750.png" alt=""></p>
+<p>再<code>application.yml</code>中添加如下配置：</p>
+<pre><code class="lang-yml">spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/   # 点击数据库查看属性，可以找到这个url
+    username: root
+    password: 123456
+</code></pre>
+<p>在Spring Boot中的 MVC（Model-View-Controller）架构，将应用程序的不同功能模块进行分离和组织。</p>
+<ol>
+<li><p><code>Controller</code>：Controller层是应用程序的控制层，<strong>负责接收用户请求</strong>，调用对应的Service处理业务逻辑，并最终返回给用户响应结果。通常一个Controller类会包含多个处理请求的方法，每个方法对应一个具体的请求路径和请求方式。</p>
+</li>
+<li><p><code>Mapper</code>（或Dao）：Mapper通常用于定义数据库操作的接口，通过注解或XML配置与<strong>数据库的映射</strong>关系。在MyBatis等持久层框架中，Mapper负责定义数据库的CRUD操作，实现数据的持久化和查询。</p>
+</li>
+<li><p><code>Service</code>：Service层主要<strong>负责处理业务逻辑</strong>，将Controller层传递过来的请求参数进行处理，并调用Mapper层进行数据库操作，最终返回处理结果给Controller层。Service层可以对业务逻辑进行封装、复用和事务管理。</p>
+</li>
+</ol>
+<p><code>Project.pojo.user</code></p>
+<pre><code class="lang-java">package com.itheima.springboot_quickstart.pojo;
+
+public class User &#123;
+
+    private Integer id;
+    private String name;
+    private Short age;
+    private Short gender;
+    private String phone;
+
+    public User() &#123;
+    &#125;
+
+    public User(Integer id, String name, Short age, Short gender, String phone) &#123;
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+        this.phone = phone;
+    &#125;
+
+    public Integer getId() &#123;
+        return id;
+    &#125;
+
+    public void setId(Integer id) &#123;
+        this.id = id;
+    &#125;
+
+    public String getName() &#123;
+        return name;
+    &#125;
+
+    public void setName(String name) &#123;
+        this.name = name;
+    &#125;
+
+    public Short getAge() &#123;
+        return age;
+    &#125;
+
+    public void setAge(Short age) &#123;
+        this.age = age;
+    &#125;
+
+    public Short getGender() &#123;
+        return gender;
+    &#125;
+
+    public void setGender(Short gender) &#123;
+        this.gender = gender;
+    &#125;
+
+    public String getPhone() &#123;
+        return phone;
+    &#125;
+
+    public void setPhone(String phone) &#123;
+        this.phone = phone;
+    &#125;
+
+    @Override
+    public String toString() &#123;
+        return &quot;User&#123;&quot; +
+                &quot;id=&quot; + id +
+                &quot;, name=&#39;&quot; + name + &#39;\&#39;&#39; +
+                &quot;, age=&quot; + age +
+                &quot;, gender=&quot; + gender +
+                &quot;, phone=&#39;&quot; + phone + &#39;\&#39;&#39; +
+                &#39;&#125;&#39;;
+    &#125;
+&#125;
+</code></pre>
+<blockquote>
+<p>创建基本的数据类</p>
+</blockquote>
+<p><code>Project.controller.UserController</code></p>
+<pre><code class="lang-java">package com.itheima.springboot_quickstart.controller;
+
+import com.itheima.springboot_quickstart.pojo.User;
+import com.itheima.springboot_quickstart.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class UserController &#123;
+
+    @Autowired
+    private UserService userService;
+
+    @RequestMapping(&quot;/findById&quot;)
+    public User findById(Integer id) &#123;
+        return userService.findById(id);
+    &#125;
+&#125;
+</code></pre>
+<blockquote>
+<p>接受用户请求并将业务逻辑传递给service</p>
+</blockquote>
+<p><code>Project.service.impl.UserServiceimpl</code></p>
+<pre><code class="lang-java">package com.itheima.springboot_quickstart.service.impl;
+
+import com.itheima.springboot_quickstart.mapper.UserMapper;
+import com.itheima.springboot_quickstart.pojo.User;
+import com.itheima.springboot_quickstart.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class UserServiceimpl implements UserService &#123;
+
+    @Autowired
+    private UserMapper userMapper;
+
+    @Override
+    public User findById(Integer id) &#123;
+        return userMapper.findById(id);
+    &#125;
+&#125;
+</code></pre>
+<blockquote>
+<p>调用Mapper实现查询数据的业务逻辑，</p>
+</blockquote>
+<p><code>Project.mapper.UserMapper</code></p>
+<pre><code class="lang-java">package com.itheima.springboot_quickstart.mapper;
+
+
+import com.itheima.springboot_quickstart.pojo.User;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+
+@Mapper
+public interface UserMapper &#123;
+
+    @Select(&quot;select * from user where id = #&#123;id&#125;&quot;)
+    public User findById(Integer id);
+&#125;
+</code></pre>
+<blockquote>
+<p>在Spring Boot中，@Select注解通常用于MyBatis框架的Mapper接口方法上，用于指定SQL查询语句。具体来说，@Select(“select * from user where id = #{id}”)表示在执行这个Mapper接口方法时，将执行指定的SQL查询语句，查询user表中id字段等于参数id的记录。</p>
+<p>其中：</p>
+<ul>
+<li>@Select是MyBatis注解，用于标记查询操作。</li>
+<li>“select * from user where id = #{id}”是SQL查询语句，其中的#{id}是一个占位符，表示要通过参数id传入具体的值进行替换。</li>
+<li>当Mapper接口方法被调用时，MyBatis框架会将传入的参数值替换掉占位符#{id}，然后执行这个SQL查询语句，并将查询结果返回给调用方。</li>
+</ul>
+<p>通过@Select注解，可以在Mapper接口方法上直接定义SQL查询语句，简化了与数据库交互的代码编写过程，同时实现了SQL语句和Java代码的分离。这样的方式可以提高代码的可读性和维护性。</p>
+</blockquote>
+
+    </div>
+    
+    
+    
+    
+    <div id="comment">
+        <div id="giscus-container" class="giscus"></div>
+    </div>
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2024 Aircraft
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Aircraft
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+<script
+    src="https://giscus.app/client.js"
+    data-repo="Aircraft-carrier/git-discussions-"
+    data-repo-id="R_kgDOMSMEYQ"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOMSMEYc4CglYu"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="light_tritanopia"
+    data-lang="zh-CN"
+    crossorigin
+    async
+></script>
+
+
+
+
+
+
+
+
+
+    
+
+    <canvas
+        id="fireworks"
+        style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 32767"
+    ></canvas>
+    <script src="https://s4.zstatic.net/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="/js/fireworks.min.js"></script>  
+
+    <canvas
+        id="background"
+        style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: -1"
+    ></canvas>
+    <script src="/js/background.min.js"></script>
+
+    <div id="cursor"></div>
+    <link rel="stylesheet" href="/css/cursor.min.css" />
+    <script src="/js/cursor.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,304 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>about | Aircraft</title>
+    <meta name="author" content="Aircraft" />
+    <meta name="description" content="谁替我上学 我可以替你睡觉" />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>AIRCRAFT</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;AIRCRAFT</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>about</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2024/7/3
+        </span>
+        
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <p>The github homepage: <a target="_blank" rel="noopener" href="https://Aircraft-carrier.github.io">🔗 Aircraft-carrier.github.io</a> can further access my personal CSDN blog and github homepage.</p>
+<h1 id="self-introduction"><a href="#self-introduction" class="headerlink" title="self-introduction"></a>self-introduction</h1><p><a target="_blank" rel="noopener" href="https://aircraft-carrier.github.io/blog/个人介绍">中文版</a></p>
+<blockquote>
+<p>The personal introduction will be divided into the following aspects: background, Academic Performance, Research and Competition Achievements, and hobbies. </p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/5b9ebfe9dd521b1127dee339957fddf.png" /></p>
+<h2 id="🥑1background"><a href="#🥑1background" class="headerlink" title="🥑1background"></a>🥑1background</h2><p>My name is <strong>Zheng Shuhang</strong>, and I come from Quanzhou City, Fujian Province.</p>
+<ul>
+<li>I attended the local ordinary middle school — Guifeng Middle School.</li>
+<li>I studied at Quanzhou No. 7 High School, a provincial key high school.</li>
+<li>I am currently studying at Harbin Institute of Technology during my undergraduate stage, majoring in <strong>Artificial Intelligence</strong>.</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/8b2dfabe52cef7c8e376dda695ff930.png" /></p>
+<h2 id="🍋2-Academic-Performance"><a href="#🍋2-Academic-Performance" class="headerlink" title="🍋2 Academic Performance"></a>🍋2 Academic Performance</h2><p>Currently studying at Harbin Institute of Technology, majoring in <strong>Credit Weighted GPA Ranking</strong>, ranked 12 out of 47 with a credit weighted GPA of 91.632.</p>
+<p>Achieved high scores in several major courses. For instance, Probability Theory 100, Formal Language and Automata 98.4, Calculus 96, Algorithm 91.6,CSAPP 96.8,Principles of Computer Construction96.7…</p>
+<p>Minor in studying Statistics Mathematics.</p>
+<h2 id="🍈3-Research-and-Competition-Achievements"><a href="#🍈3-Research-and-Competition-Achievements" class="headerlink" title="🍈3 Research and Competition Achievements"></a>🍈3 Research and Competition Achievements</h2><ul>
+<li><p>Obtained a National Third Prize in the “National College Student Mathematics Competition”.</p>
+</li>
+<li><p>Participated in the “Computer Design Competition” and qualified for the finals. </p>
+</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://github.com/shuaiqibiren1/MutilVNet3d/tree/master">Project git repository</a></p>
+<p>Participated in the project “Multimodal Cardiac Image Segmentation”, where my main responsibilities included training network construction and model training.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/cbeb6ff6f5575ebdb4520f9ea848f0c.png"/></p>
+<ul>
+<li>Participated in the school’s HITCRT club’s “Logistics Robot Competition”.</li>
+</ul>
+<p>Together with team members, completed the modeling, electronic control, communication, and visual control of a logistics robot car. My main responsibilities included serial communication of the car and developing a visual recognition system with Raspberry Pi.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/37a2439b9583d1f1e8086f90a77b2c7.png"/></p>
+<h2 id="🍒-4-hobbies"><a href="#🍒-4-hobbies" class="headerlink" title="🍒 4 hobbies"></a>🍒 4 hobbies</h2><p>My favorite sport is playing football, and I started to engage in fitness activities in college, which gradually became a habit. I enjoy ice skating and skiing during the winter. Besides, I like some passionate Japanese anime or Chinese anime and tend to follow them continuously.</p>
+<p>In conclusion, in an era where large-scale models are becoming increasingly mature, artificial intelligence algorithms are flourishing, and computing resources are constantly advancing, there are many possibilities for development. I should broaden my horizons and apply them in practice.</p>
+<blockquote>
+<p>Contact Information:</p>
+<p>Mobile Phone: 19835450735</p>
+<p>Email: 2451752823@qq.com (QQ email), 19835450735@163.com (wangyi email)</p>
+<p>wechat: zhengshuhang5514</p>
+</blockquote>
+<h2 id="🥑certificates"><a href="#🥑certificates" class="headerlink" title="🥑certificates"></a>🥑certificates</h2><p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/OFCA-OpenHarmony%E8%AE%A4%E8%AF%81.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/lalala.jpg" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/bilibili.jpg" alt=""></p>
+
+    </div>
+    
+    
+    
+    
+    <div id="comment">
+        <div id="giscus-container" class="giscus"></div>
+    </div>
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2024 Aircraft
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Aircraft
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+<script
+    src="https://giscus.app/client.js"
+    data-repo="Aircraft-carrier/git-discussions-"
+    data-repo-id="R_kgDOMSMEYQ"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOMSMEYc4CglYu"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="light_tritanopia"
+    data-lang="zh-CN"
+    crossorigin
+    async
+></script>
+
+
+
+
+
+
+
+
+
+    
+
+    <canvas
+        id="fireworks"
+        style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 32767"
+    ></canvas>
+    <script src="https://s4.zstatic.net/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="/js/fireworks.min.js"></script>  
+
+    <canvas
+        id="background"
+        style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: -1"
+    ></canvas>
+    <script src="/js/background.min.js"></script>
+
+    <div id="cursor"></div>
+    <link rel="stylesheet" href="/css/cursor.min.css" />
+    <script src="/js/cursor.min.js"></script>
+
+</body>
+</html>
