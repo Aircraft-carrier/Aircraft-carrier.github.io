@@ -3,7 +3,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8" />
-    <title> | Aircraft</title>
+    <title>vue_1 | Aircraft</title>
     <meta name="author" content="Aircraft" />
     <meta name="description" content="谁替我上学 我可以替你睡觉" />
     <meta name="keywords" content="" />
@@ -156,7 +156,7 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1></h1>
+        <h1>vue_1</h1>
     </div>
     <div class="info">
         <span class="date">
@@ -166,17 +166,35 @@
             2024/7/23
         </span>
         
+        <span class="category">
+            <a href="/categories/Learning-Notes/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Learning Notes
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/Vue3/" style="color: #03a9f4">
+                    Vue3
+                </a>
+            </span>
+            
+        </span>
         
     </div>
     
     <div class="content" v-pre>
-        <hr>
-<p>title: vue_1<br>date: 2024-07-23 21:46:53<br>tags:</p>
-<pre><code> - Vue3
-</code></pre><p>categories:</p>
-<pre><code> - Learning Notes
-</code></pre><p>description: Vue learning notes 1</p>
-<pre><code class="lang-html">&lt;!-- &lt;body&gt;
+        <pre><code class="lang-html">&lt;!-- &lt;body&gt;
     &lt;div id=&quot;app&quot;&gt;
 
         文章分类: &lt;input type=&quot;text&quot; v-model=&quot;searchConditions.category&quot;&gt;
