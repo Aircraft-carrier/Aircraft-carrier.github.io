@@ -3,7 +3,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8" />
-    <title>vue_1 | Aircraft</title>
+    <title>vue 1 | Aircraft</title>
     <meta name="author" content="Aircraft" />
     <meta name="description" content="谁替我上学 我可以替你睡觉" />
     <meta name="keywords" content="" />
@@ -156,7 +156,7 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>vue_1</h1>
+        <h1>vue 1</h1>
     </div>
     <div class="info">
         <span class="date">
@@ -184,7 +184,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/Vue3/" style="color: #03a9f4">
+                <a href="/tags/Vue3/" style="color: #ffa2c4">
                     Vue3
                 </a>
             </span>
@@ -194,84 +194,41 @@
     </div>
     
     <div class="content" v-pre>
-        <pre><code class="lang-html">&lt;!-- &lt;body&gt;
-    &lt;div id=&quot;app&quot;&gt;
-
-        文章分类: &lt;input type=&quot;text&quot; v-model=&quot;searchConditions.category&quot;&gt;
-
-        发布状态: &lt;input type=&quot;text&quot;  v-model=&quot;searchConditions.state&quot;&gt;
-
-        &lt;button v-on:click=&quot;search&quot;&gt;搜索&lt;/button&gt;
-
-        &lt;br /&gt;
-        &lt;br /&gt;
-        &lt;table border=&quot;1 solid&quot; colspa=&quot;0&quot; cellspacing=&quot;0&quot;&gt;
-            &lt;tr&gt;
-                &lt;th&gt;文章标题&lt;/th&gt;
-                &lt;th&gt;分类&lt;/th&gt;
-                &lt;th&gt;发表时间&lt;/th&gt;
-                &lt;th&gt;状态&lt;/th&gt;
-                &lt;th&gt;操作&lt;/th&gt;
-            &lt;/tr&gt;
-            &lt;tr v-for=&quot;(article,index) in articleList&quot;&gt;
-                &lt;td&gt;&#123;&#123;article.title&#125;&#125;&lt;/td&gt;
-                &lt;td&gt;&#123;&#123;article.category&#125;&#125;&lt;/td&gt;
-                &lt;td&gt;&#123;&#123;article.time&#125;&#125;&lt;/td&gt;
-                &lt;td&gt;&#123;&#123;article.state&#125;&#125;&lt;/td&gt;
-                &lt;td&gt;
-                    &lt;button&gt;编辑&lt;/button&gt;
-                    &lt;button&gt;删除&lt;/button&gt;
-                &lt;/td&gt;
-            &lt;/tr&gt;
-
-        &lt;/table&gt;
-    &lt;/div&gt;
-    &lt;!-- 导入axios的js文件 --&gt;
-    &lt;script src=&quot;https://unpkg.com/axios/dist/axios.min.js&quot;&gt;&lt;/script&gt;
-    &lt;script type=&quot;module&quot;&gt;
-        //导入vue模块
-        import &#123;createApp&#125; from &#39;https://unpkg.com/vue@3/dist/vue.esm-browser.js&#39;;
-        //创建vue应用实例
-        createApp(&#123;
-            data()&#123;
-                return &#123;
-                    articleList:[],
-                    searchConditions:&#123;
-                        category:&#39;&#39;,
-                        state:&#39;&#39;
-                    &#125;
-                &#125;
-            &#125;,
-            methods:&#123;
-                //声明方法
-                search:function()&#123;
-                    //发送请求,完成搜索,携带搜索条件
-                    axios.get(&#39;http://localhost:8080/article/search?category=&#39;+this.searchConditions.category+&#39;&amp;state=&#39;+this.searchConditions.state)
-                    .then(result=&gt;&#123;
-                        //成功回调 result.data
-                        //把得到的数据赋值给articleList
-                        this.articleList=result.data
-                    &#125;).catch(err=&gt;&#123;
-                        console.log(err);
-                    &#125;);
-                &#125;
-            &#125;,
-            //钩子函数mounted中,获取所有文章数据
-            mounted:function()&#123;
-                //发送异步请求  axios
-                axios.get(&#39;http://localhost:8080/article/getAll&#39;).then(result=&gt;&#123;
-                    //成功回调
-                    //console.log(result.data);
-                    this.articleList=result.data;
-                &#125;).catch(err=&gt;&#123;
-                    //失败回调
-                    console.log(err);
-                &#125;);
-            &#125;
-        &#125;).mount(&#39;#app&#39;);//控制html元素
-    &lt;/script&gt;
-&lt;/body&gt; --&gt;
-</code></pre>
+        <h1 id="Vue"><a href="#Vue" class="headerlink" title="Vue"></a>Vue</h1><p><a target="_blank" rel="noopener" href="https://cn.vuejs.org/guide/introduction.html">Vue深入文档</a></p>
+<h2 id="1-快速入门"><a href="#1-快速入门" class="headerlink" title="1 快速入门"></a>1 快速入门</h2><ol>
+<li>准备<ul>
+<li>准备html页面，并引入Vue模块（官方提供）。</li>
+<li>创建Vue程序的应用实例。</li>
+<li>准备元素（div）,被Vue控制。</li>
+</ul>
+</li>
+<li>构建用户界面<ul>
+<li>准备数据。</li>
+<li>通过插值表达式渲染页面。</li>
+</ul>
+</li>
+</ol>
+<p><code>https://unpkg.com/vue@3/dist/vue.esm-browser.js</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240723191528548.png" alt=""></p>
+<h2 id="2-常用指令"><a href="#2-常用指令" class="headerlink" title="2 常用指令"></a>2 常用指令</h2><p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240723191704665.png" alt=""></p>
+<h3 id="2-1-v-for"><a href="#2-1-v-for" class="headerlink" title="2.1 v-for"></a>2.1 v-for</h3><p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240723191728686.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240723193322609.png" alt=""></p>
+<h3 id="2-2-v-bind"><a href="#2-2-v-bind" class="headerlink" title="2.2 v-bind"></a>2.2 v-bind</h3><p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240723191938346.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240723193844265.png" alt=""></p>
+<h3 id="2-3-v-if-amp-v-show"><a href="#2-3-v-if-amp-v-show" class="headerlink" title="2.3 v-if &amp; v-show"></a>2.3 v-if &amp; v-show</h3><p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240723192035987.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240723194648690.png" alt=""></p>
+<h3 id="2-4-v-on"><a href="#2-4-v-on" class="headerlink" title="2.4 v-on"></a>2.4 v-on</h3><p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240723192202306.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240723195306020.png" alt=""></p>
+<h3 id="2-5-v-model"><a href="#2-5-v-model" class="headerlink" title="2.5 v-model"></a>2.5 v-model</h3><p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240723192256909.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240723200120556.png" alt=""></p>
+<h2 id="Vue生命周期"><a href="#Vue生命周期" class="headerlink" title="Vue生命周期"></a>Vue生命周期</h2><p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240723200536064.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240723200618859.png" alt=""></p>
+<h2 id="Axios异步请求使用"><a href="#Axios异步请求使用" class="headerlink" title="Axios异步请求使用"></a>Axios异步请求使用</h2><p><a target="_blank" rel="noopener" href="https://www.axios-http.cn/docs/intro">Axios中文文档</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240723201011617.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240723201712249.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240723213203460.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240723213220112.png" alt=""></p>
+<h2 id="Element-Plus"><a href="#Element-Plus" class="headerlink" title="Element Plus"></a>Element Plus</h2><p><a target="_blank" rel="noopener" href="https://element.eleme.cn/#/zh-CN/component/form">组件 | Element</a></p>
 
     </div>
     
