@@ -3,7 +3,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8" />
-    <title>Aircraft</title>
+    <title>vue 3 | Aircraft</title>
     <meta name="author" content="Aircraft" />
     <meta name="description" content="谁替我上学 我可以替你睡觉" />
     <meta name="keywords" content="" />
@@ -42,7 +42,9 @@
 
 
 
-<script src="/js/lib/home.js"></script>
+
+
+
 
 <link rel="stylesheet" href="/css/main.css" />
 
@@ -152,40 +154,11 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <div id="home-head">
-    <div
-        id="home-background"
-        ref="homeBackground"
-        data-images="/images/background.jpg,/images/background5.jpg,/images/background6.jpg,/images/background7.jpg"
-    ></div>
-    <div id="home-info" @click="homeClick">
-        <span class="loop"></span>
-        <span class="loop"></span>
-        <span class="loop"></span>
-        <span class="loop"></span>
-        <span class="info">
-            <div class="wrap">
-                <h1>Aircraft</h1>
-                <h3>zsh</h3>
-                <h5>谁替我上学 我可以替你睡觉</h5>
-            </div>
-        </span>
+            <div class="article">
+    <div>
+        <h1>vue 3</h1>
     </div>
-</div>
-<div
-    id="home-posts-wrap"
-    ref="homePostsWrap"
-    true
->
-    <div id="home-posts">
-        
-
-<div class="post">
-    <a href="/2024/07/24/vue-3/">
-        <h2 class="post-title">vue 3</h2>
-    </a>
-    <div class="category-and-date">
-        
+    <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
@@ -195,10 +168,9 @@
         
         
     </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <p>tags:</p>
+    
+    <div class="content" v-pre>
+        <p>tags:</p>
 <pre><code> - Vue3
 </code></pre><p>categories:</p>
 <pre><code> - Learning Notes
@@ -315,595 +287,17 @@ instance.interceptors.request.use(
 </code></pre>
 <p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240724191258803.png" alt=""></p>
 
-            
-        </div>
     </div>
-    <div class="post-tags">
-        
-        
-        
-    </div>
-    <a href="/2024/07/24/vue-3/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2024/07/24/vue-2/">
-        <h2 class="post-title">vue 2</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/Learning-Notes/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Learning Notes
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2024/7/24
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <p>Vue learning notes 1</p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/Vue3/" style="color: #03a9f4">Vue3</a>
-        </span>
-        
-    </div>
-    <a href="/2024/07/24/vue-2/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2024/07/23/vue-1/">
-        <h2 class="post-title">vue 1</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/Learning-Notes/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Learning Notes
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2024/7/23
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <p>Vue learning notes 1</p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/Vue3/" style="color: #03a9f4">Vue3</a>
-        </span>
-        
-    </div>
-    <a href="/2024/07/23/vue-1/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2024/07/23/SpringBoot-5/">
-        <h2 class="post-title">SpringBoot 5</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/Learning-Notes/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Learning Notes
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2024/7/23
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <p>SpringBoot learning notes 5</p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/SpringBoot/" style="color: #03a9f4">SpringBoot</a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/Vue3/" style="color: #ffa2c4">Vue3</a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/lab/" style="color: #00a596">lab</a>
-        </span>
-        
-    </div>
-    <a href="/2024/07/23/SpringBoot-5/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2024/07/22/SpringBoot-4/">
-        <h2 class="post-title">SpringBoot 4</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/Learning-Notes/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Learning Notes
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2024/7/22
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <p>SpringBoot learning notes 4</p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/SpringBoot/" style="color: #00bcd4">SpringBoot</a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/Vue3/" style="color: #ffa2c4">Vue3</a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/Bean/" style="color: #00a596">Bean</a>
-        </span>
-        
-    </div>
-    <a href="/2024/07/22/SpringBoot-4/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2024/07/22/SpringBoot-3/">
-        <h2 class="post-title">SpringBoot 3</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/Learning-Notes/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Learning Notes
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2024/7/22
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <p>SpringBoot learning notes 3</p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/SpringBoot/" style="color: #00a596">SpringBoot</a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/Vue3/" style="color: #ff7d73">Vue3</a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/MyBatis/" style="color: #03a9f4">MyBatis</a>
-        </span>
-        
-    </div>
-    <a href="/2024/07/22/SpringBoot-3/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2024/07/21/SpringBoot-2/">
-        <h2 class="post-title">SpringBoot 2</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/Learning-Notes/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Learning Notes
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2024/7/21
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <p>SpringBoot learning notes 2</p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/SpringBoot/" style="color: #ff7d73">SpringBoot</a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/Vue3/" style="color: #03a9f4">Vue3</a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/Maven/" style="color: #ffa2c4">Maven</a>
-        </span>
-        
-    </div>
-    <a href="/2024/07/21/SpringBoot-2/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2024/07/12/paddle-visualdl/">
-        <h2 class="post-title">paddle-visualdl</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/Learning/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Learning
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2024/7/12
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <p>visualdl learning</p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/PaddlePaddle/" style="color: #00bcd4">PaddlePaddle</a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/deep-learning/" style="color: #00a596">deep learning</a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/AI/" style="color: #ff7d73">AI</a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/visualdl/" style="color: #00bcd4">visualdl</a>
-        </span>
-        
-    </div>
-    <a href="/2024/07/12/paddle-visualdl/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2024/07/11/ComputerNetWork1/">
-        <h2 class="post-title">ComputerNetWork 1</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/Learning-Notes/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Learning Notes
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2024/7/11
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/ComputerNetWork/" style="color: #00a596">ComputerNetWork</a>
-        </span>
-        
-    </div>
-    <a href="/2024/07/11/ComputerNetWork1/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2024/07/11/MySQL/">
-        <h2 class="post-title">MySQL</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/Database/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Database
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2024/7/11
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <p>MySQL learning notes</p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/MySQL/" style="color: #03a9f4">MySQL</a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/SQL/" style="color: #ffa2c4">SQL</a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/Database/" style="color: #00bcd4">Database</a>
-        </span>
-        
-    </div>
-    <a href="/2024/07/11/MySQL/" class="go-post">阅读全文</a>
-</div>
-
-
-        <div class="page-current">
-    
-    <span class="current">1</span>
-    
-    <a class="page-num" href="/page/2">
-        2
-    </a>
     
     
     
     
-    <a class="page-num" href="/page/2/">
-        <i class="fa-solid fa-caret-right fa-fw"></i>
-    </a>
-    
-</div>
-
+    <div id="comment">
+        <div id="giscus-container" class="giscus"></div>
     </div>
     
-    <div id="home-card">
-        <div id="card-style">
-    <div id="card-div">
-        <div class="avatar">
-            <img src="/images/avatar.jpg" alt="avatar" />
-        </div>
-        <div class="name">Aircraft</div>
-        <div class="description">
-            <p>好热~~~啊！<br>…</p>
-
-        </div>
-        
-        <div class="icon-links">
-            
-            <span class="icon-link">
-                <a target="_blank" rel="noopener" href="https://github.com/Aircraft-carrier">
-                    <i
-                        class="fa-brands fa-github fa-fw"
-                    ></i>
-                </a>
-            </span>
-            
-            <span class="icon-link">
-                <a target="_blank" rel="noopener" href="https://www.weibo.com/u/7562264534">
-                    <i
-                        class="fa-brands fa-weibo fa-fw"
-                    ></i>
-                </a>
-            </span>
-            
-        </div>
-        
-        
-        <div class="friend-links">
-            
-            <div class="friend-link">
-                <a target="_blank" rel="noopener" href="https://argvchs.github.io">Argvchs</a>
-            </div>
-            
-            <div class="friend-link">
-                <a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_74314859?spm=1010.2135.3001.5421">CSDN</a>
-            </div>
-            
-            <div class="friend-link">
-                <a target="_blank" rel="noopener" href="https://aircraft-carrier.netlify.app/">Netlify</a>
-            </div>
-            
-        </div>
-        
-    </div>
-</div>
-
-    </div>
+    
+    
     
 </div>
 
@@ -935,6 +329,33 @@ instance.interceptors.request.use(
         
     </div>
     <script src="/js/main.js"></script>
+    
+    
+<script
+    src="https://giscus.app/client.js"
+    data-repo="Aircraft-carrier/git-discussions-"
+    data-repo-id="R_kgDOMSMEYQ"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOMSMEYc4CglYu"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="light_tritanopia"
+    data-lang="zh-CN"
+    crossorigin
+    async
+></script>
+
+
+
+
+
+
+
+
+
     
 
     <canvas
