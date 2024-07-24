@@ -186,6 +186,15 @@
     </a>
     <div class="category-and-date">
         
+        <span class="category">
+            <a href="/categories/Learning-Notes/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Learning Notes
+            </a>
+        </span>
+        
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
@@ -198,129 +207,23 @@
     <div class="description">
         <div class="content" v-pre>
             
-            <p>tags:</p>
-<pre><code> - Vue3
-</code></pre><p>categories:</p>
-<pre><code> - Learning Notes
-</code></pre><h2 id="description-Vue-learning-notes-1"><a href="#description-Vue-learning-notes-1" class="headerlink" title="description: Vue learning notes 1 "></a>description: Vue learning notes 1 </h2><h1 id="Vue"><a href="#Vue" class="headerlink" title="Vue"></a>Vue</h1><p><a target="_blank" rel="noopener" href="https://cn.vuejs.org/guide/introduction.html">Vue深入文档</a></p>
-<h1 id="整站使用Vue"><a href="#整站使用Vue" class="headerlink" title="整站使用Vue"></a>整站使用Vue</h1><h2 id="API风格"><a href="#API风格" class="headerlink" title="API风格"></a>API风格</h2><p>组合式API 和选项式API</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240724181059132.png" alt=""></p>
-<p>setup：是一个标识，告诉Vue需要进行一些处理，让我们可以更简洁的使用组合式API。</p>
-<h2 id="使用JS文件封装"><a href="#使用JS文件封装" class="headerlink" title="使用JS文件封装"></a>使用JS文件封装</h2><ul>
-<li>放在<code>.vue</code>文件中难以复用</li>
-</ul>
-<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240724181559883.png" alt=""></p>
-<ul>
-<li>接口调用的js代码一般会封装到<code>.js</code>文件中, 并且以函数的形式暴露给外部。使用 async…await 同步接收网络请求的结果。</li>
-</ul>
-<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240724182330461.png" alt=""></p>
-<h2 id="Element-Plus快速入门"><a href="#Element-Plus快速入门" class="headerlink" title="Element Plus快速入门"></a>Element Plus快速入门</h2><p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240724182615159.png" alt=""></p>
-<h2 id="跨域"><a href="#跨域" class="headerlink" title="跨域"></a>跨域</h2><p>由于浏览器的同源策略限制，向不同源(不同协议、不同域名、不同端口)发送ajax请求会失败</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240724182740213.png" alt=""></p>
-<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240724182752877.png" alt=""></p>
-<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240724183106893.png" alt=""></p>
-<h3 id="配置解析"><a href="#配置解析" class="headerlink" title="配置解析"></a>配置解析</h3><ol>
-<li><p><strong><code>server</code></strong>: 这是配置服务器的根节点。</p>
-</li>
-<li><p><strong><code>proxy</code></strong>: 这是定义代理的部分。</p>
-</li>
-<li><p><strong><code>&#39;/api&#39;</code></strong>: 这是前端请求的路径前缀。当请求以 <code>/api</code> 开头时，将会被代理。</p>
-</li>
-<li><p><strong><code>target: &#39;http://localhost:8080&#39;</code></strong>: 这是代理的目标地址，表示将请求<strong>转发</strong>到本地的 8080 端口（通常是后端服务的地址）。</p>
-</li>
-<li><p><strong><code>changeOrigin: true</code></strong>: 这个选项用于修改请求头中的 <code>Origin</code> 字段，使其与目标地址一致。这在某些情况下是必要的，以确保后端能够正确处理请求。</p>
-</li>
-<li><p><strong><code>rewrite: (path) =&gt; path.replace(/^\/api/, &#39;&#39;)</code></strong>: 这是一个路径重写函数。它会将请求路径中的 <code>/api</code> 前缀去掉。例如，如果前端请求 <code>/api/users</code>，经过重写后将变为 <code>/users</code>，然后发送到目标地址。</p>
-</li>
-</ol>
-<h3 id="整体流程"><a href="#整体流程" class="headerlink" title="整体流程"></a>整体流程</h3><ul>
-<li>当前端应用发送请求到 <code>/api/some-endpoint</code> 时：<ul>
-<li>代理会将请求转发到 <code>http://localhost:8080/some-endpoint</code>。</li>
-<li><code>changeOrigin: true</code> 确保请求的来源是 <code>http://localhost:8080</code>。</li>
-<li><code>rewrite</code> 函数会去掉 <code>/api</code> 前缀，使得请求路径正确。</li>
-</ul>
-</li>
-</ul>
-<p>这种配置方式在开发环境中非常常见，能够有效地解决跨域问题并简化前后端的交互。</p>
-<h2 id="优化axios响应拦截器"><a href="#优化axios响应拦截器" class="headerlink" title="优化axios响应拦截器"></a>优化axios响应拦截器</h2><p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240724185302170.png" alt=""></p>
-<p>这段代码是使用 Axios 进行 HTTP 请求时的响应拦截器。下面是它的具体解释：</p>
-<ol>
-<li><p><strong><code>instance.interceptors.response.use(...)</code></strong>: 这是 Axios 提供的响应拦截器功能，可以在接收到响应数据之后进行额外的处理。</p>
-</li>
-<li><p><strong><code>result =&gt; &#123;...&#125;</code></strong>: 这是成功响应的处理函数，当成功接收到响应数据时，会执行此函数。<code>result</code> 是包含响应数据的对象。</p>
-</li>
-<li><p><strong><code>if (result.data.code == 0) &#123;...&#125;</code></strong>: 在成功处理函数中，首先判断返回的数据中是否包含业务状态码为 0。这里假定业务状态码为 0 代表操作成功。</p>
-</li>
-<li><p><strong><code>return result.data;</code></strong>: 如果业务状态码为 0，表示本次操作成功。将响应数据 <code>result.data</code> 返回。</p>
-</li>
-<li><p><strong><code>alert(result.data.message || &#39;服务异常&#39;);</code></strong>: 如果业务状态码不为 0，说明本次操作失败。弹出提示框显示错误消息（若有）或默认的服务异常信息。</p>
-</li>
-<li><p><strong><code>return Promise.reject(result.data);</code></strong>: 将包含错误信息的数据对象 <code>result.data</code> 作为参数，拒绝 Promise 并返回该错误对象。</p>
-</li>
-<li><p><strong><code>err =&gt; &#123;...&#125;</code></strong>: 这是请求出错时的处理函数，当遇到类似网络错误或 HTTP 状态码错误时，会执行此函数。</p>
-</li>
-<li><p><strong><code>alert(&#39;服务异常&#39;);</code></strong>: 弹出提示框，显示服务异常信息。</p>
-</li>
-<li><p><strong><code>return Promise.reject(err);</code></strong>: 拒绝 Promise 并返回错误对象 <code>err</code>。</p>
-</li>
-</ol>
-<p>这段代码的作用是对服务器返回的数据进行处理和显示相应的提示信息。如果业务状态码为 0，则表示操作成功；否则表示操作失败，并弹出错误消息。在请求出错时也会弹出服务异常提示框。通过拦截器可以统一处理请求和响应，以简化代码逻辑并提高代码的可维护性。</p>
-<blockquote>
-<p><strong>全局性</strong>：</p>
-<ul>
-<li>响应拦截器中的函数可在所有请求的成功和失败时统一处理，相当于全局的处理函数。</li>
-<li>使用 <code>.then()</code> 和 <code>.catch()</code> 需要在每个请求处理成功和失败的情况。</li>
-</ul>
-</blockquote>
-<h2 id="路由Vue-Router"><a href="#路由Vue-Router" class="headerlink" title="路由Vue Router"></a>路由Vue Router</h2><p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240724185925340.png" alt=""></p>
-<p><strong>路由（Route）</strong></p>
-<p>路由是指一条由路径（<code>path</code>）和对应的组件（<code>component</code>）组成的映射关系。在 Vue Router 中，可以通过定义不同的路由来指定不同路径下所要展示的组件。</p>
-<p><strong>功能</strong>：</p>
-<ul>
-<li>根据不同的路径展示不同的组件内容。</li>
-<li>实现页面切换和导航。</li>
-<li>可以配置路由参数和动态路由。</li>
-</ul>
-<h2 id="子路由"><a href="#子路由" class="headerlink" title="子路由"></a>子路由</h2><p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240724190312823.png" alt=""></p>
-<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240724190414927.png" alt=""></p>
-<p><strong>子路由（Nested Route）</strong></p>
-<p>子路由是将子级路由嵌套在父级路由下的一种路由管理方式。在 Vue Router 中，可以使用子路由来实现组件的嵌套和组织细分。</p>
-<p><strong>功能</strong>：</p>
-<ul>
-<li>将多个组件结构化组织，形成层级关系。</li>
-<li>实现页面布局的嵌套和复用。</li>
-<li>父级路由的内容在子路由中作为占位符使用。</li>
-</ul>
-<p>通过使用子路由，可以实现更复杂的页面结构和组件布局，使代码更清晰、可维护性更高。子路由可以帮助开发者更好地管理页面结构和逻辑，提高代码组织的效率。在实际项目中，可以根据需求合理使用路由和子路由，实现更灵活、功能强大的页面路由管理。</p>
-<h2 id="Pinia状态管理库"><a href="#Pinia状态管理库" class="headerlink" title="Pinia状态管理库"></a>Pinia状态管理库</h2><p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240724190940874.png" alt=""></p>
-<p>在 Vue 中可以使用 Pinia 状态管理库来管理应用的状态。后SpringBoot中的thread有点像。</p>
-<h2 id="Axios请求拦截器"><a href="#Axios请求拦截器" class="headerlink" title="Axios请求拦截器"></a>Axios请求拦截器</h2><p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240724191155201.png" alt=""></p>
-<pre><code class="lang-js">//导入token状态
-import &#123; useTokenStore &#125; from &#39;@/stores/token.js&#39;;
-//添加请求拦截器
-instance.interceptors.request.use(
-    (config)=&gt;&#123;
-        //在发送请求之前做什么
-        let tokenStore = useTokenStore()
-        if(tokenStore.token)&#123;
-            config.headers.Authorization=tokenStore.token
-        &#125;
-        return config
-    &#125;,
-    (err)=&gt;&#123;
-        //如果请求错误做什么
-        Promise.reject(err)
-    &#125;
-)
-</code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240724191258803.png" alt=""></p>
+            <p>Vue learning notes 3</p>
 
             
         </div>
     </div>
     <div class="post-tags">
         
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
         
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/Vue3/" style="color: #ffa2c4">Vue3</a>
+        </span>
         
     </div>
     <a href="/2024/07/24/vue-3/" class="go-post">阅读全文</a>
@@ -353,7 +256,7 @@ instance.interceptors.request.use(
     <div class="description">
         <div class="content" v-pre>
             
-            <p>Vue learning notes 1</p>
+            <p>Vue learning notes 2</p>
 
             
         </div>
@@ -368,7 +271,7 @@ instance.interceptors.request.use(
         
         <span class="tag">
             
-            <a href="/tags/Vue3/" style="color: #03a9f4">Vue3</a>
+            <a href="/tags/Vue3/" style="color: #00bcd4">Vue3</a>
         </span>
         
     </div>
@@ -417,7 +320,7 @@ instance.interceptors.request.use(
         
         <span class="tag">
             
-            <a href="/tags/Vue3/" style="color: #03a9f4">Vue3</a>
+            <a href="/tags/Vue3/" style="color: #00bcd4">Vue3</a>
         </span>
         
     </div>
@@ -466,17 +369,17 @@ instance.interceptors.request.use(
         
         <span class="tag">
             
-            <a href="/tags/SpringBoot/" style="color: #03a9f4">SpringBoot</a>
+            <a href="/tags/SpringBoot/" style="color: #ff7d73">SpringBoot</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/Vue3/" style="color: #ffa2c4">Vue3</a>
+            <a href="/tags/Vue3/" style="color: #03a9f4">Vue3</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/lab/" style="color: #00a596">lab</a>
+            <a href="/tags/lab/" style="color: #ffa2c4">lab</a>
         </span>
         
     </div>
@@ -525,17 +428,17 @@ instance.interceptors.request.use(
         
         <span class="tag">
             
-            <a href="/tags/SpringBoot/" style="color: #00bcd4">SpringBoot</a>
+            <a href="/tags/SpringBoot/" style="color: #ff7d73">SpringBoot</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/Vue3/" style="color: #ffa2c4">Vue3</a>
+            <a href="/tags/Vue3/" style="color: #03a9f4">Vue3</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/Bean/" style="color: #00a596">Bean</a>
+            <a href="/tags/Bean/" style="color: #ffa2c4">Bean</a>
         </span>
         
     </div>
@@ -584,7 +487,7 @@ instance.interceptors.request.use(
         
         <span class="tag">
             
-            <a href="/tags/SpringBoot/" style="color: #00a596">SpringBoot</a>
+            <a href="/tags/SpringBoot/" style="color: #00bcd4">SpringBoot</a>
         </span>
         
         <span class="tag">
@@ -594,7 +497,7 @@ instance.interceptors.request.use(
         
         <span class="tag">
             
-            <a href="/tags/MyBatis/" style="color: #03a9f4">MyBatis</a>
+            <a href="/tags/MyBatis/" style="color: #ffa2c4">MyBatis</a>
         </span>
         
     </div>
@@ -648,12 +551,12 @@ instance.interceptors.request.use(
         
         <span class="tag">
             
-            <a href="/tags/Vue3/" style="color: #03a9f4">Vue3</a>
+            <a href="/tags/Vue3/" style="color: #ffa2c4">Vue3</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/Maven/" style="color: #ffa2c4">Maven</a>
+            <a href="/tags/Maven/" style="color: #03a9f4">Maven</a>
         </span>
         
     </div>
@@ -702,22 +605,22 @@ instance.interceptors.request.use(
         
         <span class="tag">
             
-            <a href="/tags/PaddlePaddle/" style="color: #00bcd4">PaddlePaddle</a>
+            <a href="/tags/PaddlePaddle/" style="color: #00a596">PaddlePaddle</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/deep-learning/" style="color: #00a596">deep learning</a>
+            <a href="/tags/deep-learning/" style="color: #00bcd4">deep learning</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/AI/" style="color: #ff7d73">AI</a>
+            <a href="/tags/AI/" style="color: #03a9f4">AI</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/visualdl/" style="color: #00bcd4">visualdl</a>
+            <a href="/tags/visualdl/" style="color: #ff7d73">visualdl</a>
         </span>
         
     </div>
@@ -765,7 +668,7 @@ instance.interceptors.request.use(
         
         <span class="tag">
             
-            <a href="/tags/ComputerNetWork/" style="color: #00a596">ComputerNetWork</a>
+            <a href="/tags/ComputerNetWork/" style="color: #ff7d73">ComputerNetWork</a>
         </span>
         
     </div>
@@ -814,17 +717,17 @@ instance.interceptors.request.use(
         
         <span class="tag">
             
-            <a href="/tags/MySQL/" style="color: #03a9f4">MySQL</a>
+            <a href="/tags/MySQL/" style="color: #00bcd4">MySQL</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/SQL/" style="color: #ffa2c4">SQL</a>
+            <a href="/tags/SQL/" style="color: #00a596">SQL</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/Database/" style="color: #00bcd4">Database</a>
+            <a href="/tags/Database/" style="color: #ffa2c4">Database</a>
         </span>
         
     </div>
