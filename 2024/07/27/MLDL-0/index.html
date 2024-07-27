@@ -1,0 +1,540 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>MLDL 0 | Aircraft</title>
+    <meta name="author" content="Aircraft" />
+    <meta name="description" content="谁替我上学 我可以替你睡觉" />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>AIRCRAFT</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;AIRCRAFT</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>MLDL 0</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2024/7/27
+        </span>
+        
+        <span class="category">
+            <a href="/categories/Machine-Learning/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Machine Learning
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/dataSet/" style="color: #00a596">
+                    dataSet
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/dataload/" style="color: #ff7d73">
+                    dataload
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/module/" style="color: #ffa2c4">
+                    module
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/Loss/" style="color: #00bcd4">
+                    Loss
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h1 id="Pytorch-Learn"><a href="#Pytorch-Learn" class="headerlink" title="Pytorch Learn"></a>Pytorch Learn</h1><p>Hung-yi Lee</p>
+<p><a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/Pytorch_Tutorial_1.pdf">Pytorch.pdf</a>    &amp;  <a target="_blank" rel="noopener" href="https://pytorch-cn.readthedocs.io/zh/latest/">PyTorch中文文档</a>  </p>
+<h2 id="Tensor"><a href="#Tensor" class="headerlink" title="Tensor"></a>Tensor</h2><h3 id="Constructor"><a href="#Constructor" class="headerlink" title="Constructor"></a>Constructor</h3><p><code>From list / numpy array</code></p>
+<pre><code class="lang-python">x = torch.tensor([[1,-1],[-1,1]])
+x = torch.from_numpy(np.array([[1,-1],[-1,1]]))
+</code></pre>
+<p><code>Zero tensor</code></p>
+<pre><code class="lang-python">x = torch.zeros([2,2])    # [2,2] is shape
+</code></pre>
+<p><code>Unit tensor</code></p>
+<pre><code class="lang-python">x = torch.ones([1,2,5])  # [1,2,5] is shape
+</code></pre>
+<h3 id="Operators"><a href="#Operators" class="headerlink" title="Operators"></a>Operators</h3><p><code>Squeeze</code>: remove the specified dimension with length 1</p>
+<pre><code class="lang-python">&gt;&gt;&gt; x = torch.zeros([1,2,3])
+&gt;&gt;&gt; x.shape
+torch.Size([1,2,3])
+&gt;&gt;&gt; x = x.squeeze(0)  # dim = 0
+&gt;&gt;&gt; x.shape
+torch.Size([2,3])
+</code></pre>
+<p><code>Unsqueeze</code>:expand a new dimension</p>
+<pre><code class="lang-python">&gt;&gt;&gt; x = torch.zeros([2,3])
+&gt;&gt;&gt; x.shape
+torch.Size([2,3])
+&gt;&gt;&gt; x = x.unsqueeze(1) # dim = 1
+&gt;&gt;&gt; shape.shape
+torch.Size([2,1,3])
+</code></pre>
+<p><code>Transpose</code>:transpose two specified dimensions</p>
+<pre><code class="lang-python">&gt;&gt;&gt; x = torch.zeros([2,3])
+&gt;&gt;&gt; x.shape
+torch.Size([2,3])
+&gt;&gt;&gt; x = x.transpose(0,1)
+&gt;&gt;&gt; x.shape
+torch.Size([3,2])
+</code></pre>
+<p><code>Cat</code>:concatenate multiple tensors</p>
+<pre><code class="lang-python">&gt;&gt;&gt; x = torch.zeros([2,1,3])    # dim_1 = 1
+&gt;&gt;&gt; y = torch.zeros([2,3,3])    # dim_1 = 3
+&gt;&gt;&gt; z = torch.zeros([2,2,3])    # dim_1 = 2
+&gt;&gt;&gt; w = torch.cat([x,y,z],dim=1)
+&gt;&gt;&gt; w.shape
+torch.Size([2,6,3])             # dim_1 = 6
+</code></pre>
+<p><code>Addition</code> 、<code>Subtraction</code>、<code>Power</code>、<code>Summation</code>、<code>Mean</code></p>
+<pre><code class="lang-python">z = x + y
+z = x - y
+y = x.pow(2)
+y = x.sum()
+y = x.mean()
+</code></pre>
+<h3 id="PyTorch-v-s-Numpy"><a href="#PyTorch-v-s-Numpy" class="headerlink" title="PyTorch v.s. Numpy"></a>PyTorch v.s. Numpy</h3><p><code>Attributes</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240727114104159.png" alt=""></p>
+<p><code>Shape manipulation</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240727114140288.png" alt=""></p>
+<p><code>view</code> 方法在改变张量形状时，要求新形状中的元素个数和原形状中的元素个数相同。此外，<code>view</code> 返回的是一个与原张量共享内存的视图。</p>
+<pre><code class="lang-python">import torch
+
+# 创建一个 1D 张量
+x = torch.arange(6)
+print(&quot;Original tensor:&quot;, x)
+
+# 使用 view 改变形状为 2x3
+y = x.view(2, 3)
+print(&quot;Reshaped using view:&quot;, y)
+
+# 修改原张量的值，查看 view 对应的值
+x[0] = 10
+print(&quot;Modified original tensor:&quot;, x)
+print(&quot;View after modifying original:&quot;, y)
+# Original tensor: tensor([0, 1, 2, 3, 4, 5])
+# Reshaped using view: tensor([[0, 1, 2],
+#         [3, 4, 5]])
+# Modified original tensor: tensor([10, 1, 2, 3, 4, 5])
+# View after modifying original: tensor([[10, 1, 2],
+#         [3, 4, 5]])
+</code></pre>
+<p><code>reshape</code> 方法会返回一个新的张量，它可能会分配新的内存，而不是视图。它也允许一些灵活性，例如在某些情况下改变形状时，<code>reshape</code> 会自动进行内存的调整。</p>
+<pre><code class="lang-python"># 使用 reshape 改变形状为 2x3
+z = x.reshape(2, 3)
+print(&quot;Reshaped using reshape:&quot;, z)
+
+# 修改原张量的值
+x[1] = 20
+print(&quot;Modified original tensor:&quot;, x)
+print(&quot;Reshape after modifying original:&quot;, z)
+# Reshaped using reshape: tensor([[10,  1,  2],
+#         [ 3,  4,  5]])
+# Modified original tensor: tensor([10, 20,  2,  3,  4,  5])
+# Reshape after modifying original: tensor([[10,  1,  2],
+#         [ 3,  4,  5]])
+</code></pre>
+<h3 id="Device"><a href="#Device" class="headerlink" title="Device"></a>Device</h3><p>Default: tensors &amp; modules will be computed with CPU</p>
+<p>CPU ：<code>x = x.to(&#39;cpu&#39;)</code></p>
+<p>GPU : <code>x = x.to(&#39;cuda&#39;)</code></p>
+<p>Check if your computer has NVIDIA GPU :<code>torch.cuda.is_available()</code></p>
+<p>Multiple GPUs: specify <code>cuda:0, cuda:1, cuda:2, ...</code></p>
+<h3 id="How-to-Calculate-Gradient"><a href="#How-to-Calculate-Gradient" class="headerlink" title="How to Calculate Gradient?"></a>How to Calculate Gradient?</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/wxc971231/article/details/121140403">Tensor自动求梯度+计算图模型+反向传播+Function对象</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240727140237950.png" alt=""></p>
+<pre><code class="lang-python">x = torch.tensor([1.0,0.],[-1.,1.],requires_grad=True)
+z = x.pow(2).sum()
+z.backward()
+x.grad
+</code></pre>
+<p>在这段代码中，我们利用 PyTorch 进行自动求梯度，下面详细解释代码的每一个部分及其在反向传播中的作用。同时，我们也将介绍函数对象和叶子节点的概念。</p>
+<ol>
+<li><p><strong>创建张量</strong>：</p>
+<pre><code class="lang-python">x = torch.tensor([[1.0, 0.], [-1., 1.]], requires_grad=True)
+</code></pre>
+<ul>
+<li>这里我们创建了一个二维张量 <code>x</code>，其内容是 <code>[[1.0, 0.], [-1., 1.]]</code>。</li>
+<li>设置 <code>requires_grad=True</code>，意味着我们希望跟踪这个张量的操作，以便进行自动求梯度。PyTorch 记录所有对该张量的操作，以便在反向传播时能够计算出梯度。</li>
+<li>此外， <code>x</code> 是一个<strong>叶子节点</strong>，这是指在计算图的最底层的张量，它是用户直接创建的张量或从其他张量分割而来，不是通过其他张量的操作结果产生的。</li>
+</ul>
+</li>
+<li><p><strong>定义计算图的输出</strong>：</p>
+<pre><code class="lang-python">z = x.pow(2).sum()
+</code></pre>
+<ul>
+<li><code>x.pow(2)</code> 是对 <code>x</code> 中的每个元素进行平方运算，生成一个新的张量，这个新张量并不是用户直接创建的，而是通过操作 <code>x</code> 生成，因此它不是叶子节点。</li>
+<li>接着，我们调用 <code>.sum()</code>，它会计算所有元素的和，结果保存在 <code>z</code> 中。至此，计算图已经构建完成，PyTorch 知道如何从 <code>z</code> 计算回 <code>x</code>。</li>
+</ul>
+</li>
+<li><p><strong>反向传播</strong>：</p>
+<pre><code class="lang-python">z.backward()
+</code></pre>
+</li>
+</ol>
+<p>   <img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240727141321350.png" alt=""></p>
+<ol>
+<li><p><strong>查看梯度</strong>：</p>
+<pre><code class="lang-python">x.grad
+</code></pre>
+<ul>
+<li>这一行返回 <code>x</code> 的梯度，结果应为：<code>tensor([[ 2., 0.], [-2., 2.]])</code>。这对应于从反向传播过程中计算得到的梯度值。</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>在 PyTorch 中，任何通过运算生成的张量都可以看作是一个<strong>函数对象</strong>，它们代表了多个操作和计算结果的链表。例如，<code>z</code> 就是一个非叶子节点，它由 <code>x</code> 计算得到，而这些操作形成了一个计算图，这样在计算梯度时，我们就知道如何回溯。</li>
+</ul>
+<blockquote>
+<p>Note 1：</p>
+<p>从数据加载器（DataLoader）中得到的Tensor默认情况下其 <code>requires_grad</code> 属性是 <code>False</code>，这意味着这些Tensor在反向传播时不会计算梯度。这是因为输入数据通常不需要计算梯度，只有模型的参数（如权重和偏置）需要计算梯度以进行优化。</p>
+<p>在计算损失的过程中，只有那些需要更新的模型参数（通常是权重，<code>weight</code>）的 <code>requires_grad</code> 属性设置为 <code>True</code>。这些参数在反向传播时会计算梯度，以便优化算法（如SGD、Adam等）可以使用这些梯度来更新模型参数。</p>
+<p>整个过程可以简要总结如下：</p>
+<ol>
+<li>数据 Tensor 的 <code>requires_grad</code> 默认是 <code>False</code>，用于输入数据。</li>
+<li>模型参数（如权重）一般设置为 <code>requires_grad=True</code>，以计算梯度。</li>
+<li>损失函数的计算图仅涉及那些 <code>requires_grad=True</code> 的参数，进行反向传播时会计算梯度。</li>
+</ol>
+<p>Note 2:</p>
+<p>在 PyTorch 中，训练模型时传给损失函数（loss function）的参数通常是模型的输出（即预测值）和目标值（即真实标签）。从构建 <code>Function</code> 对象并用于反向传播的角度，我们可以更详细地理解这一过程。</p>
+<p>首先，我们通过前向传播过程得到模型的输出，通常如下所示：</p>
+<pre><code class="lang-python">output = model(input_data)
+</code></pre>
+<p>output中是通过前向传播得来的，这个过程构建了计算图模型是一个Fucition对象，其中requires_grad=True的只有weight和bias这些parameter</p>
+<p>在计算损失时，我们将模型输出和目标值传递给损失函数。例如，对于分类问题，常用的损失函数是 <code>CrossEntropyLoss</code>：</p>
+<pre><code class="lang-python">loss = loss_fn(output, target)
+</code></pre>
+<p>在 PyTorch 的底层，损失函数的计算是通过定义 <code>Function</code> 类来实现的。每个损失函数都会有一个与之关联的 <code>Function</code> 对象，它定义了前向传播（forward）和反向传播（backward）的方法。</p>
+<ul>
+<li><p><strong>前向传播</strong>：在前向传播时，损失函数将模型输出和目标值作为输入，计算损失值。这一过程记录了计算图的结构和数据流向。</p>
+</li>
+<li><p><strong>反向传播</strong>：在反向传播时（当调用 <code>loss.backward()</code> 时），PyTorch 会使用在前向传播中记录的计算图来计算梯度。在这个过程中，框架会调用损失函数对应的 <code>backward</code> 方法，损失的梯度（对模型输出的梯度）会被传递回去，这个过程涉及计算链式法则，最终所有 <code>requires_grad=True</code> 的参数（如模型权重）都能得到相应的梯度。</p>
+</li>
+</ul>
+<p>在得到梯度后，我们使用优化器（如 SGD 或 Adam）来更新模型的参数。这一过程使用到计算过程中得到的梯度值。</p>
+<pre><code class="lang-python">optimizer.zero_grad()  # 清除之前的梯度
+loss.backward()  # 反向传播，计算梯度
+optimizer.step()  # 更新参数
+</code></pre>
+</blockquote>
+<h2 id="Overview-of-the-DNN-Training-Procedure"><a href="#Overview-of-the-DNN-Training-Procedure" class="headerlink" title="Overview of the DNN Training Procedure"></a>Overview of the DNN Training Procedure</h2><p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240727141445756-17220608860981.png" alt=""></p>
+<h3 id="Dataset-amp-Dataloader"><a href="#Dataset-amp-Dataloader" class="headerlink" title="Dataset &amp; Dataloader"></a>Dataset &amp; Dataloader</h3><p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240727141702217.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240727141808051.png" alt=""></p>
+<h3 id="torch-nn"><a href="#torch-nn" class="headerlink" title="torch.nn"></a>torch.nn</h3><p><code>Neural Network Layers</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240727142157283.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240727142217844.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240727142232795.png" alt=""></p>
+<h3 id="nn-Module"><a href="#nn-Module" class="headerlink" title="nn.Module"></a>nn.Module</h3><p><code>Sequential</code>接收一个 “子模块的有序字典（<code>OrderedDict</code>）”或者“一系列子模块”作为参数来逐一添加 <code>Module</code> 的实例，得到模型的<code>forward</code> 方法将这些实例按添加的顺序逐一计算，适用于模型的前向计算为简单串联各个层的计算的情况.</p>
+<pre><code class="lang-python">net = nn.Sequential(
+        nn.Linear(784, 256),
+        nn.ReLU(),
+        nn.Linear(256, 10), 
+        )
+</code></pre>
+<p><code>ModuleList</code> 接收一个子模块的列表作为输入，可以类似 python <code>List</code> 那样进行 <code>append</code> 和 <code>extend</code> 操作</p>
+<pre><code class="lang-python">class MyModule(nn.Module):
+    def __init__(self):
+        super(MyModule, self).__init__()
+        self.linears = nn.ModuleList([nn.Linear(10, 10) for i in range(10)])
+
+    def forward(self, x):
+        # ModuleList can act as an iterable, or be indexed using ints
+        for i, l in enumerate(self.linears):
+            x = self.linears[i // 2](x) + l(x)
+        return x
+</code></pre>
+<p><code>ModuleDict</code> 也是为了让网络定义 <code>forward</code> 时更加灵活而出现的，它接受一个子模块的字典作为输入，可以类似 python <code>Dict</code> 那样进行添加访问操作</p>
+<pre><code class="lang-python">net = nn.ModuleDict(&#123;
+    &#39;linear&#39;: nn.Linear(784, 256),
+    &#39;act&#39;: nn.ReLU(),
+&#125;)
+
+net[&#39;output&#39;] = nn.Linear(256, 10) # 类似 python Dict 进行添加
+print(net[&#39;linear&#39;])               # 类型 python Dict 进行访问
+print(net.output)                  # 另一种访问 key &#39;output&#39; 的方法
+
+print(net)
+# net(torch.zeros(1, 784)) # 报NotImplementedError
+# Linear(in_features=784, out_features=256, bias=True)
+# Linear(in_features=256, out_features=10, bias=True)
+# ModuleDict(
+#   (linear): Linear(in_features=784, out_features=256, bias=True)
+#   (act): ReLU()
+#   (output): Linear(in_features=256, out_features=10, bias=True)
+# )
+</code></pre>
+<h3 id="Activation-Functions"><a href="#Activation-Functions" class="headerlink" title="Activation Functions"></a>Activation Functions</h3><p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240727142314141.png" alt=""></p>
+<h3 id="Loss-Functions"><a href="#Loss-Functions" class="headerlink" title="Loss Functions"></a>Loss Functions</h3><p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240727142356330.png" alt=""></p>
+<h3 id="Build-own-neural-network"><a href="#Build-own-neural-network" class="headerlink" title="Build own neural network"></a>Build own neural network</h3><p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240727142610712.png" alt=""></p>
+<h3 id="torch-optim"><a href="#torch-optim" class="headerlink" title="torch.optim"></a>torch.optim</h3><p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240727142915889.png" alt=""></p>
+<h3 id="Neural-Network-Training"><a href="#Neural-Network-Training" class="headerlink" title="Neural Network Training"></a>Neural Network Training</h3><p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240727143021370.png" alt=""></p>
+<p><code>Neural Network Training</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240727143031041.png" alt=""></p>
+<p><code>Neural Network Evaluation (Validation Set)</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240727143222388.png" alt=""></p>
+<p><code>Neural Network Evaluation (Testing Set)</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240727143339632.png" alt=""></p>
+<p><code>Save/Load a Neural Network</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240727143930582.png" alt=""></p>
+
+    </div>
+    
+    
+    
+    
+    <div id="comment">
+        <div id="giscus-container" class="giscus"></div>
+    </div>
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2024 Aircraft
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Aircraft
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+<script
+    src="https://giscus.app/client.js"
+    data-repo="Aircraft-carrier/git-discussions-"
+    data-repo-id="R_kgDOMSMEYQ"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOMSMEYc4CglYu"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="light_tritanopia"
+    data-lang="zh-CN"
+    crossorigin
+    async
+></script>
+
+
+
+
+
+
+
+
+
+    
+
+    <canvas
+        id="fireworks"
+        style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 32767"
+    ></canvas>
+    <script src="https://s4.zstatic.net/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="/js/fireworks.min.js"></script>  
+
+    <canvas
+        id="background"
+        style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: -1"
+    ></canvas>
+    <script src="/js/background.min.js"></script>
+
+    <div id="cursor"></div>
+    <link rel="stylesheet" href="/css/cursor.min.css" />
+    <script src="/js/cursor.min.js"></script>
+
+</body>
+</html>
