@@ -3,7 +3,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8" />
-    <title>Hello World | Aircraft</title>
+    <title>ML&amp;DL 1 | Aircraft</title>
     <meta name="author" content="Aircraft" />
     <meta name="description" content="谁替我上学 我可以替你睡觉" />
     <meta name="keywords" content="" />
@@ -156,22 +156,22 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>Hello World</h1>
+        <h1>ML&amp;DL 1</h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2017/1/1
+            2024/7/27
         </span>
         
         <span class="category">
-            <a href="/categories/General/">
+            <a href="/categories/Machine-Learning/">
                 <span class="icon">
                     <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
-                General
+                Machine Learning
             </a>
         </span>
         
@@ -184,8 +184,22 @@
             
             <span class="tag">
                 
-                <a href="/tags/Introduction/" style="color: #00a596">
-                    Introduction
+                <a href="/tags/Regression/" style="color: #00bcd4">
+                    Regression
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/Sigmoid/" style="color: #00a596">
+                    Sigmoid
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/ReLU/" style="color: #00bcd4">
+                    ReLU
                 </a>
             </span>
             
@@ -194,21 +208,63 @@
     </div>
     
     <div class="content" v-pre>
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre><code class="lang-bash">$ hexo new &quot;My New Post&quot;
-$ hexo new page &quot;About&quot;
-$ hexo new draft &quot;Secret Post&quot;
-</code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre><code class="lang-bash">$ hexo server
-</code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre><code class="lang-bash">$ hexo generate
-</code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre><code class="lang-bash">$ hexo deploy
-</code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+        <h1 id="regression"><a href="#regression" class="headerlink" title="regression"></a>regression</h1><p><a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/regression%20(v16">regression.pdf</a>.pdf)</p>
+<h2 id="Machine-Learning-机器学习"><a href="#Machine-Learning-机器学习" class="headerlink" title="Machine Learning(机器学习)"></a>Machine Learning(机器学习)</h2><p>一句话概括:机器学习就是让计算机具备找一个函数的能力。</p>
+<h3 id="分类："><a href="#分类：" class="headerlink" title="分类："></a>分类：</h3><p><code>Regression</code> : 找一个函数，他的输出是一个数值。</p>
+<p><code>classification</code> : 函数的输出是从设定好的选项里选择一个作为输出</p>
+<p><code>structured Learning</code> : 机器产生有结构的东西的问题——学会创造。</p>
+<h2 id="Case-Study-预测频道流量"><a href="#Case-Study-预测频道流量" class="headerlink" title="Case Study:预测频道流量"></a>Case Study:预测频道流量</h2><h3 id="找到函数的三个步骤"><a href="#找到函数的三个步骤" class="headerlink" title="找到函数的三个步骤"></a>找到函数的三个步骤</h3><ul>
+<li><code>Fuction with Unknown Parameters</code>写一个带有未知参数的函数  <strong>（model）</strong></li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240727193818870.png" alt=""></p>
+<p><code>y</code>是我们准备要预测的东西（<code>Label</code>），<code>x_1</code>是这个频道前一天总共观看的人数跟数值(<code>feature</code>与w直接相乘)，<code>b</code>和<code>w</code>是未知的参数，它们是准备要透过资料去找出来的参数(<code>weight &amp; bias</code>)</p>
+<p><strong>猜测</strong>：未来点击阅读次数的函数F,是前一天的点阅次数，乘上w，再加上b(猜测往往来自于对这个问题本质的了解)</p>
+<ul>
+<li><code>Define Loss from Training Data</code></li>
+</ul>
+<p>Loss也是一个Fuction,它的输入是Model里面的<strong>参数</strong></p>
+<p><strong>物理意义</strong>：Function输出的值代表,现在如果我们把这一组未知的参数,设定某一个数值的时候,这笔数值好还是不好。L越大,代表一组参数越不好,这个大L越小,代表现在这一组参数越好</p>
+<p><strong>计算方法</strong>：求取估计的值跟实际的值（Label） 之间的差距</p>
+<p><code>MAE(mean absolute error) 、MSE(mean square error) 、 Cross-entropy</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240727202152953.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240727202207258.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240727202233971.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240727202326183.png" alt=""></p>
+<p><code>Optimization</code>（优化）</p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/read/cv33733975/">梯度下降法</a></p>
+<h3 id="Liner-Model-线性模型"><a href="#Liner-Model-线性模型" class="headerlink" title="Liner Model(线性模型)"></a>Liner Model(线性模型)</h3><p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240727202831567.png" alt=""></p>
+<p>Model的Bias：一个模型无法模拟/描述真实的情况。比如线性模型在高维也只可以是一个超平面，永远无法拟合曲面。</p>
+<p><strong>解决方案</strong> ： 需要一个更复杂的、更有弹性的、有未知参数的fuction</p>
+<h2 id="Piecewise-Linear-Curves"><a href="#Piecewise-Linear-Curves" class="headerlink" title="Piecewise Linear Curves"></a>Piecewise Linear Curves</h2><p>Sigmoid函数的意义</p>
+<h3 id="1-模型定义"><a href="#1-模型定义" class="headerlink" title="1. 模型定义"></a>1. 模型定义</h3><p>定义：由多段锯齿状的线段所组成的线</p>
+<p>⇒可以看作是一个常数,再加上一堆蓝色的 Function（Hard Sigmoid)</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240727203404875.png" alt=""></p>
+<blockquote>
+<p><strong>用一条曲线来近似描述这条蓝色的曲线:Sigmoid函数（S型的function）</strong></p>
+<p>【事实上，sigmoid的个数就是神经网络中的一层的neuron节点数(使用几个sigmoid是<strong>超参数</strong>）】</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240727203333000.png" alt=""></p>
+<p><strong>结论：</strong></p>
+<ol>
+<li>可以用 Piecewise Linear 的 Curves,去逼近任何的连续的曲线。</li>
+<li>每一个 Piecewise Linear 的 Curves,都可以用一大堆蓝色的 Function加上一个常量组合起来得到。</li>
+<li>只要有足够的蓝色 Function 把它加起来,就可以变成任何连续的曲线。</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240727203533366.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240727203554849.png" alt=""></p>
+<h3 id="2-多个特征模型"><a href="#2-多个特征模型" class="headerlink" title="2. 多个特征模型"></a>2. 多个特征模型</h3><p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240727203648006.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240727203713092.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240727203759895.png" alt=""></p>
+<p>转化为矩阵运算＋激活函数的形式：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240727204220954.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240727204247781.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240727204259574.png" alt=""></p>
+<p>总之：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240727204319169.png" alt=""></p>
+<p><code>Function with unknown parameters</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240727204352225.png" alt=""></p>
+<h3 id="ReLU"><a href="#ReLU" class="headerlink" title="ReLU"></a>ReLU</h3><p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240727204504598.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240727204515401.png" alt=""></p>
 
     </div>
     
