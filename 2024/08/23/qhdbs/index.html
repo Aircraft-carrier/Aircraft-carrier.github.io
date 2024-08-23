@@ -1,0 +1,665 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>前后端部署 | Aircraft</title>
+    <meta name="author" content="Aircraft" />
+    <meta name="description" content="谁替我上学 我可以替你睡觉" />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>AIRCRAFT</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;AIRCRAFT</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>前后端部署</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2024/8/23
+        </span>
+        
+        <span class="category">
+            <a href="/categories/Learning/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Learning
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/MySQL/" style="color: #ffa2c4">
+                    MySQL
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/Nginx/" style="color: #ff7d73">
+                    Nginx
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/jdk/" style="color: #00bcd4">
+                    jdk
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/Redis/" style="color: #03a9f4">
+                    Redis
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/systemctl/" style="color: #00a596">
+                    systemctl
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/vue/" style="color: #ffa2c4">
+                    vue
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/tcp/" style="color: #03a9f4">
+                    tcp
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h1 id="服务器部署"><a href="#服务器部署" class="headerlink" title="服务器部署"></a>服务器部署</h1><h2 id="腾讯云上部署"><a href="#腾讯云上部署" class="headerlink" title="腾讯云上部署"></a>腾讯云上部署</h2><h3 id="jdk下载"><a href="#jdk下载" class="headerlink" title="jdk下载"></a>jdk下载</h3><p>先把<code>jdk</code>包下载到<code>/tmp</code>目录下</p>
+<pre><code class="lang-bash">cd /usr/local/
+sudo mkdir java
+cd java
+sudo cp -R /tmp/openjdk-22.0.2_linux-x64_bin.tar.gz /usr/local/java
+sudo tar -xvf openjdk-22.0.2_linux-x64_bin.tar.gz 
+sudo mv jdk-22.0.2 jdk22
+</code></pre>
+<p><code>sudo vim  /etc/profile</code>添加：</p>
+<pre><code class="lang-bash">export JAVA_HOME=/usr/local/java/jdk22
+export PATH=$JAVA_HOME/bin:$PATH
+
+esc :wq!
+</code></pre>
+<p><code>source /etc/profile</code>重新执行profile脚本增加环境变量。</p>
+<p><code>echo $JAVA_HOME</code>查看java环境变量</p>
+<p><code>java --version</code>查看jdk版本</p>
+<h3 id="nginx"><a href="#nginx" class="headerlink" title="nginx"></a>nginx</h3><p>先增加一些配置文件</p>
+<pre><code class="lang-bash">sudo apt install g++ 
+sudo apt install -y libpcre3 libpcre3-dev
+sudo apt install -y zlib1g zlib1g-dev
+sudo apt install -y openssl libssl-dev
+</code></pre>
+<p><code>cd /tmp/</code>使用wget下载nginx</p>
+<pre><code class="lang-bash">wget http://nginx.org/download/nginx-1.24.0.tar.gz
+</code></pre>
+<p>在<code>/usr/local/</code>中下载</p>
+<pre><code class="lang-bash">cd /usr/local/
+sudo mkdir nginx
+sudo cp -R /tmp/nginx-1.24.0.tar.gz /usr/local/nginx
+sudo tar -zxvf nginx-1.24.0.tar.gz
+cd nginx-1.24.0/
+</code></pre>
+<p>编译</p>
+<pre><code class="lang-bash">sudo ./configure --with-http_stub_status_module --with-http_ssl_module
+sudo make &amp;&amp; make install
+</code></pre>
+<p>查看目录结构</p>
+<pre><code class="lang-bash">$ cd /usr/local/nginx/nginx-1.24.0
+$ ls
+auto     CHANGES.ru  configure  html     Makefile  objs    src
+CHANGES  conf        contrib    LICENSE  man       README
+$ cd /usr/local/nginx
+$ ls
+client_body_temp  html          nginx-1.24.0.tar.gz  scgi_temp
+conf              logs          proxy_temp           uwsgi_temp
+fastcgi_temp      nginx-1.24.0  sbin
+</code></pre>
+<p>conf（配置）</p>
+<pre><code class="lang-bash">cd /usr/local/nginx/conf
+
+# 内网ip
+ifconfig
+
+# 公网ip
+curl ifconfig.me
+</code></pre>
+<p><code>sudo vim nginx.conf</code></p>
+<pre><code class="lang-bash">
+#服务器
+server&#123;
+    listen 80;
+    server_name 159.75.116.168; #你的服务器ip或域名
+
+    #前端
+    location / &#123;
+        root /home/vue/dist;
+        index index.html index.htm;
+        try_files $uri $uri /index.html;
+    &#125;
+    #后端
+    location /api/ &#123;  
+        rewrite ^/api/(.*)$ /$1 break;  
+
+        proxy_pass http://159.75.116.168:8080;  
+       &#125;
+
+esc :wq!
+</code></pre>
+<p><code>sudo /usr/local/nginx/sbin/nginx -t</code>检查配置语法有没有出错</p>
+<p>修改<code>/home/vue/dist</code>权限</p>
+<pre><code class="lang-bash">ls -ld /home/vue/dist  # 查看权限
+ls -l /home/vue/dist 
+sudo chmod -R 755 /home/vue/dist # 所有用户读取
+sudo chown -R nobody:nogroup /home/vue/dist
+</code></pre>
+<p><code>cat nginx.conf</code>查看是否写入。</p>
+<p>sbin（启动）</p>
+<pre><code class="lang-bash">cd /usr/local/nginx/sbin
+sudo ./nginx -s stop      # 停止
+sudo ./nginx              # 启动
+sudo ./nginx -s reload    # 重启
+ps aux | grep nginx  # 查看是否运行
+ps -ef | grep nginx
+
+// sudo /usr/local/nginx/sbin/nginx
+</code></pre>
+<p>使用 <code>systemctl</code>打开或启用 Nginx 服务器。</p>
+<p>由于是源码编译的nginx所以需要做一个配置才能使用 <code>systemctl</code></p>
+<p><code>sudo vim /etc/systemd/system/nginx.service</code></p>
+<pre><code class="lang-bash">[Unit]  
+Description=Nginx Web Server  
+After=network.target  
+
+[Service]  
+ExecStart=/usr/local/nginx/sbin/nginx  
+ExecReload=/usr/local/nginx/sbin/nginx -s reload  
+ExecStop=/usr/local/nginx/sbin/nginx -s stop  
+User=root  
+Group=www-data  
+Restart=on-failure  
+
+[Install]  
+WantedBy=multi-user.target
+
+esc :wq!
+</code></pre>
+<p><code>sudo systemctl daemon-reload</code>重新加载systemd 配置</p>
+<pre><code class="lang-bash">sudo systemctl start nginx   # 启动
+sudo systemctl enable nginx  # 开机自启动
+sudo systemctl status nginx  # 检查状态
+sudo systemctl restart nginx #重启
+</code></pre>
+<h3 id="MySQl"><a href="#MySQl" class="headerlink" title="MySQl"></a>MySQl</h3><p>下载</p>
+<pre><code class="lang-bash">wget https://cdn.mysql.com/archives/mysql-8.0/mysql-8.0.22-linux-glibc2.12-x86_64.tar.xz
+cd /usr/local/
+sudo cp -R /tmp/mysql-8.0.22-linux-glibc2.12-x86_64.tar.xz /usr/local
+sudo tar -xJvf mysql-8.0.22-linux-glibc2.12-x86_64.tar.xz
+sudo rm -r mysql-8.0.22-linux-glibc2.12-x86_64.tar.xz
+sudo mv mysql-8.0.22-linux-glibc2.12-x86_64 mysql
+</code></pre>
+<p>添加用户组</p>
+<pre><code class="lang-bash">sudo mkdir /data/mysql
+sudo groupadd mysql  
+sudo useradd -r -g mysql mysql  
+sudo chown -R mysql:mysql /usr/local/mysql  
+sudo chown -R mysql:mysql /data/mysql
+</code></pre>
+<p><code>ls -l /usr/local/mysql</code> Or <code>ll</code>查看文件权限</p>
+<p>安装mysql</p>
+<pre><code class="lang-bash">sudo apt install libaio1sudo apt install libaio1
+sudo /usr/local/mysql/bin/mysqld --user=mysql --basedir=/usr/local/mysql --datadir=/data/mysql --initialize
+</code></pre>
+<p>密码：/F94(uheF6g?</p>
+<p>一些配置</p>
+<pre><code class="lang-bash"># 连接
+sudo ln -s /usr/local/mysql/bin/mysql /usr/bin
+# 找到相应的文件再链接
+find / -name libtinfo.so*
+sudo ln -s /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4 /usr/lib64/libtinfo.so.5
+sudo ln -s /usr/lib64/libncurses.so.6.1 /usr/lib64/libncurses.so.5
+sudo apt-get update  
+sudo apt-get install --reinstall libncurses5
+# 验证
+ls -l /usr/lib64/libtinfo.so.5
+</code></pre>
+<p>mysql配置文件 <code>my.cnf</code></p>
+<p><code>vim /etc/my.cnf</code></p>
+<pre><code class="lang-bash">[mysqld]
+datadir=/data/mysql
+basedir=/usr/local/mysql
+socket=/tmp/mysql.sock
+user=mysql
+port=3306
+character-set-server=utf8
+# 取消密码验证
+# skip-grant-tables
+symbolic-links=0
+[mysqld_safe]
+log-error=/var/log/mysqld.log
+pid-file=/var/run/mysqld/mysqld.pid
+</code></pre>
+<p>启动mysql</p>
+<pre><code class="lang-bash"># 将 mysql 加到服务中
+cp -s /usr/local/mysql/support-files/mysql.server /etc/init.d/mysql
+sudo /etc/init.d/mysql start
+chkconfig mysql on
+</code></pre>
+<p>进入mysql <code>mysql -u root -p</code></p>
+<p>修改密码：</p>
+<pre><code class="lang-bash">ALTER USER &#39;root&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;123456&#39;;
+USE mysql;  
+UPDATE user SET host = &#39;%&#39; WHERE user = &#39;root&#39; AND host = &#39;localhost&#39;;  
+FLUSH PRIVILEGES;
+</code></pre>
+<p>远程连接尝试：</p>
+<p>打开防火墙</p>
+<pre><code class="lang-bash">mysql -h 159.75.116.168 -P 3306 -u root -p
+</code></pre>
+<h3 id="redis"><a href="#redis" class="headerlink" title="redis"></a>redis</h3><p>下载</p>
+<pre><code class="lang-bash">cd /tmp
+wget http://download.redis.io/releases/redis-5.0.4.tar.gz
+cd /usr/local/
+sudo cp -R /tmp/redis-5.0.4.tar.gz /usr/local/
+sudo tar xzf redis-5.0.4.tar.gz 
+sudo rm -r redis-5.0.4.tar.gz 
+sudo mv redis-5.0.4 redis
+cd redis
+sudo make
+</code></pre>
+<p>运行</p>
+<pre><code class="lang-bash">cd /usr/local/redis/src
+./redis-server
+./redis-server --daemonize yes  // 后台运行
+sudo systemctl status redis
+sudo systemctl stop redis
+</code></pre>
+<p>or</p>
+<pre><code class="lang-bash">sudo apt-get update
+sudo apt-get install redis
+sudo systemctl start redis
+</code></pre>
+<h3 id="sprintboot项目打包"><a href="#sprintboot项目打包" class="headerlink" title="sprintboot项目打包"></a>sprintboot项目打包</h3><pre><code class="lang-bash">cd /home/vue
+</code></pre>
+<p>配置：</p>
+<pre><code class="lang-yml">root@VM-20-3-ubuntu:/home/vue# cat application.yml 
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://$&#123;ip&#125;:3306/big_event
+    username: root
+    password: 123456
+  data:
+    redis:
+      host: localhost
+      port: 6379
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true #开启驼峰命名和下划线命名的自动转换
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+server:
+  port: 8080
+
+file:
+  upload-dir: /tmp
+
+python:
+  interpreter: /root/miniconda3/envs/paddle_env/bin/python
+
+okhttp:
+  connect-timeout: 30
+  read-timeout: 30
+  write-timeout: 30
+  max-idle-connections: 200
+  keep-alive-duration: 300
+
+wenxin:
+  apiKey: isBtin2KboRoULW3PuzqTo5V
+  secretKey: TouZAeES992L5K9x3vvSr2wcQPoPEmg9
+  accessTokenUrl: https://aip.baidubce.com/oauth/2.0/token
+  ERNIE-Bot4:
+    0URL: https://aip.baidubce.com/rpc/2.0/ai_custom/v1/wenxinworkshop/chat/ernie-lite-8k
+
+ip: 159.75.116.168
+</code></pre>
+<p>开启脚本<code>start.sh</code>：</p>
+<pre><code class="lang-bash">nohup java -jar big-event-1.0-SNAPSHOT.jar &gt; server.log 2&gt;&amp;1 &amp;
+</code></pre>
+<p>关闭脚本<code>stop.sh</code></p>
+<pre><code class="lang-bash">#!/bin/bash  
+
+PORT=8080  
+# 使用正确的命令和 awk 表达式来查找 PID  
+pid=$(netstat -tnlp | grep &quot;:$PORT&quot; | grep -v grep | awk &#39;&#123;print $7&#125;&#39; | cut -d/ -f1)  
+
+# 检查 pid 是否为空  
+if [ -n &quot;$pid&quot; ]; then  
+    # 如果 pid 不为空，则杀死进程  
+    kill -9 $pid  
+    if [ $? -eq 0 ]; then  
+        echo &quot;Killed process listening on port $PORT&quot;  
+    else  
+        echo &quot;Failed to kill process listening on port $PORT&quot;  
+    fi  
+else  
+    # 如果 pid 为空，则不执行任何操作（或可选地输出一条消息）  
+    echo &quot;No process found listening on port $PORT&quot;  
+fi
+</code></pre>
+<p>加权限<code>chmod +x *</code></p>
+<p>开一下tcp</p>
+<p>运行<code>cd /home/vue</code> + <code>./start.sh</code> </p>
+<p>运行后查看</p>
+<pre><code class="lang-bash">ps -ef | grep java
+tail -f server.log
+</code></pre>
+<h3 id="创建python环境"><a href="#创建python环境" class="headerlink" title="创建python环境"></a>创建python环境</h3><p>环境准备</p>
+<pre><code class="lang-bash">cd /usr/local/
+sudo mkdir python_env
+cd python_env
+sudo apt install python
+sudo apt install python3-venv 
+// sudo apt install python3-pip
+</code></pre>
+<p>搭建python环境</p>
+<pre><code class="lang-bash">sudo python3 -m venv seg_env
+source /usr/local/python_env/seg_env/bin/activate  
+deactivate // 退出
+Or
+conda create —name [env-name] python=3.9  // conda create -n miccai_env python=3.9
+conda activate [env-name]                 // conda activate miccai_env
+</code></pre>
+<p>删除环境</p>
+<pre><code class="lang-bash">deactivate 
+sudo rm -rf seg_env
+</code></pre>
+<p>安装包</p>
+<pre><code class="lang-bash">(seg_env) $ which pip
+&gt;&gt;&gt; /usr/local/python_env/seg_env/bin/pip
+
+pip install nibabel --break-system-packages # 强制安装
+
+pip list     // 查看已经安装的包
+pip freeze   // 输出requirementstxt 
+pip show numpy
+
+$ which python
+/usr/bin/python
+</code></pre>
+<p>修改<code>application.yml</code>配置</p>
+<pre><code>python:
+  interpreter: /usr/bin/python
+</code></pre><h3 id="报错解决"><a href="#报错解决" class="headerlink" title="报错解决"></a>报错解决</h3><p>遇到 “413 Request Entity Too Large” 错误通常意味着你尝试上传的文件大小超过了服务器（在这个案例中是 Nginx）配置的最大允许请求体大小。这个限制是为了防止服务器因为处理过大的请求而耗尽资源。</p>
+<p>需要修改 Nginx 的配置文件（通常是 <code>nginx.conf</code> 或者在 <code>sites-available/</code> 目录下的某个文件），增加或修改 <code>client_max_body_size</code> 指令的值。这个指令用于设置允许客户端请求的最大单文件字节数。</p>
+<p>例如，可以将 <code>client_max_body_size</code> 设置为 <code>20M</code>（20兆字节）或更高，具体取决于你的需求：</p>
+<pre><code class="lang-nginx">http &#123;  
+    ...  
+    client_max_body_size 20M;  
+    ...  
+&#125;
+</code></pre>
+
+    </div>
+    
+    
+    
+    
+    <div id="comment">
+        <div id="giscus-container" class="giscus"></div>
+    </div>
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2024 Aircraft
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Aircraft
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+<script
+    src="https://giscus.app/client.js"
+    data-repo="Aircraft-carrier/git-discussions-"
+    data-repo-id="R_kgDOMSMEYQ"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOMSMEYc4CglYu"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="light_tritanopia"
+    data-lang="zh-CN"
+    crossorigin
+    async
+></script>
+
+
+
+
+
+
+
+
+
+    
+
+    <canvas
+        id="fireworks"
+        style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 32767"
+    ></canvas>
+    <script src="https://s4.zstatic.net/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="/js/fireworks.min.js"></script>  
+
+    <canvas
+        id="background"
+        style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: -1"
+    ></canvas>
+    <script src="/js/background.min.js"></script>
+
+    <div id="cursor"></div>
+    <link rel="stylesheet" href="/css/cursor.min.css" />
+    <script src="/js/cursor.min.js"></script>
+
+</body>
+</html>
