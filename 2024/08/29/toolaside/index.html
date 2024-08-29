@@ -3,7 +3,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8" />
-    <title>Categories: General | Aircraft</title>
+    <title>工具栏设计 | Aircraft</title>
     <meta name="author" content="Aircraft" />
     <meta name="description" content="谁替我上学 我可以替你睡觉" />
     <meta name="keywords" content="" />
@@ -37,6 +37,10 @@
 
 
 <script src="/js/lib/preview.js"></script>
+
+
+
+
 
 
 
@@ -150,36 +154,20 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <div id="archives">
-    
-    <div class="categories-tags">
-        
-        
-        
-        <span>
-            <a href="/categories/Paper/" style="background: #03a9f4">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Paper
-            </a>
+            <div class="article">
+    <div>
+        <h1>工具栏设计</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2024/8/29
         </span>
         
-        
-        
-        <span>
-            <a href="/categories/Learning-Notes/" style="background: #00bcd4">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Learning Notes
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/categories/Learning/" style="background: #ff7d73">
+        <span class="category">
+            <a href="/categories/Learning/">
                 <span class="icon">
                     <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
@@ -188,179 +176,177 @@
         </span>
         
         
-        
-        <span>
-            <a href="/categories/Database/" style="background: #03a9f4">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Database
-            </a>
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/vue/" style="color: #00bcd4">
+                    vue
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/css/" style="color: #ffa2c4">
+                    css
+                </a>
+            </span>
+            
         </span>
-        
-        
-        
-        <span>
-            <a href="/categories/Learning/Introduction/" style="background: #ffa2c4">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Introduction
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/categories/Blog/" style="background: #03a9f4">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Blog
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/categories/codeforces/" style="background: #00bcd4">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                codeforces
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/categories/Database/Learning-Notes/" style="background: #ffa2c4">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Learning Notes
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/categories/General/" style="background: linear-gradient(120deg, #9abbf7 0%, #ffbbf4 100%)">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                General
-            </a>
-        </span>
-        
-        
-        
-        
-        
-        <span>
-            <a href="/categories/Learning/visualization/" style="background: #00bcd4">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                visualization
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/categories/Machine-Learning/" style="background: #03a9f4">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Machine Learning
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/categories/Machine-Learning/Hung-yi-Lee/" style="background: #ff7d73">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Hung-yi Lee
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/categories/Machine-Learning/Hung-yi-Lee/Pytorch/" style="background: #03a9f4">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Pytorch
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/categories/Learning/heartSeg/" style="background: #ff7d73">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                heartSeg
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/categories/Learning/heartSeg/project/" style="background: #03a9f4">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                project
-            </a>
-        </span>
-        
         
     </div>
     
-    <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2017/1/1</div>
-            <a href="/2017/01/01/hello-world/">
-                <h3>Hello World</h3>
-            </a>
-            <div class="info">
-                
-                <span class="category">
-                    <a href="/categories/General/">
-                        <span class="icon">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </span>
-                        General
-                    </a>
-                </span>
-                
-                
-                <span class="tags">
-                    <span class="icon">
-                        <i class="fa-solid fa-tags fa-fw"></i>
-                    </span>
-                    
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/Introduction/" style="color: #ff7d73">
-                            Introduction
-                        </a>
-                    </span>
-                    
-                </span>
-                
-            </div>
-        </div>
+    <div class="content" v-pre>
+        <h1 id="工具栏"><a href="#工具栏" class="headerlink" title="工具栏"></a>工具栏</h1><ul>
+<li><code>@\components\myAside.vue(template)</code></li>
+</ul>
+<pre><code class="lang-vue">&lt;-template-&gt; 
+&lt;-div v-if=&quot;asideshow.segtool&quot; style=&quot;padding: 15px;border-radius: 5px;animation: hideToShow 1s ease-in-out&quot;
+         class=&quot;.tool-container shadow-box background-opacity&quot;-&gt;  
+        &lt;-div style=&quot;font-family: &#39;Microsoft YaHei&#39;;margin-bottom: 10px;&quot; @click=&quot;showdiaWindows()&quot;-&gt;  Tools &lt;-/div-&gt;
+
+            &lt;-el-card
+              v-for=&quot;card in cards&quot;
+              :key=&quot;card.id&quot;
+              class=&quot;menu-item&quot;
+              :class=&quot;&#123; &#39;active&#39;: isOpen(card.id) &#125;&quot;
+              @click=&quot;toggleDropdown(card.id)&quot;
+              :body-style=&quot;&#123; padding: &#39;8px&#39; &#125;&quot;
+            -&gt;
+              &lt;-div class=&quot;menu-title&quot; :class=&quot;&#123; &#39;selected-title&#39;: openedMenus === card.id &#125;&quot;-&gt;
+                &lt;-img :src=&quot;card.icon&quot; class=&quot;menu-icon&quot; :alt=&quot;`Icon $&#123;card.id&#125;`&quot; /-&gt; &#123;&#123; card.title &#125;&#125;
+              &lt;-/div-&gt;
+              &lt;-div class=&quot;small-blue-font&quot; v-if=&quot;isOpen(card.id)&quot;-&gt;&#123;&#123;card.description&#125;&#125;&lt;-/div-&gt;
+              &lt;-div class=&quot;button-container&quot; v-if=&quot;isOpen(card.id)&quot;-&gt;
+                &lt;-el-button
+                  v-for=&quot;button in card.buttons&quot;
+                  :key=&quot;button.action&quot;
+                  class=&quot;button-title&quot;
+                  @click.prevent=&quot;executeAction(button.action)&quot;
+                -&gt;
+                  &#123;&#123; button.label &#125;&#125;
+                &lt;-/el-button-&gt;
+
+              &lt;-FileUpload v-if=&quot;isOpen(1)&quot; /-&gt;
+              &lt;-ShowFile v-else-if=&quot;isOpen(2)&quot; /-&gt;
+
+
+              &lt;-/div-&gt;
+            &lt;-/el-card-&gt;
+    &lt;-/div-&gt;  
+&lt;-/template-&gt;
+</code></pre>
+<ul>
+<li><p>```javascript<br>&lt;-script setup-&gt;<br>const cards = [<br>{<br>  id: 1,<br>  title: ‘Upload Image’,<br>  icon: SunflowerIcon, // Use the imported image<br>  description: “Please upload CT or MR NIfTI images.”,<br>  buttons: []<br>},<br>{<br>  id: 2,<br>  title: ‘Files’,<br>  icon: YitaoIcon, // Use the imported image<br>  description: “Please select a NIfTI image for slicing.”,<br>  buttons: []<br>}<br>];</p>
+</li>
+</ul>
+<p>const toggleDropdown = (menuId) =-&gt; {<br>  if (openedMenus.value !== menuId) {<br>    openedMenus.value = menuId;<br>  }<br>};  </p>
+<p>const isOpen = (menuId) =-&gt; openedMenus.value === menuId; </p>
+<p>const executeAction = (actionName) =-&gt; {<br>  if(actionName === ‘Action1_1’){</p>
+<p>  }<br>  activeButton.value = actionName;<br>  console.log(<code>$&#123;actionName&#125; 执行了！</code>);<br>};  </p>
+<p>&lt;-/script-&gt;</p>
+<pre><code>
+
+
+- `@\components\myAside.vue(style)`
+
+```css
+&lt;-style scpoe-&gt;
+  .tool-container &#123;  
+      background: linear-gradient(-45deg, #cccccc, #d9d9d9, #b3b3b3, #e6e6e6, #bfbfbf);  
+      /*background: var(--background);*/
+      background-size: 400% 400%;  
+      animation: gradientBG 10s ease infinite;  
+      display: flex;  
+      flex-direction: column;  
+      align-items: center;  
+      border-radius: 10px;  
+      position: relative;  
+      overflow: hidden;  
+  &#125;
+
+    .shadow-box &#123;
+        box-shadow: 0 1px 20px -6px var(--borderColor);
+        transition: all 0.3s ease;
+    &#125;
+
+
+    .shadow-box:hover &#123;
+        box-shadow: 0 5px 10px 5px var(--borderHoverColor);
+    &#125;
+
+  .menu-item &#123;  
+      margin-bottom: 5px;  
+      border: 2px solid #d3d3d3; 
+      border-radius: 10px;  
+      transition: border-color 0.3s; 
+      box-shadow: none;
+      padding: 0px; 
+  &#125;  
+
+  .menu-title &#123;   
+      background-color: white;  
+      transition: background-color 0.3s;
+      font-family: &#39;Microsoft YaHei&#39;, &#39;SimSun&#39;, sans-serif;
+      font-weight: bold;  
+  &#125;
+
+  .selected-title &#123;
+    color: blue; 
+  &#125;
+
+  .active &#123;  
+    border: 2px solid blue; 
+  &#125;  
+
+  .button-container &#123;  
+      padding: 5px;
+      display: flex;  
+      flex-direction: column; /* 使按钮按列排列 */  
+      align-items: flex-start; /* 可选：左对齐 */   
+  &#125;  
+
+  .button-container .el-button &#123;
+    margin-left: 0; 
+  &#125;
+
+  .button-title &#123;  
+      margin-top: 5px;
+      width: 100%;
+      font-family: Arial, sans-serif;  
+      background-color: #EDEEF1;  
+      font-weight: normal;  
+  &#125;  
+
+  .small-blue-font &#123;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    color: blue; /* 字体颜色 */
+    font-family: &#39;Microsoft YaHei&#39;, &#39;SimSun&#39;, sans-serif;
+    font-size: 12px; /* 较小的字号 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  &#125;
+
+
+&lt;-/style-&gt;
+</code></pre>
     </div>
+    
+    
+    
+    
+    <div id="comment">
+        <div id="giscus-container" class="giscus"></div>
+    </div>
+    
+    
+    
     
 </div>
 
@@ -392,6 +378,33 @@
         
     </div>
     <script src="/js/main.js"></script>
+    
+    
+<script
+    src="https://giscus.app/client.js"
+    data-repo="Aircraft-carrier/git-discussions-"
+    data-repo-id="R_kgDOMSMEYQ"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOMSMEYc4CglYu"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="light_tritanopia"
+    data-lang="zh-CN"
+    crossorigin
+    async
+></script>
+
+
+
+
+
+
+
+
+
     
 
     <canvas
