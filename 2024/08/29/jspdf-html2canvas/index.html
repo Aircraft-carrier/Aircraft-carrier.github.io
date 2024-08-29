@@ -1,0 +1,588 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>Web下载pdf | Aircraft</title>
+    <meta name="author" content="Aircraft" />
+    <meta name="description" content="谁替我上学 我可以替你睡觉" />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>AIRCRAFT</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;AIRCRAFT</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>Web下载pdf</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2024/8/29
+        </span>
+        
+        <span class="category">
+            <a href="/categories/Learning/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Learning
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/html2canvas/" style="color: #ff7d73">
+                    html2canvas
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/jspdf/" style="color: #00bcd4">
+                    jspdf
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h1 id="jspdf-html2canvas"><a href="#jspdf-html2canvas" class="headerlink" title="jspdf+html2canvas"></a>jspdf+html2canvas</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/shanghai597/article/details/134269785?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-0-134269785-blog-130341673.235^v43^pc_blog_bottom_relevance_base8&amp;spm=1001.2101.3001.4242.1&amp;utm_relevant_index=1">网页pdf</a></p>
+<ul>
+<li><code>@\components\common\HeartReport.vue</code></li>
+</ul>
+<pre><code class="lang-vue">&lt;-template-&gt;
+  &lt;-div class=&quot;report-container&quot;-&gt;
+    &lt;-div id=&quot;pdf-content&quot;-&gt;
+      &lt;-h1 class=&quot;title&quot;-&gt;心脏诊疗报告&lt;-/h1-&gt;
+      &lt;-p class=&quot;content&quot;-&gt;心脏参数:&lt;-/p-&gt;
+      &lt;-ul class=&quot;content&quot;-&gt;
+        &lt;-li-&gt;年龄: &#123;&#123; docStore.heartParameters.age &#125;&#125;&lt;-/li-&gt;
+        &lt;-li-&gt;性别: &#123;&#123; docStore.heartParameters.sex &#125;&#125;&lt;-/li-&gt;
+        &lt;-li-&gt;胸部疼痛类型: &#123;&#123; docStore.heartParameters.cp &#125;&#125;&lt;-/li-&gt;
+        &lt;-li-&gt;血压: &#123;&#123; docStore.heartParameters.trestbps &#125;&#125;&lt;-/li-&gt;
+        &lt;-li-&gt;胆固醇: &#123;&#123; docStore.heartParameters.chol &#125;&#125;&lt;-/li-&gt;
+        &lt;-li-&gt;空腹血糖: &#123;&#123; docStore.heartParameters.fbs &#125;&#125;&lt;-/li-&gt;
+        &lt;-li-&gt;心电图结果: &#123;&#123; docStore.heartParameters.restecg &#125;&#125;&lt;-/li-&gt;
+        &lt;-li-&gt;最大心跳数: &#123;&#123; docStore.heartParameters.thalach &#125;&#125;&lt;-/li-&gt;
+        &lt;-li-&gt;运动时是否有心绞痛: &#123;&#123; docStore.heartParameters.exang &#125;&#125;&lt;-/li-&gt;
+        &lt;-li-&gt;相对于休息的 ST segment 的倾斜度: &#123;&#123; docStore.heartParameters.oldpeak &#125;&#125;&lt;-/li-&gt;
+        &lt;-li-&gt;透视检查看到的血管数: &#123;&#123; docStore.heartParameters.ca &#125;&#125;&lt;-/li-&gt;
+        &lt;-li-&gt;缺陷种类: &#123;&#123; docStore.heartParameters.thal &#125;&#125;&lt;-/li-&gt;
+      &lt;-/ul-&gt;
+
+      &lt;-h2 class=&quot;section-title&quot;-&gt;诊疗建议:&lt;-/h2-&gt;
+      &lt;-span v-html=&quot;docStore.parsedMessage&quot;-&gt;&lt;-/span-&gt; 
+    &lt;-/div-&gt;
+  &lt;-/div-&gt;
+&lt;-/template-&gt;
+
+&lt;-script setup-&gt;
+import &#123; ref, computed, onMounted &#125; from &#39;vue&#39;;
+import useDocStore from &#39;@/stores/document.js&#39;; 
+import useImageStore from &#39;@/stores/images.js&#39;;  
+const docStore = useDocStore();
+const imageStore = useImageStore();
+import &#123; marked &#125; from &#39;marked&#39;;
+
+// 在组件挂载时调用函数
+onMounted(async() =-&gt; &#123;
+  await docStore.fetchHeartParameters(imageStore.segImgId)
+  await docStore.fetchWenxinAdvice(&quot;注意休息早点睡觉&quot;)
+&#125;);
+
+
+&lt;-/script-&gt;
+
+&lt;-style scoped-&gt;
+@font-face &#123;
+  font-family: &#39;FZFS&#39;;
+  src: url(&#39;@/assets/fonts/fzfs.ttf&#39;) format(&#39;truetype&#39;);
+&#125;
+
+.report-container &#123;
+  font-family: &#39;FZFS&#39;, &#39;Times New Roman&#39;, sans-serif;
+  width: 800px;
+  margin: auto;
+  padding: 20px;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+&#125;
+
+.title &#123;
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 20px;
+&#125;
+
+.section-title &#123;
+  font-size: 20px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+&#125;
+
+.content &#123;
+  font-size: 16px;
+  line-height: 1.6;
+&#125;
+
+ul &#123;
+  list-style-type: none;
+  padding: 0;
+&#125;
+
+ul li &#123;
+  margin-bottom: 5px;
+&#125;
+&lt;-/style-&gt;
+</code></pre>
+<ul>
+<li><code>@\stores\document.js</code></li>
+</ul>
+<pre><code class="lang-javascript">import &#123; defineStore &#125; from &#39;pinia&#39;;
+import &#123; ref &#125; from &#39;vue&#39;;
+import heartimg from &#39;@/assets/heart.png&#39;;
+import &#123; heartParametersService, wenxinService &#125; from &#39;@/api/doc.js&#39;; // 确保引入服务  
+import &#123; downloadPDF &#125; from &#39;@/utils/htmlToPdf.js&#39;; // 新增引入 
+import &#123; ChatService &#125; from &#39;@/api/wenxin&#39;;
+import &#123; marked &#125; from &#39;marked&#39;;
+
+const useDocStore = defineStore(&#39;document&#39;, () =-&gt; &#123;
+    const heartParameters = ref(&#123;
+        id: 1,
+        age: 18,
+        sex: &#39;男&#39;,
+        cp: 0,
+        trestbps: 120,
+        chol: 200,
+        fbs: 0,
+        restecg: 0,
+        thalach: 150,
+        exang: 0,
+        oldpeak: 1.0,
+        ca: 0,
+        thal: 1
+    &#125;);
+
+    const images = ref([heartimg]);
+    const suggestedAdvice = ref(&quot;根据心脏参数，建议定期检查并保持健康的生活方式。如有进一步不适，请及时就医。&quot;);
+    const parsedMessage = ref();
+
+    const fetchHeartParameters = async (fileId) =-&gt; &#123;
+        const Id = &#123;
+            id: fileId
+        &#125;;
+        console.log(Id);
+        try &#123;
+            const response = await heartParametersService(Id);
+            if (response.code === 0) &#123;
+                const data = response.data;
+
+                // 为每个字段设置默认值，如果为空则使用默认值
+                heartParameters.value = &#123;
+                    id: data.id || heartParameters.value.id,
+                    age: data.age !== null ? data.age : 18,
+                    sex: data.sex || &#39;男&#39;,
+                    cp: data.cp !== null ? data.cp : 0,
+                    trestbps: data.trestbps !== null ? data.trestbps : 120,
+                    chol: data.chol !== null ? data.chol : 200,
+                    fbs: data.fbs !== null ? data.fbs : 0,
+                    restecg: data.restecg !== null ? data.restecg : 0,
+                    thalach: data.thalach !== null ? data.thalach : 150,
+                    exang: data.exang !== null ? data.exang : 0,
+                    oldpeak: data.oldpeak !== null ? data.oldpeak : 1.0,
+                    ca: data.ca !== null ? data.ca : 0,
+                    thal: data.thal !== null ? data.thal : 1
+                &#125;;
+
+                console.log(heartParameters.value)
+            &#125; else &#123;
+                console.error(&#39;Error fetching heart parameters:&#39;, response.message);
+            &#125;
+        &#125; catch (error) &#123;
+            console.error(&#39;Error fetching heart parameters:&#39;, error);
+        &#125;
+    &#125;;
+
+    const fetchWenxinAdvice = async (doctorAdvice) =-&gt; &#123;
+        // 构造提问内容
+        const message = `
+        医生的建议如下：
+        &quot;$&#123;doctorAdvice&#125;&quot;
+
+        现在，我正在处理一组心脏健康相关的数据，其中包含多个字段：
+        - age（年龄）：$&#123;heartParameters.value.age&#125;，表示对象的年龄。
+        - sex（性别）：$&#123;heartParameters.value.sex&#125;，表示对象的性别，取值范围为 female 和 male。
+        - cp（胸部疼痛类型）：$&#123;heartParameters.value.cp&#125;，痛感由重到轻依次为 typical、atypical、non-anginal 和 asymptomatic。
+        - trestbps（血压）：$&#123;heartParameters.value.trestbps&#125;，表示血压数值。
+        - chol（胆固醇）：$&#123;heartParameters.value.chol&#125;，表示胆固醇数值。
+        - fbs（空腹血糖）：$&#123;heartParameters.value.fbs&#125;，当血糖含量大于120mg/dl时为 true，否则为 false。
+        - restecg（心电图结果）：$&#123;heartParameters.value.restecg&#125;，表示心电图结果，取值范围为 norm 和 hyp。
+        - thalach（最大心跳数）：$&#123;heartParameters.value.thalach&#125;，表示最大心跳数。
+        - exang（运动时是否心绞痛）：$&#123;heartParameters.value.exang&#125;，表示是否在运动时有心绞痛，true 为是，false 为否。
+        - oldpeak（运动相对于休息的ST depression）：$&#123;heartParameters.value.oldpeak&#125;，表示 ST 段压数值。
+        - slop（心电图ST segment的倾斜度）：$&#123;heartParameters.value.slop&#125;，表示 ST segment 的倾斜度，取值范围为 down、flat 和 up。
+        - ca（透视检查看到的血管数）：$&#123;heartParameters.value.ca&#125;，表示透视检查看到的血管数。
+        - thal（缺陷种类）：$&#123;heartParameters.value.thal&#125;，表示并发种类，取值范围为 norm、fix 和 rev。
+        - status（是否患病）：$&#123;heartParameters.value.status&#125;，表示对象是否患病，取值范围为 buff 和 sick。
+
+        请基于以上信息，并结合医生的建议，站在医生的角度给我提供一个段落形式的建议。可以参考以下模板：
+
+        鉴于您... 我建议您...
+    `;
+
+        try &#123;
+            // 调用 API 获取响应
+            const response = await ChatService(&#123; question: message &#125;);
+            let advice = response.data; // 假设响应数据在 response.data 中
+
+            // 裁剪建议内容
+            const suggestionIndex = advice.indexOf(&quot;建议：&quot;);
+            if (suggestionIndex !== -1) &#123;
+                advice = advice.slice(suggestionIndex + 3); // 只保留“建议：”后的内容
+            &#125;
+            suggestedAdvice.value = advice !== null ? advice : &quot;根据心脏参数，建议定期检查并保持健康的生活方式。如有进一步不适，请及时就医。&quot;; // 假设响应数据在 response.data 中
+            console.log(suggestedAdvice.value);
+            parsedMessage.value = marked(suggestedAdvice.value);
+        &#125; catch (error) &#123;
+            console.error(&#39;API 请求失败:&#39;, error);
+        &#125;
+    &#125;;
+
+
+    const addImage = (image) =-&gt; &#123;
+        images.value.push(image);
+    &#125;;
+
+    // 生成 PDF 的函数  
+    const generatePDF = async () =-&gt; &#123;
+        const pdfContent = document.getElementById(&quot;pdf-content&quot;); // 替换为你的 HTML 内容的 ID  
+        if (!pdfContent) &#123;
+            console.error(&quot;未找到要渲染的内容&quot;);
+            return;
+        &#125;
+        // 调用 utils 下载 PDF 方法  
+        await downloadPDF(pdfContent);
+    &#125;;
+
+    return &#123;
+        heartParameters,
+        suggestedAdvice,
+        parsedMessage,
+        fetchHeartParameters,
+        fetchWenxinAdvice,
+        addImage,
+        generatePDF
+    &#125;;
+&#125;, &#123; persist: true &#125;);
+
+export default useDocStore;
+</code></pre>
+<ul>
+<li><code>@\utils\htmlToPdf.js</code></li>
+</ul>
+<pre><code class="lang-javascript">import html2canvas from &quot;html2canvas&quot;;
+import &#123; jsPDF &#125; from &quot;jspdf&quot;;
+
+// 导出 PDF  
+export const downloadPDF = async (page) =-&gt; &#123;
+    const canvas = await html2canvas(page, &#123;
+        useCORS: true, // 允许跨域请求  
+        allowTaint: true, // 允许跨域  
+        scale: 2, // 设置放大倍数  
+        backgroundColor: &#39;#ffffff&#39; // 背景色  
+    &#125;);
+
+    canvas2PDF(canvas);
+&#125;;
+
+// 将 canvas 转换为 PDF  
+const canvas2PDF = (canvas) =-&gt; &#123;
+    const PDF = new jsPDF(&#123;
+        orientation: &#39;p&#39;, // 参数： l：横向  p：纵向  
+        unit: &#39;mm&#39;, // 参数：测量单位（&quot;pt&quot;，&quot;mm&quot;, &quot;cm&quot;, &quot;m&quot;, &quot;in&quot; or &quot;px&quot;）  
+        format: &#39;a4&#39; // A4纸  
+    &#125;);
+
+    const ctx = canvas.getContext(&#39;2d&#39;);
+    const a4w = 190; // A4 宽度  
+    const a4h = 277; // A4 高度  
+    const imgHeight = Math.floor(a4h * canvas.width / a4w); // 计算每页的高度  
+    let renderedHeight = 0;
+
+    while (renderedHeight &lt;- canvas.height) &#123;
+        let page = document.createElement(&quot;canvas&quot;);
+        page.width = canvas.width;
+        page.height = Math.min(imgHeight, canvas.height - renderedHeight);
+
+        // 用 getImageData 剪裁指定区域  
+        page.getContext(&#39;2d&#39;).putImageData(
+            ctx.getImageData(0, renderedHeight, canvas.width, Math.min(imgHeight, canvas.height - renderedHeight)),
+            0, 0
+        );
+
+        // canvas 转成图片并添加到 PDF  
+        PDF.addImage(page.toDataURL(&#39;image/jpeg&#39;, 0.2), &#39;JPEG&#39;, 10, 10, a4w, Math.min(a4h, a4w * page.height / page.width));
+
+        renderedHeight += imgHeight;
+
+        // 判断是否需要分页  
+        if (renderedHeight &lt;- canvas.height) &#123;
+            PDF.addPage();
+        &#125;
+    &#125;
+
+    PDF.save(&quot;心脏诊疗报告.pdf&quot;); // 保存 PDF 文件  
+    console.log(&quot;成功下载文件&quot;);
+&#125;;
+</code></pre>
+<p><img src="jspdf+html2canvas.assets/xlbujspdfhtml1" alt=""></p>
+<p><img src="jspdf+html2canvas.assets/xlbsjspdfhtml2" alt=""></p>
+
+    </div>
+    
+    
+    
+    
+    <div id="comment">
+        <div id="giscus-container" class="giscus"></div>
+    </div>
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2024 Aircraft
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Aircraft
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+<script
+    src="https://giscus.app/client.js"
+    data-repo="Aircraft-carrier/git-discussions-"
+    data-repo-id="R_kgDOMSMEYQ"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOMSMEYc4CglYu"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="light_tritanopia"
+    data-lang="zh-CN"
+    crossorigin
+    async
+></script>
+
+
+
+
+
+
+
+
+
+    
+
+    <canvas
+        id="fireworks"
+        style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 32767"
+    ></canvas>
+    <script src="https://s4.zstatic.net/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="/js/fireworks.min.js"></script>  
+
+    <canvas
+        id="background"
+        style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: -1"
+    ></canvas>
+    <script src="/js/background.min.js"></script>
+
+    <div id="cursor"></div>
+    <link rel="stylesheet" href="/css/cursor.min.css" />
+    <script src="/js/cursor.min.js"></script>
+
+</body>
+</html>
