@@ -1,0 +1,821 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>好看的卡片设计 | Aircraft</title>
+    <meta name="author" content="Aircraft" />
+    <meta name="description" content="谁替我上学 我可以替你睡觉" />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>AIRCRAFT</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;AIRCRAFT</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>好看的卡片设计</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2024/8/29
+        </span>
+        
+        <span class="category">
+            <a href="/categories/Learning/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Learning
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/vue3/" style="color: #ffa2c4">
+                    vue3
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h1 id="好看的卡片"><a href="#好看的卡片" class="headerlink" title="好看的卡片"></a>好看的卡片</h1><ul>
+<li>简介卡片</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/xlbskp1.png" alt=""></p>
+<p><code>@\components\myAside.vue</code></p>
+<pre><code class="lang-vue">&lt;-template-&gt;  
+    &lt;-div v-if=&quot;asideshow.user&quot; class=&quot;card-content1 shadow-box background-opacity&quot;-&gt;
+        &lt;-el-avatar style=&quot;margin-top: 20px&quot; class=&quot;user-avatar&quot; :size=&quot;120&quot; :src=&quot;userInfo.userPic&quot;-&gt;&lt;-/el-avatar-&gt;
+        &lt;-div class=&quot;web-name&quot;-&gt;&#123;&#123; userInfo.username &#125;&#125;&lt;-/div-&gt;
+        &lt;-div class=&quot;web-info&quot;-&gt;
+          &lt;-div class=&quot;blog-info-box&quot;-&gt;
+            &lt;-span-&gt;昵称&lt;-/span-&gt;
+            &lt;-span class=&quot;blog-info-num&quot;-&gt;&#123;&#123; userInfo.nickname &#125;&#125;&lt;-/span-&gt;
+          &lt;-/div-&gt;
+          &lt;-div class=&quot;blog-info-box&quot;-&gt;
+            &lt;-span-&gt;名称&lt;-/span-&gt;
+            &lt;-span class=&quot;blog-info-num&quot;-&gt;&#123;&#123; userInfo.username &#125;&#125;&lt;-/span-&gt;
+          &lt;-/div-&gt;
+          &lt;-div class=&quot;blog-info-box&quot;-&gt;
+            &lt;-span-&gt;身份&lt;-/span-&gt;
+            &lt;-span class=&quot;blog-info-num&quot;-&gt;&#123;&#123; userInfo.identity &#125;&#125;&lt;-/span-&gt;
+          &lt;-/div-&gt;
+        &lt;-/div-&gt;
+        &lt;-a class=&quot;collection-btn&quot;-&gt;
+          &lt;-i class=&quot;el-icon-star-off&quot; style=&quot;margin-right: 2px&quot;-&gt;&lt;-/i-&gt;&#123;&#123; userInfo.email &#125;&#125;
+        &lt;-/a-&gt;
+      &lt;-/div-&gt;
+&lt;-/template-&gt;
+</code></pre>
+<p><code>style</code></p>
+<pre><code class="lang-css">&lt;-style scoped-&gt;
+    .card-content1 &#123;
+        background: linear-gradient(-45deg, #e8d8b9, #eccec5, #a3e9eb, #bdbdf0, #eec1ea);
+        background-size: 400% 400%;
+        animation: gradientBG 10s ease infinite;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-radius: 10px;
+        position: relative;
+        overflow: hidden;
+    &#125;
+
+    .card-content1 :not(:first-child) &#123;
+        z-index: 10;
+    &#125;
+
+    .web-name &#123;
+      font-size: 30px;
+      font-weight: bold;
+      margin: 20px 0;
+    &#125;
+
+    .web-info &#123;
+      width: 80%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+    &#125;
+
+    .blog-info-box &#123;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-around;
+    &#125;
+
+    .blog-info-num &#123;
+      margin-top: 12px;
+    &#125;
+
+    .collection-btn &#123;
+      position: relative;
+      margin-top: 12px;
+      background: var(--lightGreen);
+      cursor: pointer;
+      width: 65%;
+      height: 35px;
+      border-radius: 1rem;
+      text-align: center;
+      line-height: 35px;
+      color: var(--white);
+      overflow: hidden;
+      z-index: 1;
+      margin-bottom: 25px;
+    &#125;
+
+    .collection-btn::before &#123;
+      background: var(--gradualRed);
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      content: &quot;&quot;;
+      transform: scaleX(0);
+      transform-origin: 0;
+      transition: transform 0.5s ease-out;
+      transition-timing-function: cubic-bezier(0.45, 1.64, 0.47, 0.66);
+      border-radius: 1rem;
+      z-index: -1;
+    &#125;
+
+    .collection-btn:hover::before &#123;
+      transform: scaleX(1);
+    &#125;
+
+    .shadow-box &#123;
+        box-shadow: 0 1px 20px -6px var(--borderColor);
+        transition: all 0.3s ease;
+    &#125;
+
+    .shadow-box:hover &#123;
+        box-shadow: 0 5px 10px 5px var(--borderHoverColor);
+    &#125;
+
+&lt;-/style-&gt;
+</code></pre>
+<ul>
+<li>博客卡片</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/xlbskp2.png" alt=""></p>
+<p><code>@\components\common\ResourceCardList.vue</code></p>
+<pre><code class="lang-vue">&lt;-template-&gt;
+  &lt;-div class=&quot;card-container&quot; v-if=&quot;resourcePathList.length&quot;-&gt;
+    &lt;-div v-for=&quot;(resourcePath, index) in resourcePathList&quot;
+         :key=&quot;index&quot;
+         class=&quot;card-item shadow-box wow&quot;
+         @click=&quot;clickResourcePath(resourcePath)&quot;-&gt;
+      &lt;-div class=&quot;card-image&quot;-&gt;
+        &lt;-el-image class=&quot;my-el-image&quot;
+                  v-once
+                  lazy
+                  :src=&quot;resourcePath.cover&quot;
+                  fit=&quot;cover&quot;-&gt;
+          &lt;-template #error-&gt;
+            &lt;-div class=&quot;image-slot myCenter&quot; style=&quot;background-color: var(--lightGreen)&quot;-&gt;
+              &lt;-div class=&quot;error-text&quot;-&gt;
+                &lt;-div-&gt;遇事不决，可问春风&lt;-/div-&gt;
+              &lt;-/div-&gt;
+            &lt;-/div-&gt;
+          &lt;-/template-&gt;
+        &lt;-/el-image-&gt;
+      &lt;-/div-&gt;
+      &lt;-div class=&quot;card-body&quot;-&gt;
+        &lt;-div class=&quot;card-title&quot;-&gt;
+          &lt;-span v-if=&quot;resourcePath.recommendStatus&quot;-&gt;
+            🔥
+          &lt;-/span-&gt;
+          &#123;&#123; resourcePath.title &#125;&#125;
+        &lt;-/div-&gt;
+        &lt;-div class=&quot;card-desc&quot;-&gt;
+          &#123;&#123; resourcePath.introduction &#125;&#125;
+        &lt;-/div-&gt;
+        &lt;-div class=&quot;card-time&quot;-&gt;
+          &lt;-svg viewBox=&quot;0 0 1024 1024&quot; width=&quot;14&quot; height=&quot;14&quot; style=&quot;vertical-align: -2px;&quot;-&gt;
+            &lt;-path d=&quot;M512 512m-512 0a512 512 0 1 0 1024 0 512 512 0 1 0-1024 0Z&quot; fill=&quot;#409EFF&quot;-&gt;&lt;-/path-&gt;
+            &lt;-path
+              d=&quot;M654.222222 256c-17.066667 0-28.444444 11.377778-28.444444 28.444444v56.888889c0 17.066667 11.377778 28.444444 28.444444 28.444445s28.444444-11.377778 28.444445-28.444445v-56.888889c0-17.066667-11.377778-28.444444-28.444445-28.444444zM369.777778 256c-17.066667 0-28.444444 11.377778-28.444445 28.444444v56.888889c0 17.066667 11.377778 28.444444 28.444445 28.444445s28.444444-11.377778 28.444444-28.444445v-56.888889c0-17.066667-11.377778-28.444444-28.444444-28.444444z&quot;
+              fill=&quot;#FFFFFF&quot;-&gt;&lt;-/path-&gt;
+            &lt;-path
+              d=&quot;M725.333333 312.888889H711.111111v28.444444c0 31.288889-25.6 56.888889-56.888889 56.888889s-56.888889-25.6-56.888889-56.888889v-28.444444h-170.666666v28.444444c0 31.288889-25.6 56.888889-56.888889 56.888889s-56.888889-25.6-56.888889-56.888889v-28.444444h-14.222222c-22.755556 0-42.666667 19.911111-42.666667 42.666667v341.333333c0 22.755556 19.911111 42.666667 42.666667 42.666667h426.666666c22.755556 0 42.666667-19.911111 42.666667-42.666667v-341.333333c0-22.755556-19.911111-42.666667-42.666667-42.666667zM426.666667 654.222222h-56.888889c-17.066667 0-28.444444-11.377778-28.444445-28.444444s11.377778-28.444444 28.444445-28.444445h56.888889c17.066667 0 28.444444 11.377778 28.444444 28.444445s-11.377778 28.444444-28.444444 28.444444z m227.555555 0h-56.888889c-17.066667 0-28.444444-11.377778-28.444444-28.444444s11.377778-28.444444 28.444444-28.444445h56.888889c17.066667 0 28.444444 11.377778 28.444445 28.444445s-11.377778 28.444444-28.444445 28.444444z m0-113.777778h-56.888889c-17.066667 0-28.444444-11.377778-28.444444-28.444444s11.377778-28.444444 28.444444-28.444444h56.888889c17.066667 0 28.444444 11.377778 28.444445 28.444444s-11.377778 28.444444-28.444445 28.444444z&quot;
+              fill=&quot;#FFFFFF&quot;-&gt;&lt;-/path-&gt;
+          &lt;-/svg-&gt;
+          发布于 &#123;&#123; getDateDiff(resourcePath.createTime) &#125;&#125;
+        &lt;-/div-&gt;
+      &lt;-/div-&gt;
+    &lt;-/div-&gt;
+  &lt;-/div-&gt;
+&lt;-/template-&gt;
+
+&lt;-script setup-&gt;
+import &#123; defineProps, defineEmits &#125; from &#39;vue&#39;;
+
+const props = defineProps(&#123;
+  resourcePathList: &#123;
+    type: Array,
+    required: true
+  &#125;
+&#125;);
+
+const emit = defineEmits([&#39;clickResourcePath&#39;]);
+
+function clickResourcePath(resourcePath) &#123;
+  emit(&quot;clickResourcePath&quot;, resourcePath.id);
+&#125;
+
+function getDateDiff(date) &#123;
+  const now = new Date();
+  const past = new Date(date);
+  const diff = now - past;
+
+  const seconds = Math.floor(diff / 1000);
+  const minutes = Math.floor(seconds / 60);
+  const hours = Math.floor(minutes / 60);
+  const days = Math.floor(hours / 24);
+  const months = Math.floor(days / 30);
+  const years = Math.floor(days / 365);
+
+  if (years -&gt; 0) &#123;
+    return `$&#123;years&#125;年前`;
+  &#125; else if (months -&gt; 0) &#123;
+    return `$&#123;months&#125;个月前`;
+  &#125; else if (days -&gt; 0) &#123;
+    return `$&#123;days&#125;天前`;
+  &#125; else if (hours -&gt; 0) &#123;
+    return `$&#123;hours&#125;小时前`;
+  &#125; else if (minutes -&gt; 0) &#123;
+    return `$&#123;minutes&#125;分钟前`;
+  &#125; else &#123;
+    return `刚刚`;
+  &#125;
+&#125;
+
+
+
+&lt;-/script-&gt;
+
+&lt;-style scoped-&gt;
+
+  .card-container &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+
+  .card-item &#123;
+    position: relative;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, .88);
+    overflow: hidden;
+    margin: 10px;
+    height: 300px;
+    flex-shrink: 0;
+    width: calc(100% / 3 - 20px);
+    cursor: pointer;
+    animation: zoomIn 0.8s ease-in-out;
+  &#125;
+
+  .card-image &#123;
+    width: 100%;
+    height: 180px;
+  &#125;
+
+  .card-image -&gt;-&gt;-&gt; .el-image__inner &#123;
+    transition: all 1s;
+  &#125;
+
+  .card-image -&gt;-&gt;-&gt; .el-image__inner:hover &#123;
+    transform: scale(1.2);
+  &#125;
+
+  .card-body &#123;
+    padding: 10px 20px;
+  &#125;
+
+  .card-title &#123;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    transition: all .2s ease-in-out;
+  &#125;
+
+  .card-title:hover &#123;
+    color: var(--lightGreen);
+  &#125;
+
+  .card-desc &#123;
+    font-size: 14px;
+    line-height: 1.5;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    letter-spacing: 1px;
+  &#125;
+
+  .card-time &#123;
+    position: absolute;
+    bottom: 10px;
+    font-size: 12px;
+    color: var(--greyFont);
+  &#125;
+
+  @media screen and (max-width: 700px) &#123;
+    .card-item &#123;
+      width: calc(100% / 2 - 20px);
+    &#125;
+  &#125;
+
+  @media screen and (max-width: 500px) &#123;
+    .card-item &#123;
+      width: calc(100% - 20px);
+    &#125;
+  &#125;
+
+&lt;-/style-&gt;
+</code></pre>
+<p><code>@\stores\patients.js</code></p>
+<pre><code class="lang-javascript">import &#123; defineStore &#125; from &#39;pinia&#39;
+import &#123; ref &#125; from &#39;vue&#39;
+import &#123; DPatientsService &#125; from &#39;@/api/bind.js&#39;  // 假设你的服务文件路径是 @/services/apiService
+
+
+const usePatientsInfoStore = defineStore(&#39;patients&#39;, () =-&gt; &#123;
+    const infos = ref([])
+
+    // 获取用户信息并更新 store
+    const fetchInfos = async () =-&gt; &#123;
+
+        infos.value = []
+        try &#123;
+            const response = await DPatientsService()
+            console.log(&#39;API Response:&#39;, response)  // 调试输出
+            if (response.code === 0) &#123;  // 确保响应成功
+                infos.value = response.data
+                console.log(&#39;Fetched Infos:&#39;, infos.value)  // 调试输出
+            &#125;
+            else &#123;
+                console.error(&#39;Error fetching patients info:&#39;, response.message)
+            &#125;
+        &#125; catch (error) &#123;
+            console.log(&#39;Its OK&#39;)
+        &#125;
+    &#125;
+
+    const setInfo = (newInfos) =-&gt; &#123;
+        infos.value = newInfos
+    &#125;
+
+    const removeInfo = () =-&gt; &#123;
+        infos.value = []
+    &#125;
+
+    const clearUserData = () =-&gt; &#123;
+        infos.value = []
+    &#125;
+
+    return &#123; infos, setInfo, removeInfo, fetchInfos, clearUserData &#125;
+&#125;, &#123; persist: true &#125;)
+
+export default usePatientsInfoStore
+</code></pre>
+<p><code>@\components\user.vue</code></p>
+<pre><code class="lang-vue">&lt;-template-&gt;    
+    &lt;-div v-if=&quot;userInfo.identity === &#39;patient&#39;&quot;-&gt;
+      &lt;-ResourceCardList :resourcePathList=&quot;resourcePathList&quot; @clickResourcePath=&quot;handleResourceClick&quot; /-&gt;
+    &lt;-/div-&gt;
+&lt;-/template-&gt; 
+
+&lt;-script setup-&gt;
+import ResourceCardList from &#39;@/components/common/ResourceCardList.vue&#39;;
+
+const resourcePathList = computed(() =-&gt; &#123;
+  return filesInfo.value.map((info, index) =-&gt; (&#123;
+    cover: info.url || &#39;https://aircraft-1111.oss-cn-beijing.aliyuncs.com/mr_train_1001_middle_slice.jpg&#39;,
+    title: info.fileName,
+    introduction: &#39;一个 nii 图像&#39;,
+    recommendStatus: true,
+    createTime: &#39;2024-08-15T00:00:00Z&#39;,
+    url: &#39;/demo&#39;,
+    id: info.id
+  &#125;))
+&#125;)
+
+async function handleResourceClick(id) &#123;
+  console.log(&#39;Clicked image id:&#39;, id);
+
+  imageStore.setImgId(id);   // 设置图片ID
+
+  await imageStore.fetchImages(id);  // 等待获取图片完成
+
+  router.push(&#39;/demo&#39;);  // 获取图片后跳转到/demo路由
+&#125;
+
+&lt;-/script-&gt;
+</code></pre>
+<ul>
+<li>列表卡片</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/xlbskp3.png" alt=""></p>
+<p><code>@\components\common\userCard.vue</code></p>
+<pre><code class="lang-vue">&lt;-template-&gt;
+  &lt;-div class=&quot;card-content shadow-box-mini&quot; @click=&quot;handleClick&quot;-&gt;
+    &lt;-div-&gt;
+      &lt;-el-avatar :size=&quot;avatarSize&quot; :src=&quot;avatarSrc&quot;-&gt;&lt;-/el-avatar-&gt;
+    &lt;-/div-&gt;
+    &lt;-div class=&quot;card-right&quot;-&gt;
+      &lt;-div class=&quot;card-title&quot;-&gt;&#123;&#123; title &#125;&#125;&lt;-/div-&gt;
+      &lt;-div class=&quot;card-desc&quot;-&gt;&#123;&#123; description &#125;&#125;&lt;-/div-&gt;
+    &lt;-/div-&gt;
+  &lt;-/div-&gt;
+&lt;-/template-&gt;
+
+&lt;-script setup-&gt;
+import &#123; defineProps, defineEmits &#125; from &#39;vue&#39;;
+
+const props = defineProps(&#123;
+  avatarSize: &#123;
+    type: Number,
+    default: 100
+  &#125;,
+  avatarSrc: &#123;
+    type: String,
+    required: true
+  &#125;,
+  title: &#123;
+    type: String,
+    default: &#39;时光相册&#39;
+  &#125;,
+  description: &#123;
+    type: String,
+    default: &#39;📸记录美好瞬间&#39;
+  &#125;,
+  clickValue: &#123;
+    type: Number,
+    default: 2
+  &#125;
+&#125;);
+
+const emit = defineEmits();
+
+function handleClick() &#123;
+  emit(&#39;card-click&#39;, props.clickValue);
+&#125;
+&lt;-/script-&gt;
+
+&lt;-style scoped-&gt;
+.card-content &#123;
+  display: flex;
+  padding: 25px;
+  margin: 25px 0;
+  border-radius: 20px;
+  width: 100%;
+  cursor: pointer;
+  transition: all 0.3s;
+  background: var(--background);
+&#125;
+
+.card-content:hover &#123;
+  /* Add hover effects if needed */
+&#125;
+
+.card-right &#123;
+  margin-left: 20px;
+&#125;
+
+.card-title &#123;
+  font-size: 1.6rem;
+  letter-spacing: 0.2rem;
+  line-height: 3.5rem;
+  font-weight: 700;
+&#125;
+
+.card-desc &#123;
+  font-size: 1.1rem;
+  letter-spacing: 0.2rem;
+  color: #777777;
+&#125;
+&lt;-/style-&gt;
+</code></pre>
+<p><code>@\components\cardList.vue</code></p>
+<pre><code class="lang-vue">&lt;-template-&gt;
+  &lt;-div class=&quot;card-list&quot;-&gt;
+    &lt;-CardComponent
+      v-for=&quot;(card, index) in cards&quot;
+      :key=&quot;index&quot;
+      :avatarSrc=&quot;card.avatarSrc&quot;
+      :title=&quot;card.title&quot;
+      :description=&quot;card.description&quot;
+      @card-click=&quot;handleCardClick(card.id)&quot;
+    /-&gt;
+  &lt;-/div-&gt;
+&lt;-/template-&gt;
+
+&lt;-script setup-&gt;
+import &#123; defineProps, defineEmits &#125; from &#39;vue&#39;;
+import CardComponent from &#39;@/components/common/userCard.vue&#39;; // 确保路径正确
+
+const props = defineProps(&#123;
+  cards: &#123;
+    type: Array,
+    required: true
+  &#125;
+&#125;);
+
+const emit = defineEmits();
+
+function handleCardClick(id) &#123;
+  emit(&#39;card-click&#39;, id);
+&#125;
+&lt;-/script-&gt;
+
+&lt;-style scoped-&gt;
+.card-list &#123;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+&#125;
+&lt;-/style-&gt;
+</code></pre>
+<p><code>@\components\user.vue</code></p>
+<pre><code class="lang-vue">&lt;-template-&gt;
+   &lt;-CardList
+    v-if=&quot;userInfo.identity === &#39;doctor&#39;&quot;
+    :cards=&quot;cardData&quot;
+    @card-click=&quot;handleCardClick&quot;
+    /-&gt;
+&lt;-/template-&gt;
+
+&lt;-script setup-&gt;
+
+import CardList from &#39;@/components/CardList.vue&#39;;
+const cardData = computed(() =-&gt; &#123;
+  return patientsInfos.value.map((info, index) =-&gt; (&#123;
+    id: info.id,
+    avatarSrc: info.userPic || IU,  // 这里假设所有卡片使用相同的图片
+    title: `$&#123;info.username&#125; ($&#123;info.nickname&#125;)`,
+    description: `📸Comment : $&#123;info.comment&#125;`
+  &#125;))
+&#125;)
+
+function handleCardClick(id) &#123;
+  console.log(&#39;Card clicked with ID:&#39;, id);
+  findPatientInfo(id)
+  dialogVisible.value = true; // 显示弹窗
+  console.log(&quot;dialogVisible : &quot; + dialogVisible.value)
+  getFilesName();
+&#125;
+&lt;-/script-&gt;
+</code></pre>
+
+    </div>
+    
+    
+    
+    
+    <div id="comment">
+        <div id="giscus-container" class="giscus"></div>
+    </div>
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2024 Aircraft
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Aircraft
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+<script
+    src="https://giscus.app/client.js"
+    data-repo="Aircraft-carrier/git-discussions-"
+    data-repo-id="R_kgDOMSMEYQ"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOMSMEYc4CglYu"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="light_tritanopia"
+    data-lang="zh-CN"
+    crossorigin
+    async
+></script>
+
+
+
+
+
+
+
+
+
+    
+
+    <canvas
+        id="fireworks"
+        style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 32767"
+    ></canvas>
+    <script src="https://s4.zstatic.net/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="/js/fireworks.min.js"></script>  
+
+    <canvas
+        id="background"
+        style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: -1"
+    ></canvas>
+    <script src="/js/background.min.js"></script>
+
+    <div id="cursor"></div>
+    <link rel="stylesheet" href="/css/cursor.min.css" />
+    <script src="/js/cursor.min.js"></script>
+
+</body>
+</html>
