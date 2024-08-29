@@ -184,7 +184,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/sprintboot/" style="color: #ffa2c4">
+                <a href="/tags/sprintboot/" style="color: #00a596">
                     sprintboot
                 </a>
             </span>
@@ -673,12 +673,12 @@ public interface DoctorPatientMapper &#123;
 <pre><code class="lang-java">@Mapper
 public interface UserMapper &#123;
 
-    @Select(&quot;&lt;script&gt;&quot; +
+    @Select(&quot;&lt;-script-&gt;&quot; +
             &quot;SELECT * FROM user WHERE id IN &quot; +
-            &quot;&lt;foreach item=&#39;id&#39; collection=&#39;ids&#39; open=&#39;(&#39; separator=&#39;,&#39; close=&#39;)&#39;&gt;&quot; +
+            &quot;&lt;-foreach item=&#39;id&#39; collection=&#39;ids&#39; open=&#39;(&#39; separator=&#39;,&#39; close=&#39;)&#39;-&gt;&quot; +
             &quot;#&#123;id&#125;&quot; +
-            &quot;&lt;/foreach&gt;&quot; +
-            &quot;&lt;/script&gt;&quot;)
+            &quot;&lt;-/foreach-&gt;&quot; +
+            &quot;&lt;-/script-&gt;&quot;)
     List&lt;User&gt; findUsersByIds(@Param(&quot;ids&quot;) List&lt;Integer&gt; ids);
 
 &#125;
