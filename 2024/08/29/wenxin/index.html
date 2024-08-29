@@ -1,0 +1,1043 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>wenxin | Aircraft</title>
+    <meta name="author" content="Aircraft" />
+    <meta name="description" content="谁替我上学 我可以替你睡觉" />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>AIRCRAFT</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;AIRCRAFT</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>wenxin</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2024/8/29
+        </span>
+        
+        <span class="category">
+            <a href="/categories/Learning/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Learning
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/wenxin/" style="color: #ffa2c4">
+                    wenxin
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/SDK/" style="color: #ff7d73">
+                    SDK
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h1 id="Wenxin"><a href="#Wenxin" class="headerlink" title="Wenxin"></a>Wenxin</h1><h2 id="侧边栏的问答助手"><a href="#侧边栏的问答助手" class="headerlink" title="侧边栏的问答助手"></a>侧边栏的问答助手</h2><ul>
+<li><code>@\components\myAside.vue(template)</code></li>
+</ul>
+<pre><code class="lang-vue">&lt;-template-&gt;
+    &lt;-div v-if=&quot;asideshow.wenxin&quot; 
+       style=&quot;padding: 15px; border-radius: 10px; animation: hideToShow 1s ease-in-out&quot;
+       class=&quot;shadow-box background-opacity wow&quot;-&gt;
+    &lt;-div style=&quot;color: var(--lightGreen); font-size: 20px; font-weight: bold; margin-bottom: 10px&quot; 
+         @click=&quot;showWenxin()&quot;-&gt;
+      文心智能助手
+    &lt;-/div-&gt;
+
+    &lt;-!-- 问答功能部分 ---&gt;
+    &lt;-div class=&quot;chat-window&quot; style=&quot;max-height: 300px; overflow-y: auto; margin-bottom: 10px;&quot;-&gt;
+      &lt;-div class=&quot;message-list&quot;-&gt;
+        &lt;-div 
+          v-for=&quot;(msg, index) in messages&quot; 
+          :key=&quot;index&quot; 
+          class=&quot;message&quot; 
+          :class=&quot;&#123; &#39;user-message&#39;: msg.isUser &#125;&quot;
+        -&gt;  
+          &lt;-span v-if=&quot;msg.isUser&quot;-&gt;&#123;&#123; msg.text &#125;&#125;&lt;-/span-&gt;  
+          &lt;-span v-else v-html=&quot;msg.text&quot;-&gt;&lt;-/span-&gt;
+        &lt;-/div-&gt;
+      &lt;-/div-&gt;
+    &lt;-/div-&gt;
+
+    &lt;-div style=&quot;display: flex; margin-bottom: 10px;&quot;-&gt;
+      &lt;-input class=&quot;ais-SearchBox-input&quot; type=&quot;text&quot;
+             v-model=&quot;userInput&quot;
+             placeholder=&quot;输入消息 ......&quot; 
+             maxlength=&quot;32&quot; 
+             @keyup.enter=&quot;sendMessage&quot;
+             style=&quot;flex: 1;&quot;-&gt;
+      &lt;-div class=&quot;ais-SearchBox-submit&quot; @click=&quot;sendMessage&quot;-&gt;
+        &lt;-svg style=&quot;margin-top: 3.5px; margin-left: 18px&quot; viewBox=&quot;0 0 1024 1024&quot; width=&quot;20&quot; height=&quot;20&quot;-&gt;
+          &lt;-path
+            d=&quot;M51.2 508.8c0 256.8 208 464.8 464.8 464.8s464.8-208 464.8-464.8-208-464.8-464.8-464.8-464.8 208-464.8 464.8z&quot;
+            fill=&quot;#51C492&quot;-&gt;&lt;-/path-&gt;
+          &lt;-path
+            d=&quot;M772.8 718.4c48-58.4 76.8-132.8 76.8-213.6 0-186.4-151.2-337.6-337.6-337.6-186.4 0-337.6 151.2-337.6 337.6 0 186.4 151.2 337.6 337.6 337.6 81.6 0 156-28.8 213.6-76.8L856 896l47.2-47.2-130.4-130.4zM512 776c-149.6 0-270.4-121.6-270.4-271.2S363.2 233.6 512 233.6c149.6 0 271.2 121.6 271.2 271.2C782.4 654.4 660.8 776 512 776z&quot;
+            fill=&quot;#FFFFFF&quot;-&gt;&lt;-/path-&gt;
+        &lt;-/svg-&gt;
+      &lt;-/div-&gt;
+    &lt;-/div-&gt;
+
+    &lt;-button @click=&quot;handleGeneratePDF&quot; class=&quot;generate-button&quot;-&gt;生成并展示心脏诊疗报告&lt;-/button-&gt;
+  &lt;-/div-&gt;
+&lt;-/template-&gt;
+</code></pre>
+<ul>
+<li><code>@\components\myAside.vue(script)</code></li>
+</ul>
+<pre><code class="lang-javascript">&lt;-script setup-&gt;
+import &#123; ChatService &#125; from &#39;@/api/wenxin&#39;;  
+import &#123; marked &#125; from &#39;marked&#39;; 
+import useDocStore from &#39;@/stores/document.js&#39;;   
+const docStore = useDocStore();  
+const userInput = ref(&#39;&#39;);  
+const messages = ref([]); 
+
+const showWenxin = () =-&gt; &#123;
+  store.commit(&#39;changeVisibility&#39;, &#123; wenxin: !visible.value.wenxin &#125;);
+  toggleDropdown(0);
+&#125;
+
+const sendMessage = async () =-&gt; &#123;  
+  const trimmedMessage = userInput.value.trim();  
+  if (trimmedMessage) &#123;  
+    messages.value.push(&#123; text: trimmedMessage, isUser: true &#125;);  
+    userInput.value = &#39;&#39;; 
+
+    try &#123;  
+      const response = await ChatService(&#123; question: trimmedMessage &#125;);  
+      const responseMessage = response.data;  
+      const parsedMessage = marked(responseMessage);  
+
+      messages.value.push(&#123; text: parsedMessage, isUser: false &#125;);  
+    &#125; catch (error) &#123;  
+      console.error(&#39;API 请求失败:&#39;, error);  
+      messages.value.push(&#123; text: &#39;发送消息失败，请稍后再试。&#39;, isUser: false &#125;);  
+    &#125;  
+  &#125;  
+&#125;; 
+
+const handleGeneratePDF = async () =-&gt; &#123;
+    console.log(&quot;generate pdf&quot;);   
+    await docStore.generatePDF();  
+&#125;;  
+
+&lt;-/script-&gt;
+</code></pre>
+<ul>
+<li><code>color.css</code></li>
+</ul>
+<pre><code class="lang-css">:root &#123;
+    /* 背景 */
+    --background: white;
+    --gradualBackground: linear-gradient(to right bottom, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    --favoriteBg: #f7f9fe;
+
+    /* 字体 */
+    --fontColor: black;
+    /* 边框 */
+    --borderColor: rgba(0, 0, 0, 0.5);
+    /* 边框 */
+    --borderHoverColor: rgba(110, 110, 110, 0.4);
+    /* 文章字体 */
+    --articleFontColor: #1f1f1f;
+    /* 文章灰色字体 */
+    --articleGreyFontColor: #616161;
+    /* 评论背景颜色 */
+    --commentContent: #F7F9FE;
+
+
+    /* 主题背景 */
+    --themeBackground: orange;
+    /* 主题悬停背景 */
+    --gradualRed: linear-gradient(to right, #ff4b2b, #ff416c);
+
+    /* 导航栏字体 */
+    --toolbarFont: #333333;
+    /* 导航栏背景 */
+    --toolbarBackground: rgba(255, 255, 255, 1);
+    /* 灰色字体 */
+    --greyFont: #797979;
+    --maxGreyFont: #595A5A;
+    /* footer背景 */
+    --gradientBG: linear-gradient(-90deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    /* 白色遮罩 */
+    --whiteMask: rgba(255, 255, 255, 0.3);
+    /* max白色遮罩 */
+    --maxWhiteMask: rgba(255, 255, 255, 0.5);
+    --maxMaxWhiteMask: rgba(255, 255, 255, 0.7);
+    /* mini白色遮罩 */
+    --miniWhiteMask: rgba(255, 255, 255, 0.15);
+    /* 透明 */
+    --transparent: rgba(0, 0, 0, 0);
+    /* mini黑色遮罩 */
+    --miniMask: rgba(249, 245, 245, 0.15);
+    /* 黑色遮罩 */
+    --mask: rgba(0, 0, 0, 0.3);
+    /* 半透明 */
+    --translucent: rgba(0, 0, 0, 0.5);
+    /* 深黑遮罩 */
+    --maxMask: rgba(0, 0, 0, 0.7);
+
+
+    --white: white;
+
+    --red: red;
+    --lightRed: #ff4b2b;
+    --maxLightRed: #ff416c;
+    --orangeRed: #EF794F;
+
+    --azure: #ECF7FE;
+    --blue: rgb(3, 169, 244);
+
+    --lightGray: #DDDDDD;
+    --maxLightGray: #EEEEEE;
+    --maxMaxLightGray: rgba(242, 242, 242, 0.5);
+
+    --lightGreen: #39c5bb;
+
+    --green: #67C23A;
+    --black: black;
+    --lightYellow: #F4E1C0;
+
+    --globalFont: poetize-font;
+&#125;
+</code></pre>
+<ul>
+<li><code>@\components\myAside.vue(style)</code></li>
+</ul>
+<pre><code class="lang-css"> &lt;-style scoped-&gt;
+    .shadow-box &#123;
+        box-shadow: 0 1px 20px -6px var(--borderColor);
+        transition: all 0.3s ease;
+    &#125;
+
+    .shadow-box:hover &#123;
+        box-shadow: 0 5px 10px 5px var(--borderHoverColor);
+    &#125;
+
+    .background-opacity &#123;
+        /*background: var(--background);*/
+        /* opacity: 0.88; */
+    &#125;
+      .chat-window &#123;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    &#125;
+
+    .message-list &#123;
+      display: flex;
+      flex-direction: column;
+    &#125;
+
+    .message &#123;
+      padding: 8px;
+      margin: 5px 0;
+      border-radius: 4px;
+      max-width: 100%;
+      word-wrap: break-word;
+    &#125;
+
+    .user-message &#123;
+      background-color: #d1e7dd;
+      align-self: flex-end;
+    &#125;
+
+      .ais-SearchBox-input &#123;
+      padding: 0 14px;
+      height: 30px;
+      width: calc(100% - 50px);
+      outline: 0;
+      border: 2px solid var(--lightGreen);
+      border-right: 0;
+      border-radius: 40px 0 0 40px;
+      color: var(--maxGreyFont);
+      background: var(--white);
+    &#125;
+
+   .ais-SearchBox-submit &#123;
+      height: 30px;
+      width: 50px;
+      border: 2px solid var(--lightGreen);
+      border-left: 0;
+      border-radius: 0 40px 40px 0;
+      background: var(--white);
+      cursor: pointer;
+   &#125;
+
+    .generate-button &#123;  
+        position: relative;      
+        margin-top: 12px;      
+        background: var(--lightGreen); 
+        cursor: pointer;        
+        width: 100%;             
+        height: 35px;          
+        border-radius: 1rem;   
+        text-align: center;    
+        line-height: 35px;      
+        color: var(--white);   
+        overflow: hidden;        
+        z-index: 1;           
+        margin-bottom: 25px;    
+        border: none;            
+        padding: 0;             
+    &#125;  
+
+    .generate-button:hover &#123;  
+        background: #87CEEB;       
+    &#125;  
+
+
+&lt;-/style-&gt;
+</code></pre>
+<h2 id="问答助手组件"><a href="#问答助手组件" class="headerlink" title="问答助手组件"></a>问答助手组件</h2><ul>
+<li><code>@\components\common\chat.vue</code></li>
+</ul>
+<pre><code class="lang-vue">&lt;-template-&gt;  
+  &lt;-div class=&quot;chat-container&quot;-&gt;  
+    &lt;-div class=&quot;chat-window&quot;-&gt;  
+      &lt;-div class=&quot;message-list&quot;-&gt;  
+        &lt;-div   
+          v-for=&quot;(msg, index) in messages&quot;   
+          :key=&quot;index&quot;   
+          class=&quot;message&quot;   
+          :class=&quot;&#123; &#39;user-message&#39;: msg.isUser &#125;&quot;  
+        -&gt;  
+          &lt;-span v-if=&quot;msg.isUser&quot;-&gt;&#123;&#123; msg.text &#125;&#125;&lt;-/span-&gt;  
+          &lt;-span v-else v-html=&quot;msg.text&quot;-&gt;&lt;-/span-&gt; &lt;-!-- 修正为使用 span 标签关闭 v-html ---&gt;
+        &lt;-/div-&gt;  
+      &lt;-/div-&gt;  
+    &lt;-/div-&gt;  
+    &lt;-div class=&quot;input-container&quot;-&gt;  
+      &lt;-input   
+        v-model=&quot;userInput&quot;   
+        @keyup.enter=&quot;sendMessage&quot;   
+        placeholder=&quot;输入你的消息...&quot;  
+      /-&gt;  
+      &lt;-button @click=&quot;sendMessage&quot;-&gt;发送&lt;-/button-&gt;  
+    &lt;-/div-&gt;  
+  &lt;-/div-&gt;  
+&lt;-/template-&gt;  
+
+&lt;-script setup-&gt;  
+import &#123; ref &#125; from &#39;vue&#39;;  
+import &#123; ChatService &#125; from &#39;@/api/wenxin&#39;;  
+import &#123; marked &#125; from &#39;marked&#39;; // 假设需要对 Markdown 格式进行处理
+
+const userInput = ref(&#39;&#39;);  
+const messages = ref([]);  
+
+const sendMessage = async () =-&gt; &#123;  
+  const trimmedMessage = userInput.value.trim();  
+  if (trimmedMessage) &#123;  
+    // 添加用户消息到消息列表  
+    messages.value.push(&#123; text: trimmedMessage, isUser: true &#125;);  
+    userInput.value = &#39;&#39;; // 清空输入框  
+
+    try &#123;  
+      // 调用 API 获取响应  
+      const response = await ChatService(&#123; question: trimmedMessage &#125;);  
+      const responseMessage = response.data; // 假设响应数据在 response.data 中  
+
+      // 使用 marked 解析 Markdown，或直接使用 HTML
+      const parsedMessage = marked(responseMessage);  
+
+      messages.value.push(&#123; text: parsedMessage, isUser: false &#125;);  
+    &#125; catch (error) &#123;  
+      console.error(&#39;API 请求失败:&#39;, error);  
+      messages.value.push(&#123; text: &#39;发送消息失败，请稍后再试。&#39;, isUser: false &#125;);  
+    &#125;  
+  &#125;  
+&#125;;  
+&lt;-/script-&gt;  
+
+&lt;-style scoped-&gt;  
+.chat-container &#123;  
+  width: 800px;  
+  margin: auto;
+  padding: 20px;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  height: 500px;  
+  border: 1px solid #ddd;  
+  border-radius: 8px;  
+  display: flex;  
+  flex-direction: column;  
+&#125;  
+
+.chat-window &#123;  
+  flex: 1;  
+  overflow-y: auto;  
+  padding: 10px;  
+&#125;  
+
+.message-list &#123;  
+  display: flex;  
+  flex-direction: column;  
+&#125;  
+
+.message &#123;  
+  padding: 8px;  
+  margin: 5px 0;  
+  border-radius: 4px;  
+  max-width: 70%; /* 限制消息的最大宽度 */
+  word-wrap: break-word; /* 自动换行 */
+&#125;  
+
+.user-message &#123;  
+  background-color: #d1e7dd;  
+  align-self: flex-end;  
+&#125;  
+
+.input-container &#123;  
+  display: flex;  
+  padding: 10px;  
+&#125;  
+
+input &#123;  
+  flex: 1;  
+  padding: 8px;  
+  border: 1px solid #ddd;  
+  border-radius: 4px;  
+&#125;  
+
+button &#123;  
+  margin-left: 10px;  
+  padding: 8px 12px;  
+  background-color: #007bff;  
+  color: #fff;  
+  border: none;  
+  border-radius: 4px;  
+  cursor: pointer;  
+&#125;  
+&lt;-/style-&gt;
+</code></pre>
+<h2 id="后端代码"><a href="#后端代码" class="headerlink" title="后端代码"></a>后端代码</h2><ul>
+<li><code>pom.xml</code></li>
+</ul>
+<pre><code class="lang-xml">    &lt;-!--文心大模型依赖---&gt;
+    &lt;-dependency-&gt;
+      &lt;-groupId-&gt;com.squareup.okhttp3&lt;-/groupId-&gt;
+      &lt;-artifactId-&gt;okhttp&lt;-/artifactId-&gt;
+      &lt;-version-&gt;4.9.3&lt;-/version-&gt;
+    &lt;-/dependency-&gt;
+
+    &lt;-dependency-&gt;
+      &lt;-groupId-&gt;com.alibaba&lt;-/groupId-&gt;
+      &lt;-artifactId-&gt;fastjson&lt;-/artifactId-&gt;
+      &lt;-version-&gt;1.2.79&lt;-/version-&gt;
+    &lt;-/dependency-&gt;
+
+    &lt;-!--javax---&gt;
+    &lt;-dependency-&gt;
+      &lt;-groupId-&gt;javax.annotation&lt;-/groupId-&gt;
+      &lt;-artifactId-&gt;javax.annotation-api&lt;-/artifactId-&gt;
+      &lt;-version-&gt;1.3.2&lt;-/version-&gt;
+    &lt;-/dependency-&gt;
+</code></pre>
+<ul>
+<li><code>application.yml</code></li>
+</ul>
+<pre><code class="lang-yml">okhttp:
+  connect-timeout: 30
+  read-timeout: 30
+  write-timeout: 30
+  max-idle-connections: 200
+  keep-alive-duration: 300
+
+wenxin:
+  apiKey: ...
+  secretKey: ...
+  accessTokenUrl: https://aip.baidubce.com/oauth/2.0/token
+  ERNIE-Bot4:
+    0URL: https://aip.baid
+</code></pre>
+<ul>
+<li><code>src/main/java/com/itheima/config/OkHttpConfiguration.java</code></li>
+</ul>
+<pre><code class="lang-java">package com.itheima.config;
+
+import okhttp3.ConnectionPool;
+import okhttp3.OkHttpClient;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import javax.net.ssl.*;
+import java.security.*;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
+import java.util.concurrent.TimeUnit;
+
+
+@Configuration
+public class OkHttpConfiguration &#123;
+
+    @Value(&quot;$&#123;okhttp.connect-timeout&#125;&quot;)
+    private Integer connectTimeout;
+
+    @Value(&quot;$&#123;okhttp.read-timeout&#125;&quot;)
+    private Integer readTimeout;
+
+    @Value(&quot;$&#123;okhttp.write-timeout&#125;&quot;)
+    private Integer writeTimeout;
+
+    @Value(&quot;$&#123;okhttp.max-idle-connections&#125;&quot;)
+    private Integer maxIdleConnections;
+
+    @Value(&quot;$&#123;okhttp.keep-alive-duration&#125;&quot;)
+    private Long keepAliveDuration;
+
+    @Bean
+    public OkHttpClient okHttpClient() &#123;
+        return new OkHttpClient.Builder()
+                .sslSocketFactory(sslSocketFactory(), x509TrustManager())
+                // 是否开启缓存
+                .retryOnConnectionFailure(false)
+                .connectionPool(pool())
+                .connectTimeout(connectTimeout, TimeUnit.SECONDS)
+                .readTimeout(readTimeout, TimeUnit.SECONDS)
+                .writeTimeout(writeTimeout,TimeUnit.SECONDS)
+                .hostnameVerifier((hostname, session) --&gt; true)
+                // 设置代理
+//                .proxy(new Proxy(Proxy.Type.HTTP, new InetSocketAddress(&quot;127.0.0.1&quot;, 8888)))
+                // 拦截器
+//                .addInterceptor()
+                .build();
+    &#125;
+
+    @Bean
+    public X509TrustManager x509TrustManager() &#123;
+        return new X509TrustManager() &#123;
+            @Override
+            public void checkClientTrusted(X509Certificate[] chain, String authType)
+                    throws CertificateException &#123;
+            &#125;
+            @Override
+            public void checkServerTrusted(X509Certificate[] chain, String authType)
+                    throws CertificateException &#123;
+            &#125;
+            @Override
+            public X509Certificate[] getAcceptedIssuers() &#123;
+                return new X509Certificate[0];
+            &#125;
+        &#125;;
+    &#125;
+
+    @Bean
+    public SSLSocketFactory sslSocketFactory() &#123;
+        try &#123;
+            // 信任任何链接
+            SSLContext sslContext = SSLContext.getInstance(&quot;TLS&quot;);
+            sslContext.init(null, new TrustManager[]&#123;x509TrustManager()&#125;, new SecureRandom());
+            return sslContext.getSocketFactory();
+        &#125; catch (NoSuchAlgorithmException | KeyManagementException e) &#123;
+            e.printStackTrace();
+        &#125;
+        return null;
+    &#125;
+
+    @Bean
+    public ConnectionPool pool() &#123;
+        return new ConnectionPool(maxIdleConnections, keepAliveDuration, TimeUnit.SECONDS);
+    &#125;
+&#125;
+</code></pre>
+<ul>
+<li><code>src/main/java/com/itheima/config/WenXinConfig.java</code></li>
+</ul>
+<pre><code class="lang-java">package com.itheima.config;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import lombok.extern.slf4j.Slf4j;
+import okhttp3.*;
+import okhttp3.MediaType;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
+
+import java.io.IOException;
+import java.util.Date;
+
+@Configuration
+@Slf4j
+public class WenXinConfig &#123;
+
+    @Value(&quot;$&#123;wenxin.apiKey&#125;&quot;)
+    public String API_KEY;
+    @Value(&quot;$&#123;wenxin.secretKey&#125;&quot;)
+    public String SECRET_KEY;
+    @Value(&quot;$&#123;wenxin.accessTokenUrl&#125;&quot;)
+    public String ACCESS_TOKEN_URL;
+    @Value(&quot;$&#123;wenxin.ERNIE-Bot4.0URL&#125;&quot;)
+    public String ERNIE_Bot_4_0_URL;
+
+    //过期时间为30天
+    public String ACCESS_TOKEN = null;
+    public String REFRESH_TOKEN = null;
+
+    public Date CREATE_TIME = null;//accessToken创建时间
+
+    public Date EXPIRATION_TIME = null;//accessToken到期时间
+
+    /**
+     * 获取accessToken
+     * @return true表示成功 false表示失败
+     */
+    public synchronized String flushAccessToken()&#123;
+        //判断当前AccessToken是否为空且判断是否过期
+        if(ACCESS_TOKEN != null &amp;&amp; EXPIRATION_TIME.getTime() -&gt; CREATE_TIME.getTime()) return ACCESS_TOKEN;
+
+        //构造请求体 包含请求参数和请求头等信息
+        RequestBody body = RequestBody.create(MediaType.parse(&quot;application/json&quot;),&quot;&quot;);
+        Request request = new Request.Builder()
+                .url(ACCESS_TOKEN_URL+&quot;?client_id=&quot;+API_KEY+&quot;&amp;client_secret=&quot;+SECRET_KEY+&quot;&amp;grant_type=client_credentials&quot;)
+                .method(&quot;POST&quot;, body)
+                .addHeader(&quot;Content-Type&quot;, &quot;application/json&quot;)
+                .addHeader(&quot;Accept&quot;, &quot;application/json&quot;)
+                .build();
+        OkHttpClient HTTP_CLIENT = new OkHttpClient().newBuilder().build();
+        String response = null;
+        try &#123;
+            //请求
+            response = HTTP_CLIENT.newCall(request).execute().body().string();
+        &#125; catch (IOException e) &#123;
+            log.error(&quot;ACCESS_TOKEN获取失败&quot;);
+            return null;
+        &#125;
+
+        //刷新令牌以及更新令牌创建时间和过期时间
+        JSONObject jsonObject = JSON.parseObject(response);
+        ACCESS_TOKEN = jsonObject.getString(&quot;access_token&quot;);
+        REFRESH_TOKEN = jsonObject.getString(&quot;refresh_token&quot;);
+        CREATE_TIME = new Date();
+        EXPIRATION_TIME = new Date(Long.parseLong(jsonObject.getString(&quot;expires_in&quot;)) + CREATE_TIME.getTime());
+
+        return ACCESS_TOKEN;
+    &#125;
+&#125;
+</code></pre>
+<ul>
+<li><code>src/main/java/com/itheima/controller/ChatController.java</code></li>
+</ul>
+<pre><code class="lang-java">package com.itheima.controller;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.itheima.config.WenXinConfig;
+import com.itheima.pojo.Result;
+import com.itheima.pojo.User;
+import com.itheima.service.UserService;
+import com.itheima.utils.ThreadLocalUtil;
+import lombok.extern.slf4j.Slf4j;
+import okhttp3.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+@RestController
+@Slf4j
+@RequestMapping(&quot;/wenxin&quot;)
+public class ChatController &#123;
+
+    @Resource
+    private WenXinConfig wenXinConfig;
+
+    // 历史对话，需要按照 user, assistant
+    List&lt;-Map&lt;-String, String-&gt;-&gt; messages = new ArrayList&lt;--&gt;();
+
+    @Autowired
+    private UserService userService;   // 假设已经通过依赖注入的用户服务
+
+    @PostMapping(&quot;/info&quot;)
+    public Result&lt;-String-&gt; info() throws IOException &#123;
+        Map&lt;-String, Object-&gt; map = ThreadLocalUtil.get();
+        String username = (String) map.get(&quot;username&quot;);
+
+        // 获取用户信息，如果没有找到用户则返回错误
+        User user = userService.findByUserName(username);
+        if (user == null) &#123;
+            return Result.error(&quot;用户未找到&quot;);
+        &#125;
+
+        String question = &quot;我的名字是 &quot; + user.getUsername() + &quot;之后的回答需要添加这个姓名&quot;; // 获取用户名并构造问题
+        log.info(&quot;用户询问信息: &#123;&#125;&quot;, question); // 日志记录
+
+        // 调用处理用户问题的方法并返回结果
+        return handleUserQuestion(question);
+    &#125;
+
+
+    @PostMapping(&quot;/ask&quot;)
+    public Result&lt;-String-&gt; ask(@RequestParam String question) throws IOException &#123;
+        if (question == null || question.isEmpty()) &#123;
+            return Result.error(&quot;请输入问题&quot;);
+        &#125;
+
+        log.info(&quot;用户提问: &#123;&#125;&quot;, question);
+
+        // 调用封装好的处理函数
+        return handleUserQuestion(question);
+    &#125;
+
+    private Result&lt;-String-&gt; handleUserQuestion(String question) throws IOException &#123;
+        String responseJson;
+        String accessToken = wenXinConfig.flushAccessToken();
+        if (accessToken != null) &#123;
+            HashMap&lt;-String, String-&gt; userMessage = new HashMap&lt;--&gt;();
+            userMessage.put(&quot;role&quot;, &quot;user&quot;);
+            userMessage.put(&quot;content&quot;, question);
+            messages.add(userMessage);
+
+            String requestJson = constructRequestJson(1, 0.95, 0.8, 1.0, false, messages);
+
+            RequestBody body = RequestBody.create(MediaType.parse(&quot;application/json&quot;), requestJson);
+            Request request = new Request.Builder()
+                    .url(wenXinConfig.ERNIE_Bot_4_0_URL + &quot;?access_token=&quot; + accessToken)
+                    .method(&quot;POST&quot;, body)
+                    .addHeader(&quot;Content-Type&quot;, &quot;application/json&quot;)
+                    .build();
+
+            OkHttpClient HTTP_CLIENT = new OkHttpClient().newBuilder().build();
+
+            printRequest(request);
+
+            try &#123;
+                responseJson = HTTP_CLIENT.newCall(request).execute().body().string();
+                log.info(&quot;API 响应: &#123;&#125;&quot;, responseJson);
+
+                // 处理API响应并构建返回结果
+                return processApiResponse(responseJson);
+            &#125; catch (IOException e) &#123;
+                log.error(&quot;网络有问题&quot;, e);
+                HashMap&lt;-String, String-&gt; assistantMessage = new HashMap&lt;--&gt;();
+                assistantMessage.put(&quot;role&quot;, &quot;assistant&quot;);
+                assistantMessage.put(&quot;content&quot;, &quot;...&quot;);
+                messages.add(assistantMessage);
+                return Result.error(&quot;网络有问题，请稍后重试&quot;);
+            &#125;
+        &#125;
+        return Result.error(&quot;获取令牌失败&quot;); // 处理获取令牌的错误情况
+    &#125;
+
+    private Result&lt;-String-&gt; processApiResponse(String responseJson) &#123;
+        // 将回复的内容转为一个 JSONObject
+        JSONObject responseObject = JSON.parseObject(responseJson);
+        // 将回复的内容添加到消息中
+        HashMap&lt;-String, String-&gt; assistantMessage = new HashMap&lt;--&gt;();
+        assistantMessage.put(&quot;role&quot;, &quot;assistant&quot;);
+        assistantMessage.put(&quot;content&quot;, responseObject.getString(&quot;result&quot;));
+        messages.add(assistantMessage);
+
+        return Result.success(responseObject.getString(&quot;result&quot;)); // 返回成功结果
+    &#125;
+
+    /**
+     * 构造请求的请求参数
+     */
+    public String constructRequestJson(Integer userId,
+                                       Double temperature,
+                                       Double topP,
+                                       Double penaltyScore,
+                                       boolean stream,
+                                       List&lt;-Map&lt;-String, String-&gt;-&gt; messages) &#123;
+        Map&lt;-String, Object-&gt; request = new HashMap&lt;--&gt;();
+        request.put(&quot;user_id&quot;, userId.toString());
+        request.put(&quot;temperature&quot;, temperature);
+        request.put(&quot;top_p&quot;, topP);
+        request.put(&quot;penalty_score&quot;, penaltyScore);
+        request.put(&quot;stream&quot;, stream);
+        request.put(&quot;messages&quot;, messages);
+        log.info(&quot;用户提问: &#123;&#125;&quot;, messages);
+        return JSON.toJSONString(request);
+    &#125;
+
+    /**
+     * 打印 Request
+     */
+    private void printRequest(Request request) &#123;
+        System.out.println(&quot;Request Details:&quot;);
+        System.out.println(&quot;Method: &quot; + request.method());
+        System.out.println(&quot;URL: &quot; + request.url());
+        System.out.println(&quot;Headers: &quot; + request.headers());
+
+        // 如果请求体存在且不是空的，打印请求体
+        if (request.body() != null) &#123;
+            // 注意：需要手动读取请求体内容，通常需要在发送请求前就读取
+            // 这里示范性地打印出内容
+            System.out.println(&quot;Request body exists.&quot;);
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+<p><img src="# Wenxin.assets/xlbswenxin1.png" alt=""></p>
+
+    </div>
+    
+    
+    
+    
+    <div id="comment">
+        <div id="giscus-container" class="giscus"></div>
+    </div>
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2024 Aircraft
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Aircraft
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+<script
+    src="https://giscus.app/client.js"
+    data-repo="Aircraft-carrier/git-discussions-"
+    data-repo-id="R_kgDOMSMEYQ"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOMSMEYc4CglYu"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="light_tritanopia"
+    data-lang="zh-CN"
+    crossorigin
+    async
+></script>
+
+
+
+
+
+
+
+
+
+    
+
+    <canvas
+        id="fireworks"
+        style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 32767"
+    ></canvas>
+    <script src="https://s4.zstatic.net/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="/js/fireworks.min.js"></script>  
+
+    <canvas
+        id="background"
+        style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: -1"
+    ></canvas>
+    <script src="/js/background.min.js"></script>
+
+    <div id="cursor"></div>
+    <link rel="stylesheet" href="/css/cursor.min.css" />
+    <script src="/js/cursor.min.js"></script>
+
+</body>
+</html>
