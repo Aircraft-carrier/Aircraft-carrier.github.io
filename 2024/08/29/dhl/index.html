@@ -1,0 +1,825 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>导航栏 | Aircraft</title>
+    <meta name="author" content="Aircraft" />
+    <meta name="description" content="谁替我上学 我可以替你睡觉" />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>AIRCRAFT</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;AIRCRAFT</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>导航栏</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2024/8/29
+        </span>
+        
+        <span class="category">
+            <a href="/categories/Learning/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Learning
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/vue3/" style="color: #ffa2c4">
+                    vue3
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h1 id="导航栏页面"><a href="#导航栏页面" class="headerlink" title="导航栏页面"></a>导航栏页面</h1><pre><code class="lang-vue">&lt;-script setup-&gt;
+import &#123; ref, onMounted, onUnmounted, computed, watch &#125; from &#39;vue&#39;;
+import &#123; useStore &#125; from &#39;vuex&#39;;
+import &#123; useRouter &#125; from &#39;vue-router&#39;;
+import &#123;
+    Management,
+    Promotion,
+    UserFilled,
+    User,
+    Crop,
+    EditPen,
+    SwitchButton,
+    CaretBottom
+&#125; from &#39;@element-plus/icons-vue&#39;
+import avatar from &#39;@/assets/default.png&#39;
+
+import &#123;userInfoService&#125; from &#39;@/api/user.js&#39;
+import useUserInfoStore from &#39;@/stores/userInfo.js&#39;
+import &#123;useTokenStore&#125; from &#39;@/stores/token.js&#39;
+import usePatientsInfoStore from &#39;@/stores/patients.js&#39;
+
+
+// # 变量声明
+const toolButton = ref(false);
+const hoverEnter = ref(false);
+const isDark = ref(false);         // 控制黑天白天的显示效果 
+const scrollTop = ref(false);
+const toolbarDrawer = ref(false);
+
+const store = useStore();   
+// npm install vuex@next       
+// 获取 store 实例，需要先再store/index.js中 createstore 并导出
+// main.js 中注册才可以使用。使用 useStore() 获取的 store 就是先前注册的store
+const router = useRouter();
+// npm install vue-router@next
+// 与 store 类似  
+// 定义计算属性,计算属性会自动响应 Vuex store 状态的变化，并在模板中实时更新。
+const toolbar = computed(() =-&gt; store.state.toolbar);
+const sortInfo = computed(() =-&gt; store.state.sortInfo);
+const visiblecontrol = computed(() =-&gt; store.state.visible);
+
+// # function
+// 改变颜色
+const changeColor = () =-&gt; &#123;
+  isDark.value = !isDark.value;
+  let root = document.querySelector(&quot;:root&quot;);
+
+  if (isDark.value) &#123;
+    root.style.setProperty(&quot;--background&quot;, &quot;#272727&quot;);
+    root.style.setProperty(&quot;--fontColor&quot;, &quot;white&quot;);
+    root.style.setProperty(&quot;--borderColor&quot;, &quot;#4F4F4F&quot;);
+    root.style.setProperty(&quot;--borderHoverColor&quot;, &quot;black&quot;);
+    root.style.setProperty(&quot;--articleFontColor&quot;, &quot;#E4E4E4&quot;);
+    root.style.setProperty(&quot;--articleGreyFontColor&quot;, &quot;#D4D4D4&quot;);
+    root.style.setProperty(&quot;--commentContent&quot;, &quot;#D4D4D4&quot;);
+    root.style.setProperty(&quot;--favoriteBg&quot;, &quot;#1e1e1e&quot;);
+  &#125; else &#123;
+    root.style.setProperty(&quot;--background&quot;, &quot;white&quot;);
+    root.style.setProperty(&quot;--fontColor&quot;, &quot;black&quot;);
+    root.style.setProperty(&quot;--borderColor&quot;, &quot;rgba(0, 0, 0, 0.5)&quot;);
+    root.style.setProperty(&quot;--borderHoverColor&quot;, &quot;rgba(110, 110, 110, 0.4)&quot;);
+    root.style.setProperty(&quot;--articleFontColor&quot;, &quot;#1F1F1F&quot;);
+    root.style.setProperty(&quot;--articleGreyFontColor&quot;, &quot;#616161&quot;);
+    root.style.setProperty(&quot;--commentContent&quot;, &quot;#F7F9FE&quot;);
+    root.style.setProperty(&quot;--favoriteBg&quot;, &quot;#f7f9fe&quot;);
+  &#125;
+&#125;;
+
+// 回到顶部
+const toTop = () =-&gt; &#123;
+  window.scrollTo(&#123;
+    top: 0,
+    behavior: &quot;smooth&quot;
+  &#125;);
+&#125;;
+
+const onScrollPage = () =-&gt; &#123;
+  scrollTop.value = document.documentElement.scrollTop || document.body.scrollTop;
+  // document.documentElement.scrollTop 是一个 JavaScript 属性，用于获取或设置 HTML 文档的垂直滚动位置。
+  // 它表示的是文档顶部与视口（viewport）顶部之间的距离，以像素为单位。
+&#125;;
+
+// 判断是否是白天
+const isDaylight = () =-&gt; &#123;
+  let currDate = new Date();
+  return currDate.getHours() -&gt; 22 || currDate.getHours() &lt;- 7;
+&#125;;
+
+// 初始化导航栏状态并提交到 Vuex store
+const initializeStatus = () =-&gt; &#123;
+  const toolbarStatus = &#123;
+    enter: false,
+    visible: true,
+  &#125;;
+  store.commit(&#39;changeToolbarStatus&#39;, toolbarStatus);
+  const visibility = &#123;
+    avatar: false,
+    info: false,
+    resetPassword: false,
+    segwindows: false,
+  &#125;
+  store.commit(&#39;changeVisibility&#39;,visibility)
+&#125;;
+
+// 更换路由
+const smallMenu = (data) =-&gt; &#123;
+  router.push(data);
+  // data
+  // 字符串：直接指定路径，如 &#39;/about&#39;
+  // 对象：可以包含路径、名称、查询参数等，如 &#123; path: &#39;/about&#39; &#125; 
+  // 或 &#123; name: &#39;About&#39;, query: &#123; id: 1 &#125; &#125;。
+  toolbarDrawer.value = false;
+&#125;;
+
+
+// # 生命周期
+// onMounted 在组件被挂载到 DOM（文档对象模型）之后执行一些代码。
+onMounted(() =-&gt; &#123;
+  initializeStatus();
+  // 监听窗口的滚动事件，绑定 onScrollPage 方法
+  window.addEventListener(&quot;scroll&quot;, onScrollPage);
+
+  // 设置页面主题
+  if (isDaylight()) &#123;
+    isDark.value = true;
+    let root = document.querySelector(&quot;:root&quot;);
+    // 在 color.css (在 main.js 中引入)中有 :root 选择器是 CSS 中一个伪类，它表示文档的根元素。
+    // 在 HTML 中，根元素是 &lt;-html-&gt; 标签。通过 document.querySelector(&quot;:root&quot;) 可以选择到这个根元素
+    root.style.setProperty(&quot;--background&quot;, &quot;#272727&quot;);
+    root.style.setProperty(&quot;--fontColor&quot;, &quot;white&quot;);
+    root.style.setProperty(&quot;--borderColor&quot;, &quot;#4F4F4F&quot;);
+    root.style.setProperty(&quot;--commentContent&quot;, &quot;#D4D4D4&quot;);
+    root.style.setProperty(&quot;--favoriteBg&quot;, &quot;#1e1e1e&quot;);
+    // setProperty 方法用于在指定的元素上设置一个新的 CSS 属性或修改现有的 CSS 属性。从而动态调整css属性
+    // body &#123;
+    // background-color: var(--background);
+    // color: var(--fontColor);
+    // &#125;
+  &#125;
+&#125;);
+
+// onUnmounted 在组件将从 DOM 中移除的时候运行的代码
+onUnmounted(() =-&gt; &#123;
+  window.removeEventListener(&quot;scroll&quot;, onScrollPage);
+&#125;);
+
+// 观察 scrollTop 变化
+// watch 用于观察一个或多个响应式数据源，并在这些数据源发生变化时执行回调函数。
+watch(scrollTop, (newScrollTop, oldScrollTop) =-&gt; &#123;
+  // 如果滑动距离超过屏幕高度的一半视为进入页面，背景改为白色
+  let enter = newScrollTop -&gt; window.innerHeight / 2;
+  const top = newScrollTop - oldScrollTop &lt;- 0;  // 向下滑的时候不显示导航栏，向上划的时候显示，初始状态显示
+  let isShow = newScrollTop - window.innerHeight -&gt; 30;
+  toolButton.value = isShow;
+
+  // 动态调整 css 样式
+  const cdTopElement = document.querySelector(&#39;.cd-top&#39;);
+
+  if (cdTopElement) &#123;
+    if (isShow) &#123;
+      if (window.innerHeight -&gt; 950) &#123;
+        cdTopElement.style.top = &#39;0&#39;;
+      &#125; else &#123;
+        cdTopElement.style.top = `$&#123;window.innerHeight - 950&#125;px`;
+      &#125;
+    &#125; else &#123;
+      cdTopElement.style.top = &#39;-900px&#39;;
+    &#125;
+  &#125; else &#123;
+    console.warn(&quot;Element with class &#39;cd-top&#39; not found.&quot;);
+  &#125;
+
+  // 导航栏显示与颜色
+  let toolbarStatus = &#123;
+    enter: enter,
+    visible: top,
+  &#125;;
+  store.commit(&#39;changeToolbarStatus&#39;, toolbarStatus);
+&#125;);
+
+
+
+// 用户身份更改
+const tokenStore = useTokenStore();
+const userInfoStore = useUserInfoStore();
+const patientsInfoStore = usePatientsInfoStore()
+
+//调用函数,获取用户详细信息
+const getUserInfo = async()=-&gt;&#123;
+    //调用接口
+    let result = await userInfoService();
+    //数据存储到pinia中
+    userInfoStore.setInfo(result.data);
+&#125;
+
+getUserInfo();
+
+
+
+
+import &#123;ElMessage,ElMessageBox&#125; from &#39;element-plus&#39;
+const handleCommand = (command)=-&gt;&#123;
+    //判断指令
+    if(command === &#39;logout&#39;)&#123;
+        //退出登录
+        ElMessageBox.confirm(
+        &#39;您确认要退出吗?&#39;,
+        &#39;温馨提示&#39;,
+        &#123;
+            confirmButtonText: &#39;确认&#39;,
+            cancelButtonText: &#39;取消&#39;,
+            type: &#39;warning&#39;,
+        &#125;
+    )
+        .then(async () =-&gt; &#123;
+            //退出登录
+            //1.清空pinia中存储的token以及个人信息
+            tokenStore.removeToken()
+            userInfoStore.removeInfo()
+            patientsInfoStore.removeInfo()
+            //2.跳转到登录页面
+            router.push(&#39;/login&#39;)
+            ElMessage(&#123;
+                type: &#39;success&#39;,
+                message: &#39;退出登录成功&#39;,
+            &#125;)
+
+        &#125;)
+        .catch(() =-&gt; &#123;
+            ElMessage(&#123;
+                type: &#39;info&#39;,
+                message: &#39;用户取消了退出登录&#39;,
+            &#125;)
+        &#125;)
+    &#125;else if(command === &#39;avatar&#39;)&#123;
+        store.commit(&#39;changeVisibility&#39;, &#123; avatar: !visiblecontrol.value.avatar &#125;);
+    &#125;else if(command === &#39;info&#39;)&#123;
+        store.commit(&#39;changeVisibility&#39;, &#123; info: !visiblecontrol.value.info &#125;);
+    &#125;
+    // else&#123;
+    //     //路由
+    //     router.push(&#39;/user/&#39;+command)
+    // &#125;
+&#125;
+
+&lt;-/script-&gt;
+
+
+&lt;-template-&gt;
+  &lt;-div-&gt;
+    &lt;-!-- el过渡动画 ---&gt;
+    &lt;-transition name=&quot;el-fade-in-linear&quot;-&gt;
+      &lt;-!-- 导航栏 ---&gt;
+      &lt;-div v-show=&quot;toolbar.visible&quot;
+           @mouseenter=&quot;hoverEnter = true&quot;
+           @mouseleave=&quot;hoverEnter = false&quot;
+           :class=&quot;[&#123; enter: toolbar.enter &#125;, &#123; hoverEnter:  hoverEnter &amp;&amp; !toolbar.enter &#125;]&quot;
+           class=&quot;toolbar-content myBetween&quot;-&gt;
+        &lt;-div class=&quot;toolbar-title&quot;-&gt;
+          &lt;-h2 @click=&quot;router.push(&#123;path: &#39;/login&#39;&#125;)&quot;-&gt; Aircraft &lt;-/h2-&gt;
+        &lt;-/div-&gt;
+
+        &lt;-!-- 导航列表 ---&gt;
+        &lt;-div-&gt;
+          &lt;-ul class=&quot;scroll-menu&quot;-&gt;
+            &lt;-li @click=&quot;router.push(&#123;path: &#39;/home&#39;&#125;)&quot;-&gt;
+              &lt;-div class=&quot;my-menu&quot;-&gt;
+                🏡 &lt;-span-&gt;首页&lt;-/span-&gt;
+              &lt;-/div-&gt;
+            &lt;-/li-&gt;
+
+            &lt;-li @click=&quot;router.push(&#123;path: &#39;/&#39;&#125;)&quot;-&gt;
+              &lt;-div class=&quot;my-menu&quot;-&gt;
+                ❤️‍🔥 &lt;-span-&gt;demo&lt;-/span-&gt;
+              &lt;-/div-&gt;
+            &lt;-/li-&gt;
+
+
+            &lt;-li @click=&quot;router.push(&#123;path: &#39;/chat&#39;&#125;)&quot;-&gt;
+              &lt;-div class=&quot;my-menu&quot;-&gt;
+                🤖 &lt;-span-&gt;chat&lt;-/span-&gt;
+              &lt;-/div-&gt;
+            &lt;-/li-&gt;
+
+
+            &lt;-el-dropdown :hide-timeout=&quot;500&quot; placement=&quot;bottom-end&quot; @command=&quot;handleCommand&quot;-&gt;
+                &lt;-li-&gt;
+                  &lt;-div class=&quot;my-menu&quot;-&gt;
+                    📝 &lt;-span-&gt;个人中心&lt;-/span-&gt;
+                  &lt;-/div-&gt;
+                &lt;-/li-&gt;
+                &lt;-template #dropdown-&gt;
+                    &lt;-el-dropdown-menu-&gt;
+                        &lt;-el-dropdown-item command=&quot;info&quot; :icon=&quot;User&quot;-&gt;基本资料&lt;-/el-dropdown-item-&gt;
+                        &lt;-el-dropdown-item command=&quot;avatar&quot; :icon=&quot;Crop&quot;-&gt;更换头像&lt;-/el-dropdown-item-&gt;
+                        &lt;-el-dropdown-item command=&quot;logout&quot; :icon=&quot;SwitchButton&quot;-&gt;退出登录&lt;-/el-dropdown-item-&gt;
+                    &lt;-/el-dropdown-menu-&gt;
+                &lt;-/template-&gt;
+            &lt;-/el-dropdown-&gt;
+
+          &lt;-/ul-&gt;
+        &lt;-/div-&gt;
+      &lt;-/div-&gt;
+    &lt;-/transition-&gt;
+
+    &lt;-div id=&quot;main-container&quot;-&gt;
+      &lt;-router-view-&gt;&lt;-/router-view-&gt;
+    &lt;-/div-&gt;
+
+
+    &lt;-div class=&quot;toolButton&quot;-&gt;
+      &lt;-div class=&quot;backTop&quot;  @click=&quot;toTop()&quot;-&gt;
+        &lt;-!-- 回到顶部按钮 ---&gt;
+        &lt;-svg viewBox=&quot;0 0 1024 1024&quot; width=&quot;50&quot; height=&quot;50&quot;-&gt;
+          &lt;-path
+            d=&quot;M696.741825 447.714002c2.717387-214.485615-173.757803-312.227566-187.33574-320.371729-10.857551 5.430775-190.050127 103.168727-187.33274 320.371729-35.297037 24.435488-73.306463 65.1623-67.875688 135.752376 5.430775 70.589076 76.018851 119.460051 103.168726 116.745664 27.152875-2.716387 19.004713-21.7221 19.004713-21.7221l8.148162-38.011425s40.721814 59.732525 51.583363 59.732525h146.609927c13.574938 0 51.585363-59.732525 51.585363-59.732525l8.147162 38.011425s-8.147162 19.005713 19.004713 21.7221c27.148876 2.714388 97.738951-46.156588 103.168727-116.745664s-32.57965-111.316888-67.876688-135.752376z m-187.33574-2.713388c-5.426776 0-70.589076-2.717387-78.733239-78.737238 2.713388-73.306463 73.306463-78.733239 78.733239-81.450626 5.430775 0 76.02385 8.144163 78.736238 81.450626-8.143163 76.019851-73.305463 78.737238-78.736238 78.737238z m0 0&quot;
+            fill=&quot;#000000&quot;-&gt;&lt;-/path-&gt;
+          &lt;-path
+            d=&quot;M423.602441 746.060699c6.47054-6.297579 12.823107-7.017417 21.629121-2.784372 34.520213 16.582259 70.232157 19.645568 107.031855 9.116944 8.118169-2.323476 15.974396-5.475765 23.598677-9.22392 13.712907-6.73648 26.003134 0.8878 26.080116 16.13936 0.109975 22.574907-0.024994 45.142816 0.080982 67.709725 0.031993 7.464316-2.277486 13.322995-9.44387 16.608254-7.277358 3.333248-13.765895 1.961558-19.526595-3.264264-3.653176-3.313253-7.063407-6.897444-10.634601-10.304675-6.563519-6.259588-6.676494-6.25259-10.625603 1.603638-8.437097 16.80121-16.821205 33.623415-25.257302 50.423625-2.489438 4.953882-5.706713 9.196925-11.411426 10.775569-8.355115 2.315478-15.772442-1.070758-20.272427-9.867774-8.774021-17.15313-17.269104-34.453228-25.918153-51.669344-3.750154-7.469315-3.9891-7.479313-10.141712-1.514658-3.715162 3.602187-7.31435 7.326347-11.142486 10.800563-5.571743 5.060858-11.934308 6.269586-18.936728 3.207277-6.82746-2.984327-9.869774-8.483086-9.892769-15.685462-0.070984-23.506697-0.041991-47.018393-0.020995-70.532089 0.007998-4.679944 1.46467-8.785018 4.803916-11.538397z&quot;
+            fill=&quot;#000000&quot;-&gt;&lt;-/path-&gt;
+        &lt;-/svg-&gt;
+      &lt;-/div-&gt;
+
+      &lt;-el-popover placement=&quot;left&quot; :close-delay=&quot;500&quot; trigger=&quot;hover&quot;-&gt;
+        &lt;-template #reference-&gt;
+          &lt;-div-&gt;
+            &lt;-i class=&quot;fa fa-cog iconRotate&quot; style=&quot;color: var(--black)&quot; aria-hidden=&quot;true&quot;-&gt;&lt;-/i-&gt;
+          &lt;-/div-&gt;
+        &lt;-/template-&gt;
+        &lt;-div class=&quot;my-setting&quot;-&gt;
+          &lt;-div-&gt;
+            &lt;-!-- 太阳按钮 ---&gt;
+            &lt;-i v-if=&quot;isDark&quot; class=&quot;el-icon-sunny iconRotate&quot;  @click=&quot;changeColor()&quot;-&gt;&lt;-/i-&gt;
+            &lt;-!-- 月亮按钮 ---&gt;
+            &lt;-i v-else class=&quot;fa fa-moon-o&quot; aria-hidden=&quot;true&quot; @click=&quot;changeColor()&quot;-&gt;&lt;-/i-&gt;
+          &lt;-/div-&gt;
+        &lt;-/div-&gt;
+      &lt;-/el-popover-&gt;
+    &lt;-/div-&gt;
+
+    &lt;-!-- 图片预览 ---&gt;
+    &lt;-div id=&quot;outerImg&quot;-&gt;
+      &lt;-div id=&quot;innerImg&quot; style=&quot;position:absolute&quot;-&gt;
+        &lt;-img id=&quot;bigImg&quot; src=&quot;&quot;/-&gt;
+      &lt;-/div-&gt;
+    &lt;-/div-&gt;
+  &lt;-/div-&gt;
+&lt;-/template-&gt;
+
+
+
+&lt;-style scoped-&gt;
+
+  .toolbar-content &#123;
+    width: 100%;
+    height: 60px;
+    color: var(--white);
+    /* 固定位置，不随滚动条滚动 */
+    position: fixed;
+    z-index: 100;
+    /* 禁止选中文字 */
+    user-select: none;
+    transition: all 0.3s ease-in-out;
+  &#125;
+
+  .toolbar-content.enter &#123;
+    background: var(--toolbarBackground);
+    color: var(--toolbarFont);
+    box-shadow: 0 1px 3px 0 rgba(0, 34, 77, 0.05);
+  &#125;
+
+  .toolbar-content.hoverEnter &#123;
+    background: var(--translucent);
+    box-shadow: 0 1px 3px 0 rgba(0, 34, 77, 0.05);
+  &#125;
+
+  .toolbar-title &#123;
+    margin-left: 30px;
+    cursor: pointer;
+  &#125;
+
+  .toolbar-mobile-menu &#123;
+    font-size: 30px;
+    margin-right: 15px;
+    cursor: pointer;
+  &#125;
+
+  .scroll-menu &#123;
+    margin: 0 25px 0 0;
+    display: flex;
+    justify-content: flex-end;
+    padding: 0;
+  &#125;
+
+  .scroll-menu li &#123;
+    list-style: none;
+    margin: 0 12px;
+    font-size: 17px;
+    height: 60px;
+    line-height: 60px;
+    position: relative;
+    cursor: pointer;
+  &#125;
+
+  .scroll-menu li:hover .my-menu span &#123;
+    color: var(--themeBackground);
+  &#125;
+
+  .scroll-menu li:hover .my-menu i &#123;
+    color: var(--themeBackground);
+    animation: scale 1.5s ease-in-out infinite;
+  &#125;
+
+  .scroll-menu li .my-menu:after &#123;
+    content: &quot;&quot;;
+    display: block;
+    position: absolute;
+    bottom: 0;
+    height: 6px;
+    background-color: var(--themeBackground);
+    width: 100%;
+    max-width: 0;
+    transition: max-width 0.25s ease-in-out;
+  &#125;
+
+  .scroll-menu li:hover .my-menu:after &#123;
+    max-width: 100%;
+  &#125;
+
+  .sortMenu &#123;
+    margin-left: 44px;
+    font-size: 17px;
+    position: relative;
+  &#125;
+
+  .sortMenu:after &#123;
+    top: 32px;
+    width: 35px;
+    left: 0;
+    height: 2px;
+    background: var(--themeBackground);
+    content: &quot;&quot;;
+    border-radius: 1px;
+    position: absolute;
+  &#125;
+
+  .el-dropdown &#123;
+    font-size: unset;
+    color: unset;
+  &#125;
+
+  .el-popper[x-placement^=bottom] &#123;
+    margin-top: -8px;
+  &#125;
+
+  .el-dropdown-menu &#123;
+    padding: 5px 0;
+  &#125;
+
+  .el-dropdown-menu__item &#123;
+    font-size: unset;
+  &#125;
+
+  .el-dropdown-menu__item:hover &#123;
+    background-color: var(--white);
+    color: var(--themeBackground);
+  &#125;
+
+  .toolButton &#123;
+    position: fixed;
+    right: 3vh;
+    bottom: 3vh;
+    animation: slide-bottom 0.5s ease-in-out both;
+    z-index: 100;
+    cursor: pointer;
+    font-size: 25px;
+    width: 30px;
+  &#125;
+
+  .my-setting &#123;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    cursor: pointer;
+    font-size: 20px;
+  &#125;
+
+  .my-setting i &#123;
+    padding: 5px;
+  &#125;
+
+  .my-setting i:hover &#123;
+    color: var(--themeBackground);
+  &#125;
+
+  .cd-top &#123;
+    background: var(--toTop) no-repeat center;
+    position: fixed;
+    right: 5vh;
+    top: -900px;
+    z-index: 99;
+    width: 70px;
+    height: 900px;
+    background-size: contain;
+    transition: all 0.5s ease-in-out;
+    cursor: pointer;
+  &#125;
+
+  .backTop &#123;
+    transition: all 0.3s ease-in;
+    position: relative;
+    top: 0;
+    left: -13px;
+  &#125;
+
+  .backTop:hover &#123;
+    top: -10px;
+  &#125;
+
+  #outerImg &#123;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    display: none;
+  &#125;
+
+  @media screen and (max-width: 400px) &#123;
+    .toolButton &#123;
+      right: 0.5vh;
+    &#125;
+  &#125;
+&lt;-/style-&gt;
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/xlbsdhl1.png" alt=""></p>
+
+    </div>
+    
+    
+    
+    
+    <div id="comment">
+        <div id="giscus-container" class="giscus"></div>
+    </div>
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2024 Aircraft
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Aircraft
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+<script
+    src="https://giscus.app/client.js"
+    data-repo="Aircraft-carrier/git-discussions-"
+    data-repo-id="R_kgDOMSMEYQ"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOMSMEYc4CglYu"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="light_tritanopia"
+    data-lang="zh-CN"
+    crossorigin
+    async
+></script>
+
+
+
+
+
+
+
+
+
+    
+
+    <canvas
+        id="fireworks"
+        style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 32767"
+    ></canvas>
+    <script src="https://s4.zstatic.net/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="/js/fireworks.min.js"></script>  
+
+    <canvas
+        id="background"
+        style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: -1"
+    ></canvas>
+    <script src="/js/background.min.js"></script>
+
+    <div id="cursor"></div>
+    <link rel="stylesheet" href="/css/cursor.min.css" />
+    <script src="/js/cursor.min.js"></script>
+
+</body>
+</html>
