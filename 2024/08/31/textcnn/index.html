@@ -1,0 +1,979 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>TextCNN | Aircraft</title>
+    <meta name="author" content="Aircraft" />
+    <meta name="description" content="谁替我上学 我可以替你睡觉" />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>AIRCRAFT</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;AIRCRAFT</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>TextCNN</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2024/8/31
+        </span>
+        
+        <span class="category">
+            <a href="/categories/Learning/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Learning
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/CNN/" style="color: #ffa2c4">
+                    CNN
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/NLP/" style="color: #00bcd4">
+                    NLP
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h1 id="TextCNN"><a href="#TextCNN" class="headerlink" title="TextCNN"></a>TextCNN</h1><h2 id="文本数据预处理"><a href="#文本数据预处理" class="headerlink" title="文本数据预处理"></a>文本数据预处理</h2><h3 id="1-read-data函数"><a href="#1-read-data函数" class="headerlink" title="1. read_data函数"></a>1. <code>read_data</code>函数</h3><pre><code class="lang-python">def read_data(file):
+    with open(file, encoding=&quot;utf-8&quot;) as f:
+        all_data = f.read().split(&quot;\n&quot;)
+    texts, labels = [], []
+    for data in all_data:
+        if data:
+            text, label = data.split(&quot;\t&quot;)
+            texts.append(text)
+            labels.append(label)
+    return texts, labels
+</code></pre>
+<ul>
+<li><strong>功能</strong>：读取一个文件，并将文件中的每一行按制表符（<code>\t</code>）分割成文本和标签，分别存储在 <code>texts</code> 和 <code>labels</code> 列表中。</li>
+<li><strong>参数</strong>：<ul>
+<li><code>file</code>：文件路径。</li>
+</ul>
+</li>
+<li><strong>返回值</strong>：<ul>
+<li><code>texts</code>：包含所有文本的列表。</li>
+<li><code>labels</code>：包含所有标签的列表。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-built-curpus-函数"><a href="#2-built-curpus-函数" class="headerlink" title="2. built_curpus 函数"></a>2. <code>built_curpus</code> 函数</h3><pre><code class="lang-python">def built_curpus(train_texts, embedding_num):
+    word_2_index = &#123;&quot;&lt;PAD&gt;&quot;: 0, &quot;&lt;UNK&gt;&quot;: 1&#125;
+    for text in train_texts:
+        for word in text:
+            word_2_index[word] = word_2_index.get(word, len(word_2_index))
+    embedding = nn.Embedding(len(word_2_index), embedding_num)
+    pkl.dump([word_2_index, embedding], open(parsers().data_pkl, &quot;wb&quot;))
+    return word_2_index, embedding
+</code></pre>
+<p>代码定义了一个名为 <code>built_curpus</code> 的函数，该函数主要用于构建词汇表和词嵌入矩阵，并将它们保存到一个文件中。具体来说，这段代码完成了以下几项任务：</p>
+<ol>
+<li><p><strong>词汇表的初始化</strong>:</p>
+<ul>
+<li><code>word_2_index = &#123;&quot;&lt;PAD&gt;&quot;: 0, &quot;&lt;UNK&gt;&quot;: 1&#125;</code>：这个字典用来将单词映射到对应的索引。<code>&quot;&lt;PAD&gt;&quot;</code> 和 <code>&quot;&lt;UNK&gt;&quot;</code> 是两个特殊的标记，分别用于填充和未知单词，分别对应索引 <code>0</code> 和 <code>1</code>。</li>
+</ul>
+</li>
+<li><p><strong>构建词汇表</strong>:</p>
+<ul>
+<li><code>for text in train_texts:</code>：遍历所有的训练文本，每个文本是一个包含多个单词的列表。</li>
+<li><code>for word in text:</code>：进一步遍历每个文本中的单词。</li>
+<li><code>word_2_index[word] = word_2_index.get(word, len(word_2_index))</code>：将每个单词添加到 <code>word_2_index</code> 字典中。如果该单词已经存在于字典中，则保持其原有的索引；如果不存在，则将其添加到字典中，并分配一个新的索引（即当前字典的长度）。</li>
+</ul>
+</li>
+<li><p><strong>词嵌入矩阵的创建</strong>:</p>
+<ul>
+<li><code>embedding = nn.Embedding(len(word_2_index), embedding_num)</code>：这里使用 PyTorch 的 <code>nn.Embedding</code> 创建了一个词嵌入矩阵。<code>len(word_2_index)</code> 表示词汇表的大小，而 <code>embedding_num</code> 则表示每个单词的嵌入维度。<code>nn.Embedding</code> 会根据词汇表的大小和嵌入维度创建一个形状为 <code>[len(word_2_index), embedding_num]</code> 的矩阵，每个单词会对应一行向量。</li>
+</ul>
+</li>
+<li><p><strong>保存词汇表和嵌入矩阵</strong>:</p>
+<ul>
+<li><code>pkl.dump([word_2_index, embedding], open(parsers().data_pkl, &quot;wb&quot;))</code>：将词汇表和嵌入矩阵保存到一个 <code>.pkl</code> 文件中。这里使用了 <code>pickle</code> 模块的 <code>dump</code> 方法将数据序列化，并写入到指定的文件中。<code>parsers().data_pkl</code> 返回了文件路径（假设 <code>parsers()</code> 是一个定义了 <code>data_pkl</code> 属性的类或者函数）。</li>
+</ul>
+</li>
+<li><p><strong>返回结果</strong>:</p>
+<ul>
+<li><code>return word_2_index, embedding</code>：函数最终返回了构建的词汇表 <code>word_2_index</code> 和词嵌入矩阵 <code>embedding</code>。</li>
+</ul>
+</li>
+</ol>
+<h3 id="3-TextDataset-类"><a href="#3-TextDataset-类" class="headerlink" title="3. TextDataset 类"></a>3. <code>TextDataset</code> 类</h3><pre><code class="lang-python">class TextDataset(Dataset):
+    def __init__(self, all_text, all_label, word_2_index, max_len):
+        self.all_text = all_text
+        self.all_label = all_label
+        self.word_2_index = word_2_index
+        self.max_len = max_len
+
+    def __getitem__(self, index):
+        text = self.all_text[index][:self.max_len]
+        label = int(self.all_label[index])
+        text_idx = [self.word_2_index.get(i, 1) for i in text]
+        text_idx = text_idx + [0] * (self.max_len - len(text_idx))
+        text_idx = torch.tensor(text_idx).unsqueeze(dim=0)
+        return text_idx, label
+
+    def __len__(self):
+        return len(self.all_text)
+</code></pre>
+<p>代码定义了一个名为 <code>TextDataset</code> 的类，继承自 <code>torch.utils.data.Dataset</code>，主要用于处理文本数据以便在深度学习模型中使用。它实现了 PyTorch 的 <code>Dataset</code> 接口，包括 <code>__init__</code>、<code>__getitem__</code> 和 <code>__len__</code> 三个核心方法。这个类的主要功能是将文本数据转换为适合模型输入的格式，包括将文本转化为索引序列，并将数据组织为数据集以供模型训练和评估。</p>
+<h4 id="1-init-方法"><a href="#1-init-方法" class="headerlink" title="1. __init__ 方法"></a>1. <code>__init__</code> 方法</h4><pre><code class="lang-python">def __init__(self, all_text, all_label, word_2_index, max_len):
+    self.all_text = all_text
+    self.all_label = all_label
+    self.word_2_index = word_2_index
+    self.max_len = max_len
+</code></pre>
+<ul>
+<li><strong>功能</strong>：初始化 <code>TextDataset</code> 对象的实例变量。<ul>
+<li><code>self.all_text</code>：存储所有的文本数据，通常是一个包含文本序列的列表。</li>
+<li><code>self.all_label</code>：存储所有的标签数据，通常是一个包含对应标签的列表。</li>
+<li><code>self.word_2_index</code>：存储词汇表，即单词到索引的映射字典。</li>
+<li><code>self.max_len</code>：指定文本的最大长度。超出此长度的文本将被截断，短于此长度的文本将被填充。</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-getitem-方法"><a href="#2-getitem-方法" class="headerlink" title="2. __getitem__ 方法"></a>2. <code>__getitem__</code> 方法</h4><pre><code class="lang-python">def __getitem__(self, index):
+    text = self.all_text[index][:self.max_len]
+    label = int(self.all_label[index])
+    text_idx = [self.word_2_index.get(i, 1) for i in text]
+    text_idx = text_idx + [0] * (self.max_len - len(text_idx))
+    text_idx = torch.tensor(text_idx).unsqueeze(dim=0)
+    return text_idx, label
+</code></pre>
+<ul>
+<li><strong>功能</strong>：获取数据集中指定索引 <code>index</code> 处的文本和标签，并将文本转换为索引序列。<ul>
+<li><code>text = self.all_text[index][:self.max_len]</code>：从 <code>self.all_text</code> 中提取指定索引的文本，并截取到 <code>max_len</code> 的长度。</li>
+<li><code>label = int(self.all_label[index])</code>：从 <code>self.all_label</code> 中提取指定索引的标签，并转换为整数类型。</li>
+<li><code>text_idx = [self.word_2_index.get(i, 1) for i in text]</code>：将文本中的每个单词转换为对应的索引。如果单词不在词汇表中，则返回索引 <code>1</code>（通常对应于 <code>&lt;UNK&gt;</code>）。</li>
+<li><code>text_idx = text_idx + [0] * (self.max_len - len(text_idx))</code>：将索引序列填充到 <code>max_len</code> 的长度，使用索引 <code>0</code>（通常对应于 <code>&lt;PAD&gt;</code>）。</li>
+<li><code>text_idx = torch.tensor(text_idx).unsqueeze(dim=0)</code>：将索引序列转换为 PyTorch 的 <code>tensor</code>，并在第一个维度上增加一个维度，使其适合模型的输入形状。</li>
+<li><code>return text_idx, label</code>：返回处理后的文本索引序列和对应的标签。</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-len-方法"><a href="#3-len-方法" class="headerlink" title="3. __len__ 方法"></a>3. <code>__len__</code> 方法</h4><pre><code class="lang-python">def __len__(self):
+    return len(self.all_text)
+</code></pre>
+<ul>
+<li><strong>功能</strong>：返回数据集的大小，即文本序列的数量。通常用于告诉 PyTorch 数据加载器（<code>DataLoader</code>）数据集的总长度。</li>
+</ul>
+<h3 id="4-举例"><a href="#4-举例" class="headerlink" title="4. 举例"></a>4. 举例</h3><p>在 <code>TextDataset</code> 类中，<code>text_idx</code> 的形状是一个 PyTorch 张量 (<code>tensor</code>)，其维度是 <code>(1, max_len)</code>，其中 <code>max_len</code> 是在初始化时指定的最大句子长度。</p>
+<p>假设我们有一个句子 <code>[&quot;hello&quot;, &quot;world&quot;]</code>，词汇表 <code>word_2_index</code> 为 <code>&#123;&quot;&lt;PAD&gt;&quot;: 0, &quot;&lt;UNK&gt;&quot;: 1, &quot;hello&quot;: 2, &quot;world&quot;: 3&#125;</code>，<code>max_len</code> 为 5。以下是如何生成对应的 <code>text_idx</code>：</p>
+<ol>
+<li><strong>原始句子</strong>: <code>[&quot;hello&quot;, &quot;world&quot;]</code></li>
+<li><strong>转换为索引</strong>: <code>[2, 3]</code>  （<code>&quot;hello&quot;</code> 对应索引 2，<code>&quot;world&quot;</code> 对应索引 3）</li>
+<li><strong>填充到 <code>max_len</code></strong>: <code>[2, 3, 0, 0, 0]</code>  （填充索引 0，表示 <code>&lt;PAD&gt;</code>）</li>
+</ol>
+<p>最后，<code>text_idx</code> 经过 <code>torch.tensor(text_idx).unsqueeze(dim=0)</code> 转换为 PyTorch 张量，并增加了一个维度：</p>
+<pre><code class="lang-python">text_idx = torch.tensor([2, 3, 0, 0, 0]).unsqueeze(dim=0)
+</code></pre>
+<ul>
+<li><strong>最终 <code>text_idx</code> 的形状</strong>: <code>(1, 5)</code></li>
+</ul>
+<p>具体的值如下：</p>
+<pre><code>tensor([[2, 3, 0, 0, 0]])
+</code></pre><p>这个张量的形状 <code>(1, 5)</code> 表示它有一个批次（即第一个维度为 1），每个输入序列的长度是 <code>max_len</code>（这里为 5）。在实际使用中，这种形状适合直接输入到神经网络模型中进行处理。</p>
+<h2 id="前向传播网络"><a href="#前向传播网络" class="headerlink" title="前向传播网络"></a>前向传播网络</h2><pre><code class="lang-python">class Block(nn.Module):
+    def __init__(self, kernel_s, embeddin_num, max_len, hidden_num):
+        super().__init__()
+        # shape [batch * in_channel * max_len * emb_num]
+        self.cnn = nn.Conv2d(in_channels=1, out_channels=hidden_num, kernel_size=(kernel_s, embeddin_num))
+        self.act = nn.ReLU()
+        self.mxp = nn.MaxPool1d(kernel_size=(max_len - kernel_s + 1))
+
+    def forward(self, batch_emb):
+        c = self.cnn(batch_emb)
+        a = self.act(c)
+        a = a.squeeze(dim=-1)
+        m = self.mxp(a)
+        m = m.squeeze(dim=-1)
+        return m
+
+class TextCNNModel(nn.Module):
+    def __init__(self, emb_matrix, max_len, class_num, hidden_num):
+        super().__init__()
+        self.emb_num = emb_matrix.weight.shape[1]
+        self.block1 = Block(2, self.emb_num, max_len, hidden_num)
+        self.block2 = Block(3, self.emb_num, max_len, hidden_num)
+        self.block3 = Block(4, self.emb_num, max_len, hidden_num)
+        self.emb_matrix = emb_matrix
+        self.classifier = nn.Linear(hidden_num * 3, class_num)
+        self.loss_fun = nn.CrossEntropyLoss()
+
+    def forward(self, batch_idx):
+        batch_emb = self.emb_matrix(batch_idx)
+        b1_result = self.block1(batch_emb)
+        b2_result = self.block2(batch_emb)
+        b3_result = self.block3(batch_emb)
+        feature = torch.cat([b1_result, b2_result, b3_result], dim=1)
+        pre = self.classifier(feature)
+        return pre
+</code></pre>
+<p>这个代码定义了一个用于文本分类任务的卷积神经网络模型 (<code>TextCNNModel</code>)，它包含多个卷积块 (<code>Block</code>)，每个卷积块使用不同的卷积核大小，以捕获文本中不同范围的特征。以下是对代码的详细解释：</p>
+<h3 id="1-Block-类"><a href="#1-Block-类" class="headerlink" title="1. Block 类"></a>1. <code>Block</code> 类</h3><p><code>Block</code> 类定义了一个卷积块，负责处理输入的嵌入向量并提取特征。</p>
+<pre><code class="lang-python">class Block(nn.Module):
+    def __init__(self, kernel_s, embeddin_num, max_len, hidden_num):
+        super().__init__()
+        # shape [batch * in_channel * max_len * emb_num]
+        self.cnn = nn.Conv2d(in_channels=1, out_channels=hidden_num, kernel_size=(kernel_s, embeddin_num))
+        self.act = nn.ReLU()
+        self.mxp = nn.MaxPool1d(kernel_size=(max_len - kernel_s + 1))
+</code></pre>
+<ul>
+<li><strong><code>__init__</code> 方法</strong>:<ul>
+<li><code>kernel_s</code>：卷积核的大小（高度）。</li>
+<li><code>embeddin_num</code>：嵌入向量的维度（宽度）。</li>
+<li><code>max_len</code>：句子的最大长度。</li>
+<li><code>hidden_num</code>：卷积层输出的通道数（即特征图数量）。</li>
+<li><code>self.cnn</code>：二维卷积层，处理输入形状为 <code>[batch_size, 1, max_len, embeddin_num]</code> 的张量。</li>
+<li><code>self.act</code>：激活函数 ReLU，应用于卷积层的输出。</li>
+<li><code>self.mxp</code>：一维最大池化层，缩小特征图的维度。</li>
+</ul>
+</li>
+</ul>
+<pre><code class="lang-python">def forward(self, batch_emb):
+    c = self.cnn(batch_emb)
+    a = self.act(c)
+    a = a.squeeze(dim=-1)
+    m = self.mxp(a)
+    m = m.squeeze(dim=-1)
+    return m
+</code></pre>
+<ul>
+<li><strong><code>forward</code> 方法</strong>:<ul>
+<li><code>batch_emb</code>：输入的嵌入矩阵，形状为 <code>[batch_size, 1, max_len, embeddin_num]</code>。</li>
+<li><code>c = self.cnn(batch_emb)</code>：对嵌入矩阵进行卷积操作，输出形状为 <code>[batch_size, hidden_num, max_len - kernel_s + 1, 1]</code>。</li>
+<li><code>a = self.act(c)</code>：应用激活函数 ReLU。</li>
+<li><code>a = a.squeeze(dim=-1)</code>：去掉最后一个维度，形状变为 <code>[batch_size, hidden_num, max_len - kernel_s + 1]</code>。</li>
+<li><code>m = self.mxp(a)</code>：最大池化操作，输出形状为 <code>[batch_size, hidden_num, 1]</code>。</li>
+<li><code>m = m.squeeze(dim=-1)</code>：去掉最后一个维度，最终形状为 <code>[batch_size, hidden_num]</code>。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-TextCNNModel-类"><a href="#2-TextCNNModel-类" class="headerlink" title="2. TextCNNModel 类"></a>2. <code>TextCNNModel</code> 类</h3><p><code>TextCNNModel</code> 是一个多通道的文本卷积神经网络模型，使用了多个不同大小的卷积核来提取文本特征。</p>
+<pre><code class="lang-python">class TextCNNModel(nn.Module):
+    def __init__(self, emb_matrix, max_len, class_num, hidden_num):
+        super().__init__()
+        self.emb_num = emb_matrix.weight.shape[1]
+        self.block1 = Block(2, self.emb_num, max_len, hidden_num)
+        self.block2 = Block(3, self.emb_num, max_len, hidden_num)
+        self.block3 = Block(4, self.emb_num, max_len, hidden_num)
+        self.emb_matrix = emb_matrix
+        self.classifier = nn.Linear(hidden_num * 3, class_num)
+        self.loss_fun = nn.CrossEntropyLoss()
+</code></pre>
+<ul>
+<li><strong><code>__init__</code> 方法</strong>:<ul>
+<li><code>emb_matrix</code>：预训练的嵌入矩阵。</li>
+<li><code>max_len</code>：句子的最大长度。</li>
+<li><code>class_num</code>：分类任务的类别数量。</li>
+<li><code>hidden_num</code>：每个卷积块输出的特征图数量。</li>
+<li><code>self.block1</code>, <code>self.block2</code>, <code>self.block3</code>：三个卷积块，每个使用不同的卷积核大小（2、3、4），以捕获不同的 n-gram 特征。</li>
+<li><code>self.classifier</code>：全连接层，将拼接后的特征向量映射到类别标签。</li>
+<li><code>self.loss_fun</code>：交叉熵损失函数，用于计算分类任务的损失。</li>
+</ul>
+</li>
+</ul>
+<pre><code class="lang-python">def forward(self, batch_idx):
+    batch_emb = self.emb_matrix(batch_idx)
+    b1_result = self.block1(batch_emb)
+    b2_result = self.block2(batch_emb)
+    b3_result = self.block3(batch_emb)
+    feature = torch.cat([b1_result, b2_result, b3_result], dim=1)
+    pre = self.classifier(feature)
+    return pre
+</code></pre>
+<ul>
+<li><strong><code>forward</code> 方法</strong>:<ul>
+<li><code>batch_idx</code>：输入的文本索引序列。</li>
+<li><code>batch_emb = self.emb_matrix(batch_idx)</code>：将文本索引转换为嵌入矩阵。</li>
+<li><code>b1_result = self.block1(batch_emb)</code>：通过第一个卷积块提取特征。</li>
+<li><code>b2_result = self.block2(batch_emb)</code>：通过第二个卷积块提取特征。</li>
+<li><code>b3_result = self.block3(batch_emb)</code>：通过第三个卷积块提取特征。</li>
+<li><code>feature = torch.cat([b1_result, b2_result, b3_result], dim=1)</code>：将三个卷积块的输出特征拼接在一起，形成一个综合的特征向量。</li>
+<li><code>pre = self.classifier(feature)</code>：通过全连接层进行分类预测。</li>
+<li><code>return pre</code>：返回分类结果。</li>
+</ul>
+</li>
+</ul>
+<p>为了更直观地理解这个 <code>TextCNNModel</code> 的工作流程，我们可以举一个简单的例子，演示从输入到输出的整个过程。</p>
+<h3 id="3-例子概述"><a href="#3-例子概述" class="headerlink" title="3. 例子概述"></a>3. 例子概述</h3><h4 id="1-输入处理"><a href="#1-输入处理" class="headerlink" title="1. 输入处理"></a>1. 输入处理</h4><p>假设我们有以下输入和模型参数：</p>
+<ul>
+<li><strong>输入句子</strong>：<code>&quot;I love NLP&quot;</code></li>
+<li><strong>词汇表 <code>word_2_index</code></strong>：<code>&#123;&quot;&lt;PAD&gt;&quot;: 0, &quot;&lt;UNK&gt;&quot;: 1, &quot;I&quot;: 2, &quot;love&quot;: 3, &quot;NLP&quot;: 4&#125;</code></li>
+<li><strong>句子最大长度 <code>max_len</code></strong>：5</li>
+<li><strong>嵌入维度 <code>embedding_dim</code></strong>：3</li>
+<li><strong>类别数量 <code>class_num</code></strong>：2</li>
+<li><strong>每个卷积块的输出通道数 <code>hidden_num</code></strong>：2</li>
+<li><strong>卷积核大小</strong>：2、3、4</li>
+</ul>
+<h5 id="1-1-索引化和填充"><a href="#1-1-索引化和填充" class="headerlink" title="1.1 索引化和填充"></a>1.1 索引化和填充</h5><ul>
+<li><p><strong>原始句子索引化</strong>：</p>
+<ul>
+<li>句子 <code>&quot;I love NLP&quot;</code> 对应的索引为 <code>[2, 3, 4]</code></li>
+<li>由于 <code>max_len</code> 为 5，我们将句子填充到 <code>[2, 3, 4, 0, 0]</code></li>
+</ul>
+</li>
+<li><p><strong>嵌入矩阵</strong>：<br>假设嵌入矩阵如下（形状为 <code>[5, 3]</code>，即5个词汇，每个词汇有3维的嵌入向量）：</p>
+<pre><code class="lang-python">emb_matrix = torch.tensor([
+    [0.0, 0.0, 0.0],  # &lt;PAD&gt;
+    [0.1, 0.1, 0.1],  # &lt;UNK&gt;
+    [0.2, 0.2, 0.2],  # I
+    [0.3, 0.3, 0.3],  # love
+    [0.4, 0.4, 0.4]   # NLP
+])
+</code></pre>
+</li>
+<li><p><strong>嵌入后的结果</strong>：</p>
+<pre><code class="lang-python">batch_idx = torch.tensor([[2, 3, 4, 0, 0]])
+batch_emb = emb_matrix[batch_idx]
+# shape: [1, 5, 3]
+</code></pre>
+<p><code>batch_emb</code> 的内容为：</p>
+<pre><code class="lang-python">batch_emb = torch.tensor([
+    [[0.2, 0.2, 0.2],  # I
+     [0.3, 0.3, 0.3],  # love
+     [0.4, 0.4, 0.4],  # NLP
+     [0.0, 0.0, 0.0],  # &lt;PAD&gt;
+     [0.0, 0.0, 0.0]]  # &lt;PAD&gt;
+])
+</code></pre>
+<p>转换为 <code>torch</code> 张量的形状为 <code>[1, 1, 5, 3]</code>。</p>
+</li>
+</ul>
+<h4 id="2-通过卷积块提取特征"><a href="#2-通过卷积块提取特征" class="headerlink" title="2. 通过卷积块提取特征"></a>2. 通过卷积块提取特征</h4><h5 id="2-1-卷积块处理"><a href="#2-1-卷积块处理" class="headerlink" title="2.1 卷积块处理"></a>2.1 卷积块处理</h5><ul>
+<li><p><strong>卷积核</strong>（示例）：</p>
+<p>假设 <code>Block</code> 类中的卷积核和偏置如下：</p>
+<pre><code class="lang-python">kernel = torch.tensor([
+    [[0.1, 0.2, 0.1], [0.2, 0.1, 0.2]],  # 卷积核1
+    [[0.3, 0.1, 0.3], [0.1, 0.3, 0.1]]   # 卷积核2
+])
+</code></pre>
+</li>
+<li><p><strong><code>Block</code> 类中的卷积操作</strong>（使用 <code>kernel_s</code> 为 2）：</p>
+<pre><code class="lang-python">c = self.cnn(batch_emb)
+# shape after cnn: [1, 2, 4, 1] -&gt; [batch_size, hidden_num, max_len-kernel_size+1, 1]
+</code></pre>
+<p>卷积操作的结果（示例）为：</p>
+<pre><code class="lang-python">c = torch.tensor([
+    [[[0.5], [0.6], [0.7], [0.8]],   # feature map 1
+     [[0.4], [0.5], [0.6], [0.7]]]   # feature map 2
+])
+</code></pre>
+<p>对应于卷积核的特征图，形状为 <code>[1, hidden_num, max_len-kernel_size+1, 1]</code>。</p>
+</li>
+<li><p><strong>激活函数和池化操作</strong>：</p>
+<pre><code class="lang-python">a = self.act(c)  # Apply ReLU activation
+m = self.mxp(a.squeeze(-1))  # Max pooling operation
+# shape after max pooling: [1, 2, 1] -&gt; [batch_size, hidden_num, 1]
+</code></pre>
+<p><code>a</code> 和 <code>m</code> 的内容（示例）为：</p>
+<pre><code class="lang-python">a = torch.tensor([
+    [[0.5], [0.6], [0.7], [0.8]],  # ReLU activated feature map 1
+    [[0.4], [0.5], [0.6], [0.7]]   # ReLU activated feature map 2
+])
+
+m = torch.tensor([
+    [[0.8]],  # Max pooled feature map 1
+    [[0.7]]   # Max pooled feature map 2
+])
+</code></pre>
+<p>最终 <code>m</code> 的形状为 <code>[1, hidden_num]</code>。</p>
+</li>
+</ul>
+<h4 id="3-合并特征并分类"><a href="#3-合并特征并分类" class="headerlink" title="3. 合并特征并分类"></a>3. 合并特征并分类</h4><h5 id="3-1-多个卷积块的特征"><a href="#3-1-多个卷积块的特征" class="headerlink" title="3.1 多个卷积块的特征"></a>3.1 多个卷积块的特征</h5><p>假设 <code>Block</code> 类中的三个卷积块（<code>kernel_s</code> 为 2、3、4）的输出为：</p>
+<pre><code class="lang-python">b1_result = torch.tensor([[0.8, 0.7]])  # From Block with kernel size 2
+b2_result = torch.tensor([[0.9, 0.8]])  # From Block with kernel size 3
+b3_result = torch.tensor([[1.0, 0.9]])  # From Block with kernel size 4
+</code></pre>
+<h4 id="3-2-拼接特征"><a href="#3-2-拼接特征" class="headerlink" title="3.2 拼接特征"></a>3.2 拼接特征</h4><pre><code class="lang-python">feature = torch.cat([b1_result, b2_result, b3_result], dim=1)
+# shape: [1, hidden_num * 3] -&gt; [1, 6]
+</code></pre>
+<p>拼接后的特征向量为：</p>
+<pre><code class="lang-python">feature = torch.tensor([[0.8, 0.7, 0.9, 0.8, 1.0, 0.9]])
+</code></pre>
+<h4 id="3-3-全连接层分类"><a href="#3-3-全连接层分类" class="headerlink" title="3.3 全连接层分类"></a>3.3 全连接层分类</h4><p>假设 <code>self.classifier</code> 的权重和偏置如下：</p>
+<pre><code class="lang-python">classifier_weight = torch.tensor([
+    [0.1, 0.2, 0.3, 0.4, 0.5, 0.6],  # For class 1
+    [0.6, 0.5, 0.4, 0.3, 0.2, 0.1]   # For class 2
+])
+classifier_bias = torch.tensor([0.1, -0.1])
+</code></pre>
+<p>计算分类预测结果：</p>
+<pre><code class="lang-python">pre = torch.matmul(feature, classifier_weight.t()) + classifier_bias
+# shape: [1, class_num] -&gt; [1, 2]
+</code></pre>
+<p>最终输出的预测结果（示例）为：</p>
+<pre><code class="lang-python">pre = torch.tensor([[1.5, 0.7]])  # Logits for class 1 and class 2
+</code></pre>
+<h2 id="模型测试和参数解析"><a href="#模型测试和参数解析" class="headerlink" title="模型测试和参数解析"></a>模型测试和参数解析</h2><pre><code class="lang-python">def test_data():
+    args = parsers()
+    device = &quot;cuda:0&quot; if torch.cuda.is_available() else &quot;cpu&quot;
+    dataset = pkl.load(open(args.data_pkl, &quot;rb&quot;))
+    word_2_index, words_embedding = dataset[0], dataset[1]
+    test_text, test_label = read_data(args.test_file)
+    test_dataset = TextDataset(test_text, test_label, word_2_index, args.max_len)
+    test_dataloader = DataLoader(test_dataset, batch_size=args.batch_size, shuffle=False)
+    model = TextCNNModel(words_embedding, args.max_len, args.class_num, args.num_filters).to(device)
+    model.load_state_dict(torch.load(args.save_model_best))
+    model.eval()
+    all_pred, all_true = [], []
+    with torch.no_grad():
+        for batch_text, batch_label in test_dataloader:
+            batch_text, batch_label = batch_text.to(device), batch_label.to(device)
+            pred = model(batch_text)
+            pred = torch.argmax(pred, dim=1)
+            pred = pred.cpu().numpy().tolist()
+            label = batch_label.cpu().numpy().tolist()
+            all_pred.extend(pred)
+            all_true.extend(label)
+    accuracy = accuracy_score(all_true, all_pred)
+    print(f&quot;test dataset accuracy: &#123;accuracy:.4f&#125;&quot;)
+
+def parsers():
+    parser = argparse.ArgumentParser(description=&quot;TextCNN model of argparse&quot;)
+    parser.add_argument(&quot;--train_file&quot;, type=str, default=os.path.join(&quot;data&quot;, &quot;train.txt&quot;))
+    parser.add_argument(&quot;--dev_file&quot;, type=str, default=os.path.join(&quot;data&quot;, &quot;dev.txt&quot;))
+    parser.add_argument(&quot;--test_file&quot;, type=str, default=os.path.join(&quot;data&quot;, &quot;test.txt&quot;))
+    parser.add_argument(&quot;--classification&quot;, type=str, default=os.path.join(&quot;data&quot;, &quot;class.txt&quot;))
+    parser.add_argument(&quot;--data_pkl&quot;, type=str, default=os.path.join(&quot;data&quot;, &quot;dataset.pkl&quot;))
+    parser.add_argument(&quot;--class_num&quot;, type=int, default=10)
+    parser.add_argument(&quot;--max_len&quot;, type=int, default=38)
+    parser.add_argument(&quot;--embedding_num&quot;, type=int, default=100)
+    parser.add_argument(&quot;--batch_size&quot;, type=int, default=32)
+    parser.add_argument(&quot;--epochs&quot;, type=int, default=30)
+    parser.add_argument(&quot;--learn_rate&quot;, type=float, default=1e-3)
+    parser.add_argument(&quot;--num_filters&quot;, type=int, default=2, help=&quot;卷积产生的通道数&quot;)
+    parser.add_argument(&quot;--save_model_best&quot;, type=str, default=os.path.join(&quot;model&quot;, &quot;best_model.pth&quot;))
+    parser.add_argument(&quot;--save_model_last&quot;, type=str, default=os.path.join(&quot;model&quot;, &quot;last_model.pth&quot;))
+    args = parser.parse_args()
+</code></pre>
+<p>代码包含两个主要部分：<code>test_data</code> 函数和 <code>parsers</code> 函数。下面详细解释这两个部分的功能。</p>
+<h3 id="test-data-函数"><a href="#test-data-函数" class="headerlink" title="test_data 函数"></a><code>test_data</code> 函数</h3><p><code>test_data</code> 函数用于测试训练好的文本分类模型，并计算测试数据集上的准确率。主要步骤如下：</p>
+<ol>
+<li><p><strong>获取参数</strong>：</p>
+<pre><code class="lang-python">args = parsers()
+</code></pre>
+<p>调用 <code>parsers</code> 函数来获取命令行参数配置。</p>
+</li>
+<li><p><strong>确定设备</strong>：</p>
+<pre><code class="lang-python">device = &quot;cuda:0&quot; if torch.cuda.is_available() else &quot;cpu&quot;
+</code></pre>
+<p>根据是否有可用的 GPU，选择计算设备（GPU 或 CPU）。</p>
+</li>
+<li><p><strong>加载数据</strong>：</p>
+<pre><code class="lang-python">dataset = pkl.load(open(args.data_pkl, &quot;rb&quot;))
+word_2_index, words_embedding = dataset[0], dataset[1]
+test_text, test_label = read_data(args.test_file)
+</code></pre>
+<p>从 <code>args.data_pkl</code> 文件中加载词汇到索引的映射和词嵌入矩阵。然后从 <code>args.test_file</code> 文件中读取测试文本和标签。</p>
+</li>
+<li><p><strong>创建数据集和数据加载器</strong>：</p>
+<pre><code class="lang-python">test_dataset = TextDataset(test_text, test_label, word_2_index, args.max_len)
+test_dataloader = DataLoader(test_dataset, batch_size=args.batch_size, shuffle=False)
+</code></pre>
+<p>使用 <code>TextDataset</code> 类创建测试数据集，并用 <code>DataLoader</code> 创建数据加载器，以便批量处理数据。</p>
+</li>
+<li><p><strong>初始化模型</strong>：</p>
+<pre><code class="lang-python">model = TextCNNModel(words_embedding, args.max_len, args.class_num, args.num_filters).to(device)
+model.load_state_dict(torch.load(args.save_model_best))
+model.eval()
+</code></pre>
+<p>初始化 <code>TextCNNModel</code> 模型，加载预训练的模型权重，并将模型设置为评估模式。</p>
+</li>
+<li><p><strong>模型推理</strong>：</p>
+<pre><code class="lang-python">all_pred, all_true = [], []
+with torch.no_grad():
+    for batch_text, batch_label in test_dataloader:
+        batch_text, batch_label = batch_text.to(device), batch_label.to(device)
+        pred = model(batch_text)
+        pred = torch.argmax(pred, dim=1)
+        pred = pred.cpu().numpy().tolist()
+        label = batch_label.cpu().numpy().tolist()
+        all_pred.extend(pred)
+        all_true.extend(label)
+</code></pre>
+<p>在不计算梯度的情况下进行模型推理，将预测结果和真实标签保存到 <code>all_pred</code> 和 <code>all_true</code> 列表中。</p>
+</li>
+<li><p><strong>计算并打印准确率</strong>：</p>
+<pre><code class="lang-python">accuracy = accuracy_score(all_true, all_pred)
+print(f&quot;test dataset accuracy: &#123;accuracy:.4f&#125;&quot;)
+</code></pre>
+<p>计算测试集上的准确率，并输出结果。</p>
+</li>
+</ol>
+<h3 id="parsers-函数"><a href="#parsers-函数" class="headerlink" title="parsers 函数"></a><code>parsers</code> 函数</h3><p><code>parsers</code> 函数用于解析命令行参数，以配置训练和测试过程中的各种设置。主要功能包括：</p>
+<ol>
+<li><p><strong>创建解析器</strong>：</p>
+<pre><code class="lang-python">parser = argparse.ArgumentParser(description=&quot;TextCNN model of argparse&quot;)
+</code></pre>
+</li>
+<li><p><strong>定义参数</strong>：</p>
+<ul>
+<li><p><strong>文件路径</strong>：</p>
+<pre><code class="lang-python">parser.add_argument(&quot;--train_file&quot;, type=str, default=os.path.join(&quot;data&quot;, &quot;train.txt&quot;))
+parser.add_argument(&quot;--dev_file&quot;, type=str, default=os.path.join(&quot;data&quot;, &quot;dev.txt&quot;))
+parser.add_argument(&quot;--test_file&quot;, type=str, default=os.path.join(&quot;data&quot;, &quot;test.txt&quot;))
+parser.add_argument(&quot;--classification&quot;, type=str, default=os.path.join(&quot;data&quot;, &quot;class.txt&quot;))
+parser.add_argument(&quot;--data_pkl&quot;, type=str, default=os.path.join(&quot;data&quot;, &quot;dataset.pkl&quot;))
+</code></pre>
+<p>这些参数用于指定训练、验证、测试数据文件的路径以及数据集和分类文件的路径。</p>
+</li>
+<li><p><strong>模型参数</strong>：</p>
+<pre><code class="lang-python">parser.add_argument(&quot;--class_num&quot;, type=int, default=10)
+parser.add_argument(&quot;--max_len&quot;, type=int, default=38)
+parser.add_argument(&quot;--embedding_num&quot;, type=int, default=100)
+parser.add_argument(&quot;--batch_size&quot;, type=int, default=32)
+parser.add_argument(&quot;--epochs&quot;, type=int, default=30)
+parser.add_argument(&quot;--learn_rate&quot;, type=float, default=1e-3)
+parser.add_argument(&quot;--num_filters&quot;, type=int, default=2, help=&quot;卷积产生的通道数&quot;)
+parser.add_argument(&quot;--save_model_best&quot;, type=str, default=os.path.join(&quot;model&quot;, &quot;best_model.pth&quot;))
+parser.add_argument(&quot;--save_model_last&quot;, type=str, default=os.path.join(&quot;model&quot;, &quot;last_model.pth&quot;))
+</code></pre>
+<p>这些参数用于配置模型的类别数量、最大句子长度、嵌入维度、批次大小、训练周期数、学习率、卷积层输出通道数以及保存模型的路径。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>解析参数并返回</strong>：</p>
+<pre><code class="lang-python">args = parser.parse_args()
+return args
+</code></pre>
+<p>解析命令行参数并将其返回，以便在程序中使用。</p>
+</li>
+</ol>
+<h2 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h2><pre><code class="lang-python">if __name__ == &quot;__main__&quot;:
+    start = time.time()
+    args = parsers()
+    train_text, train_label = read_data(args.train_file)
+    dev_text, dev_label = read_data(args.dev_file)
+    device = &quot;cuda:0&quot; if torch.cuda.is_available() else &quot;cpu&quot;
+
+    if os.path.exists(args.data_pkl):
+        dataset = pkl.load(open(args.data_pkl, &quot;rb&quot;))
+        word_2_index, words_embedding = dataset[0], dataset[1]
+    else:
+        word_2_index, words_embedding = built_curpus(train_text, args.embedding_num)
+
+    train_dataset = TextDataset(train_text, train_label, word_2_index, args.max_len)
+    train_loader = DataLoader(train_dataset, args.batch_size, shuffle=True)
+    dev_dataset = TextDataset(dev_text, dev_label, word_2_index, args.max_len)
+    dev_loader = DataLoader(dev_dataset, args.batch_size, shuffle=False)
+
+    model = TextCNNModel(words_embedding, args.max_len, args.class_num, args.num_filters).to(device)
+    opt = torch.optim.AdamW(model.parameters(), lr=args.learn_rate)
+    loss_fn = nn.CrossEntropyLoss()
+    acc_max = float(&quot;-inf&quot;)
+
+    for epoch in range(args.epochs):
+        model.train()
+        loss_sum, count = 0, 0
+        for batch_index, (batch_text, batch_label) in enumerate(train_loader):
+            batch_text, batch_label = batch_text.to(device), batch_label.to(device)
+            pred = model(batch_text)
+            loss = loss_fn(pred, batch_label)
+            opt.zero_grad()
+            loss.backward()
+            opt.step()
+            loss_sum += loss
+            count += 1
+            # 打印内容
+            if len(train_loader) - batch_index &lt;= len(train_loader) % 1000 and count == len(train_loader) % 1000:
+                msg = &quot;[&#123;0&#125;/&#123;1:5d&#125;]\tTrain_Loss:&#123;2:.4f&#125;&quot;
+                print(msg.format(epoch + 1, batch_index + 1, loss_sum / count))
+                loss_sum, count = 0.0, 0
+
+            if batch_index % 1000 == 999:
+                msg = &quot;[&#123;0&#125;/&#123;1:5d&#125;]\tTrain_Loss:&#123;2:.4f&#125;&quot;
+                print(msg.format(epoch + 1, batch_index + 1, loss_sum / count))
+                loss_sum, count = 0.0, 0
+
+        model.eval()
+        all_pred, all_true = [], []
+        with torch.no_grad():
+            for batch_text, batch_label in dev_loader:
+                batch_text, batch_label = batch_text.to(device), batch_label.to(device)
+                pred = model(batch_text)
+                pred = torch.argmax(pred, dim=1)
+                pred = pred.cpu().numpy().tolist()
+                label = batch_label.cpu().numpy().tolist()
+                all_pred.extend(pred)
+                all_true.extend(label)
+        acc = accuracy_score(all_pred, all_true)
+        print(f&quot;dev acc: &#123;acc:.4f&#125;&quot;)
+        if acc &gt; acc_max:
+            acc_max = acc
+            # 检查目录是否存在，如果不存在则创建
+            if not os.path.exists(os.path.dirname(args.save_model_best)):
+                os.makedirs(os.path.dirname(args.save_model_best))
+            torch.save(model.state_dict(), args.save_model_best)
+            print(f&quot;Saved best model&quot;)
+
+        print(&quot;*&quot; * 50)
+
+    end = time.time()
+    print(f&quot;Run time: &#123;(end - start)/60:.4f&#125; min&quot;)
+    test_data()
+</code></pre>
+<p>该代码实现了一个基于 <code>TextCNN</code> 模型的文本分类任务。它负责从训练数据中学习，并通过在验证集上的性能（准确率）来保存最佳模型。代码使用了 PyTorch 框架来进行神经网络的训练和评估。以下是代码的详细解释：</p>
+<h3 id="1-主程序入口"><a href="#1-主程序入口" class="headerlink" title="1. 主程序入口"></a>1. 主程序入口</h3><pre><code class="lang-python">if __name__ == &quot;__main__&quot;:
+</code></pre>
+<p>这部分是 Python 程序的入口，确保代码块仅在该脚本直接运行时执行，而不是在作为模块导入时执行。</p>
+<h3 id="2-参数解析与数据准备"><a href="#2-参数解析与数据准备" class="headerlink" title="2. 参数解析与数据准备"></a>2. 参数解析与数据准备</h3><pre><code class="lang-python">start = time.time()
+args = parsers()
+train_text, train_label = read_data(args.train_file)
+dev_text, dev_label = read_data(args.dev_file)
+device = &quot;cuda:0&quot; if torch.cuda.is_available() else &quot;cpu&quot;
+</code></pre>
+<ul>
+<li><code>start = time.time()</code>：记录程序开始执行的时间。</li>
+<li><code>args = parsers()</code>：调用 <code>parsers()</code> 函数解析命令行参数，获取所有需要的超参数。</li>
+<li><code>train_text, train_label</code> 和 <code>dev_text, dev_label</code>：分别读取训练集和验证集的文本数据及标签。</li>
+<li><code>device = &quot;cuda:0&quot; if torch.cuda.is_available() else &quot;cpu&quot;</code>：检查是否有 GPU 可用，如果有则使用 GPU，否则使用 CPU。</li>
+</ul>
+<h3 id="3-词汇与嵌入加载"><a href="#3-词汇与嵌入加载" class="headerlink" title="3. 词汇与嵌入加载"></a>3. 词汇与嵌入加载</h3><pre><code class="lang-python">if os.path.exists(args.data_pkl):
+    dataset = pkl.load(open(args.data_pkl, &quot;rb&quot;))
+    word_2_index, words_embedding = dataset[0], dataset[1]
+else:
+    word_2_index, words_embedding = built_curpus(train_text, args.embedding_num)
+</code></pre>
+<ul>
+<li>检查是否存在词汇与嵌入文件 <code>data_pkl</code>。如果存在，则加载词汇表和嵌入矩阵；否则，调用 <code>built_curpus()</code> 函数构建词汇表和嵌入矩阵。</li>
+</ul>
+<h3 id="4-数据加载器的创建"><a href="#4-数据加载器的创建" class="headerlink" title="4. 数据加载器的创建"></a>4. 数据加载器的创建</h3><pre><code class="lang-python">train_dataset = TextDataset(train_text, train_label, word_2_index, args.max_len)
+train_loader = DataLoader(train_dataset, args.batch_size, shuffle=True)
+dev_dataset = TextDataset(dev_text, dev_label, word_2_index, args.max_len)
+dev_loader = DataLoader(dev_dataset, args.batch_size, shuffle=False)
+</code></pre>
+<ul>
+<li>创建 <code>TextDataset</code> 对象，并分别用于训练集和验证集。</li>
+<li>使用 <code>DataLoader</code> 创建数据加载器，<code>train_loader</code> 负责打乱数据，<code>dev_loader</code> 则保持数据顺序。</li>
+</ul>
+<h3 id="5-模型与优化器的初始化"><a href="#5-模型与优化器的初始化" class="headerlink" title="5. 模型与优化器的初始化"></a>5. 模型与优化器的初始化</h3><pre><code class="lang-python">model = TextCNNModel(words_embedding, args.max_len, args.class_num, args.num_filters).to(device)
+opt = torch.optim.AdamW(model.parameters(), lr=args.learn_rate)
+loss_fn = nn.CrossEntropyLoss()
+acc_max = float(&quot;-inf&quot;)
+</code></pre>
+<ul>
+<li>初始化 <code>TextCNNModel</code> 模型，并将其移动到指定设备（GPU 或 CPU）。</li>
+<li>使用 <code>AdamW</code> 作为优化器，学习率通过命令行参数设置。</li>
+<li>定义交叉熵损失函数 <code>loss_fn</code>。</li>
+<li><code>acc_max</code> 用于存储在验证集上最高的准确率。</li>
+</ul>
+<h3 id="6-模型训练与验证"><a href="#6-模型训练与验证" class="headerlink" title="6. 模型训练与验证"></a>6. 模型训练与验证</h3><pre><code class="lang-python">for epoch in range(args.epochs):
+    model.train()
+    loss_sum, count = 0, 0
+    for batch_index, (batch_text, batch_label) in enumerate(train_loader):
+        batch_text, batch_label = batch_text.to(device), batch_label.to(device)
+        pred = model(batch_text)
+        loss = loss_fn(pred, batch_label)
+        opt.zero_grad()
+        loss.backward()
+        opt.step()
+        loss_sum += loss
+        count += 1
+        # 打印内容
+        if len(train_loader) - batch_index &lt;= len(train_loader) % 1000 and count == len(train_loader) % 1000:
+            msg = &quot;[&#123;0&#125;/&#123;1:5d&#125;]\tTrain_Loss:&#123;2:.4f&#125;&quot;
+            print(msg.format(epoch + 1, batch_index + 1, loss_sum / count))
+            loss_sum, count = 0.0, 0
+
+        if batch_index % 1000 == 999:
+            msg = &quot;[&#123;0&#125;/&#123;1:5d&#125;]\tTrain_Loss:&#123;2:.4f&#125;&quot;
+            print(msg.format(epoch + 1, batch_index + 1, loss_sum / count))
+            loss_sum, count = 0.0, 0
+</code></pre>
+<ul>
+<li>训练循环中，模型进入训练模式 (<code>model.train()</code>)，逐批次进行前向传播、计算损失、反向传播和参数更新。</li>
+<li><code>loss_sum</code> 和 <code>count</code> 用于累加并计算平均训练损失，打印训练信息。</li>
+<li>每 1000 个批次打印一次当前的训练损失。</li>
+</ul>
+<h3 id="7-验证模型与保存最佳模型"><a href="#7-验证模型与保存最佳模型" class="headerlink" title="7. 验证模型与保存最佳模型"></a>7. 验证模型与保存最佳模型</h3><pre><code class="lang-python">    model.eval()
+    all_pred, all_true = [], []
+    with torch.no_grad():
+        for batch_text, batch_label in dev_loader:
+            batch_text, batch_label = batch_text.to(device), batch_label.to(device)
+            pred = model(batch_text)
+            pred = torch.argmax(pred, dim=1)
+            pred = pred.cpu().numpy().tolist()
+            label = batch_label.cpu().numpy().tolist()
+            all_pred.extend(pred)
+            all_true.extend(label)
+    acc = accuracy_score(all_pred, all_true)
+    print(f&quot;dev acc: &#123;acc:.4f&#125;&quot;)
+    if acc &gt; acc_max:
+        acc_max = acc
+        # 检查目录是否存在，如果不存在则创建
+        if not os.path.exists(os.path.dirname(args.save_model_best)):
+            os.makedirs(os.path.dirname(args.save_model_best))
+        torch.save(model.state_dict(), args.save_model_best)
+        print(f&quot;Saved best model&quot;)
+</code></pre>
+<ul>
+<li>模型进入验证模式 (<code>model.eval()</code>)，通过关闭梯度计算 (<code>torch.no_grad()</code>)，在验证集上进行前向传播。</li>
+<li>计算当前模型在验证集上的准确率，并与之前的最佳准确率 <code>acc_max</code> 进行比较。</li>
+<li>如果当前准确率更高，则更新 <code>acc_max</code> 并保存当前模型为“最佳模型”。</li>
+</ul>
+<h3 id="8-训练结束与测试"><a href="#8-训练结束与测试" class="headerlink" title="8. 训练结束与测试"></a>8. 训练结束与测试</h3><pre><code class="lang-python">end = time.time()
+print(f&quot;Run time: &#123;(end - start)/60:.4f&#125; min&quot;)
+test_data()
+</code></pre>
+<ul>
+<li>记录程序结束时间，并计算和打印整个训练过程的运行时间。</li>
+<li>调用 <code>test_data()</code> 函数在测试集上评估模型的最终性能。</li>
+</ul>
+
+    </div>
+    
+    
+    
+    
+    <div id="comment">
+        <div id="giscus-container" class="giscus"></div>
+    </div>
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2024 Aircraft
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Aircraft
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+<script
+    src="https://giscus.app/client.js"
+    data-repo="Aircraft-carrier/git-discussions-"
+    data-repo-id="R_kgDOMSMEYQ"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOMSMEYc4CglYu"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="light_tritanopia"
+    data-lang="zh-CN"
+    crossorigin
+    async
+></script>
+
+
+
+
+
+
+
+
+
+    
+
+    <canvas
+        id="fireworks"
+        style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 32767"
+    ></canvas>
+    <script src="https://s4.zstatic.net/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="/js/fireworks.min.js"></script>  
+
+    <canvas
+        id="background"
+        style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: -1"
+    ></canvas>
+    <script src="/js/background.min.js"></script>
+
+    <div id="cursor"></div>
+    <link rel="stylesheet" href="/css/cursor.min.css" />
+    <script src="/js/cursor.min.js"></script>
+
+</body>
+</html>
