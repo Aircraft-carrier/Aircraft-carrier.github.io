@@ -886,6 +886,113 @@ test_data()
 <li>记录程序结束时间，并计算和打印整个训练过程的运行时间。</li>
 <li>调用 <code>test_data()</code> 函数在测试集上评估模型的最终性能。</li>
 </ul>
+<h3 id="9-升级版本"><a href="#9-升级版本" class="headerlink" title="9.升级版本"></a>9.升级版本</h3><pre><code class="lang-python">import matplotlib.pyplot as plt
+
+if __name__ == &quot;__main__&quot;:
+    start = time.time()
+    args = parsers()
+    train_text, train_label = read_data(args.train_file)
+    dev_text, dev_label = read_data(args.dev_file)
+    device = &quot;cuda:0&quot; if torch.cuda.is_available() else &quot;cpu&quot;
+
+    if os.path.exists(args.data_pkl):
+        dataset = pkl.load(open(args.data_pkl, &quot;rb&quot;))
+        word_2_index, words_embedding = dataset[0], dataset[1]
+    else:
+        word_2_index, words_embedding = built_curpus(train_text, args.embedding_num)
+
+    train_dataset = TextDataset(train_text, train_label, word_2_index, args.max_len)
+    train_loader = DataLoader(train_dataset, args.batch_size, shuffle=True)
+    dev_dataset = TextDataset(dev_text, dev_label, word_2_index, args.max_len)
+    dev_loader = DataLoader(dev_dataset, args.batch_size, shuffle=False)
+
+    model = TextCNNModel(words_embedding, args.max_len, args.class_num, args.num_filters).to(device)
+    opt = torch.optim.AdamW(model.parameters(), lr=args.learn_rate)
+    loss_fn = nn.CrossEntropyLoss()
+    acc_max = float(&quot;-inf&quot;)
+
+    # 用于记录损失和准确率
+    train_losses, dev_losses, dev_accuracies = [], [], []
+
+    for epoch in range(args.epochs):
+        model.train()
+        loss_sum, count = 0, 0
+        for batch_index, (batch_text, batch_label) in enumerate(train_loader):
+            batch_text, batch_label = batch_text.to(device), batch_label.to(device)
+            pred = model(batch_text)
+            loss = loss_fn(pred, batch_label)
+            opt.zero_grad()
+            loss.backward()
+            opt.step()
+            loss_sum += loss.item()
+            count += 1
+            # 打印内容
+            if len(train_loader) - batch_index &lt;= len(train_loader) % 1000 and count == len(train_loader) % 1000:
+                msg = &quot;[&#123;0&#125;/&#123;1:5d&#125;]\tTrain_Loss:&#123;2:.4f&#125;&quot;
+                print(msg.format(epoch + 1, batch_index + 1, loss_sum / count))
+                loss_sum, count = 0.0, 0
+
+            if batch_index % 1000 == 999:
+                msg = &quot;[&#123;0&#125;/&#123;1:5d&#125;]\tTrain_Loss:&#123;2:.4f&#125;&quot;
+                print(msg.format(epoch + 1, batch_index + 1, loss_sum / count))
+                loss_sum, count = 0.0, 0
+
+        train_losses.append(loss_sum / count)
+
+        model.eval()
+        dev_loss_sum, count = 0, 0
+        all_pred, all_true = [], []
+        with torch.no_grad():
+            for batch_text, batch_label in dev_loader:
+                batch_text, batch_label = batch_text.to(device), batch_label.to(device)
+                pred = model(batch_text)
+                dev_loss_sum += loss_fn(pred, batch_label).item()
+                pred = torch.argmax(pred, dim=1)
+                pred = pred.cpu().numpy().tolist()
+                label = batch_label.cpu().numpy().tolist()
+                all_pred.extend(pred)
+                all_true.extend(label)
+                count += 1
+
+        dev_losses.append(dev_loss_sum / count)
+        acc = accuracy_score(all_true, all_pred)
+        dev_accuracies.append(acc)
+        print(f&quot;dev acc: &#123;acc:.4f&#125;&quot;)
+        if acc &gt; acc_max:
+            acc_max = acc
+            # 检查目录是否存在，如果不存在则创建
+            if not os.path.exists(os.path.dirname(args.save_model_best)):
+                os.makedirs(os.path.dirname(args.save_model_best))
+            torch.save(model.state_dict(), args.save_model_best)
+            print(f&quot;Saved best model&quot;)
+
+        print(&quot;*&quot; * 50)
+
+    end = time.time()
+    print(f&quot;Run time: &#123;(end - start)/60:.4f&#125; min&quot;)
+    test_data()
+
+    # 保存损失和准确率图像
+    plt.figure(figsize=(10, 5))
+    plt.subplot(1, 2, 1)
+    plt.plot(train_losses, label=&quot;Train Loss&quot;)
+    plt.plot(dev_losses, label=&quot;Validation Loss&quot;)
+    plt.title(&quot;Loss over Epochs&quot;)
+    plt.xlabel(&quot;Epoch&quot;)
+    plt.ylabel(&quot;Loss&quot;)
+    plt.legend()
+
+    plt.subplot(1, 2, 2)
+    plt.plot(dev_accuracies, label=&quot;Validation Accuracy&quot;)
+    plt.title(&quot;Accuracy over Epochs&quot;)
+    plt.xlabel(&quot;Epoch&quot;)
+    plt.ylabel(&quot;Accuracy&quot;)
+    plt.legend()
+
+    plt.tight_layout()
+    plt.savefig(&quot;training_metrics.png&quot;)
+    plt.show()
+</code></pre>
 
     </div>
     
