@@ -1,0 +1,846 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>textcnn+emlo | Aircraft</title>
+    <meta name="author" content="Aircraft" />
+    <meta name="description" content="谁替我上学 我可以替你睡觉" />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>AIRCRAFT</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;AIRCRAFT</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>textcnn+emlo</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2024/9/2
+        </span>
+        
+        <span class="category">
+            <a href="/categories/Learning/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Learning
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/CNN/" style="color: #ff7d73">
+                    CNN
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/NLP/" style="color: #00a596">
+                    NLP
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/EMLO/" style="color: #ffa2c4">
+                    EMLO
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h1 id="实验3（附加）：词嵌入的原理与预训练词向量使用报告"><a href="#实验3（附加）：词嵌入的原理与预训练词向量使用报告" class="headerlink" title="实验3（附加）：词嵌入的原理与预训练词向量使用报告"></a>实验3（附加）：词嵌入的原理与预训练词向量使用报告</h1><p><center><div style='height:2mm;'></div><div style="font-size:14pt;">郑书航</div></center></p>
+<p><center><span style="font-size:9pt;line-height:9mm"><i>2022113601</i></span>
+</center></p>
+<h2 id="实验背景"><a href="#实验背景" class="headerlink" title="实验背景"></a>实验背景</h2><h3 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h3><p>本实验使用了经过抽样处理的<code>RT-Polarity</code>数据集，该数据集由正负情感分类的文本组成。其中，正面情感文本和负面情感文本分别保存在两个文件中。在实验中，我们将数据进行了清理、分词，并按照80:20的比例划分为训练集和测试集。</p>
+<ul>
+<li><code>rt-polarity.neg</code>数据集：包含一些对作品的负面评价。一下是取其中4个句子做翻译。</li>
+</ul>
+<ol>
+<li><strong>simplistic , silly and tedious .</strong>简陋、愚蠢且乏味。</li>
+<li><strong>it’s so laddish and juvenile , only teenage boys could possibly find it funny .</strong>这东西太粗俗幼稚了，可能只有少年男孩才会觉得好笑。</li>
+<li><strong>exploitative and largely devoid of the depth or sophistication that would make watching such a graphic treatment of the crimes bearable .</strong>具有剥削性，而且几乎完全缺乏能够使人忍受如此露骨犯罪描写的深度或精巧。</li>
+<li><strong>[garbus] discards the potential for pathological study , exhuming instead , the skewed melodrama of the circumstantial situation .</strong>[Garbus] 放弃了对病理学研究的潜力，转而挖掘情境中的扭曲的情节剧。</li>
+</ol>
+<ul>
+<li><code>rt-polarity.pos</code>数据集：包含一些对作品的正面评价。以下是取其中3个句子的翻译。</li>
+</ul>
+<ol>
+<li><strong>the rock is destined to be the 21st century’s new “ conan “ and that he’s going to make a splash even greater than arnold schwarzenegger , jean-claude van damme or steven seagal .</strong>巨石强森注定会成为21世纪的新“科南”，他的影响力将超过阿诺德·施瓦辛格、尚-克劳德·范·达美或史蒂文·席格。</li>
+<li><strong>the gorgeously elaborate continuation of “ the lord of the rings “ trilogy is so huge that a column of words cannot adequately describe co-writer/director peter jackson’s expanded vision of j . r . r . tolkien’s middle-earth .</strong>“指环王”三部曲的华丽延续如此宏大，以至于用几段文字无法充分描述编剧兼导演彼得·杰克逊对托尔金中土世界的宏大愿景。</li>
+<li><strong>effective but too-tepid biopic</strong>有效但略显平淡的传记片。</li>
+</ol>
+<h3 id="实验环境"><a href="#实验环境" class="headerlink" title="实验环境"></a>实验环境</h3><p>实验在Python环境下进行，主要依赖以下库：</p>
+<ul>
+<li><strong>PyTorch</strong>：用于构建神经网络模型和进行训练。</li>
+<li><strong>AllenNLP</strong>：用于加载和使用ELMo词嵌入模型。</li>
+<li><strong>Scikit-learn</strong>：用于数据集的划分和模型评估。</li>
+<li><strong>Matplotlib</strong>：用于绘制训练过程中损失和准确率的变化曲线。</li>
+</ul>
+<p>实验在带有CUDA支持的GPU上进行训练，确保了较快的计算速度。</p>
+<h3 id="词嵌入与预训练词向量"><a href="#词嵌入与预训练词向量" class="headerlink" title="词嵌入与预训练词向量"></a>词嵌入与预训练词向量</h3><p>​    词嵌入（Word Embedding）是一种将词汇表中的每个单词表示为一个固定长度的向量的技术。这些向量捕捉了单词之间的语义关系，使得相似意义的词在向量空间中距离较近。常见的词嵌入方法包括Word2Vec、GloVe等，它们通过大规模语料库的预训练学习单词的上下文信息，从而获得语义丰富的词向量。</p>
+<h3 id="ELMo词向量"><a href="#ELMo词向量" class="headerlink" title="ELMo词向量"></a>ELMo词向量</h3><p>​    ELMo（Embeddings from Language Models）是AllenNLP团队提出的一种基于双向LSTM的深度词嵌入模型。与传统的词嵌入方法不同，ELMo通过结合上下文信息生成动态的词嵌入，即每个单词在不同上下文中会生成不同的向量表示。这种方法大大提升了模型对多义词和复杂句子结构的理解能力。</p>
+<p>​    在本实验中，我们使用预训练好的ELMo模型来生成文本的词向量。这些词向量不仅包含了丰富的上下文语义信息，还能显著提高情感分类任务中的模型表现。ELMo模型通过一个两层的双向LSTM网络构建，每层包含2048个隐层单元，输出的词嵌入维度为512。我们使用了ELMo的预训练模型，并冻结了其参数以避免在训练过程中更新模型权重。</p>
+<h2 id="实验方案设计"><a href="#实验方案设计" class="headerlink" title="实验方案设计"></a>实验方案设计</h2><h3 id="数据预处理"><a href="#数据预处理" class="headerlink" title="数据预处理"></a>数据预处理</h3><p>代码主要用于文本数据的清理、处理和加载，特别是在自然语言处理（NLP）任务中。以下是对每个部分的详细解释：</p>
+<h4 id="数据清理函数-clean-str"><a href="#数据清理函数-clean-str" class="headerlink" title="数据清理函数 clean_str"></a>数据清理函数 <code>clean_str</code></h4><pre><code class="lang-python">def clean_str(string):
+    string = re.sub(r&quot;[^A-Za-z0-9(),!?\&#39;\`]&quot;, &quot; &quot;, string)
+    string = re.sub(r&quot;\&#39;s&quot;, &quot; \&#39;s&quot;, string)
+    string = re.sub(r&quot;\&#39;ve&quot;, &quot; \&#39;ve&quot;, string)
+    string = re.sub(r&quot;n\&#39;t&quot;, &quot; n\&#39;t&quot;, string)
+    string = re.sub(r&quot;\&#39;re&quot;, &quot; \&#39;re&quot;, string)
+    string = re.sub(r&quot;\&#39;d&quot;, &quot; \&#39;d&quot;, string)
+    string = re.sub(r&quot;\&#39;ll&quot;, &quot; \&#39;ll&quot;, string)
+    string = re.sub(r&quot;,&quot;, &quot; , &quot;, string)
+    string = re.sub(r&quot;!&quot;, &quot; ! &quot;, string)
+    string = re.sub(r&quot;\(&quot;, &quot; \( &quot;, string)
+    string = re.sub(r&quot;\)&quot;, &quot; \) &quot;, string)
+    string = re.sub(r&quot;\?&quot;, &quot; \? &quot;, string)
+    string = re.sub(r&quot;\s&#123;2,&#125;&quot;, &quot; &quot;, string)
+    return string.strip().lower()
+</code></pre>
+<ul>
+<li><strong>功能</strong>：该函数用于清理输入的字符串，去除不必要的字符，并规范化文本格式。</li>
+<li><strong>步骤</strong>：<ul>
+<li>使用正则表达式 <code>re.sub</code> 替换掉所有非字母、数字和特定标点符号的字符，替换为一个空格。</li>
+<li>处理常见的缩写形式（如 <code>\&#39;s</code>, <code>\&#39;ve</code>, <code>n\&#39;t</code> 等），确保它们前后有空格，以便后续处理。</li>
+<li>对标点符号（如逗号、感叹号、括号和问号）进行处理，确保它们前后有空格。</li>
+<li>最后，使用 <code>strip()</code> 去除字符串首尾的空格，并将字符串转换为小写。</li>
+</ul>
+</li>
+</ul>
+<h4 id="初始化-ELMo-词向量"><a href="#初始化-ELMo-词向量" class="headerlink" title="初始化 ELMo 词向量"></a>初始化 ELMo 词向量</h4><pre><code class="lang-python">elmo_options_file = &quot;elmo_2x2048_256_2048cnn_1xhighway_options.json&quot;
+elmo_weight_file = &quot;elmo_2x2048_256_2048cnn_1xhighway_weights.hdf5&quot;
+elmo_dim = 512
+
+def init_elmo():
+    elmo = Elmo(elmo_options_file, elmo_weight_file, 1, dropout=0)
+    for param in elmo.parameters():
+        param.requires_grad = False
+    return elmo
+</code></pre>
+<ul>
+<li><strong>功能</strong>：该部分代码用于初始化 ELMo（Embeddings from Language Models）模型。</li>
+<li><strong>步骤</strong>：<ul>
+<li>指定 ELMo 的配置文件和权重文件。</li>
+<li>创建 ELMo 实例，设置 <code>dropout</code> 为 0（表示不使用 dropout）。</li>
+<li>将模型参数的 <code>requires_grad</code> 属性设置为 <code>False</code>，表示在训练过程中不更新这些参数。</li>
+<li>返回初始化后的 ELMo 模型。</li>
+</ul>
+</li>
+</ul>
+<h4 id="获取-ELMo-词向量-get-elmo"><a href="#获取-ELMo-词向量-get-elmo" class="headerlink" title="获取 ELMo 词向量 get_elmo"></a>获取 ELMo 词向量 <code>get_elmo</code></h4><pre><code class="lang-python">def get_elmo(model, sentence_lists):
+    character_ids = batch_to_ids(sentence_lists)
+    embeddings = model(character_ids)
+    return embeddings[&#39;elmo_representations&#39;][0]
+</code></pre>
+<ul>
+<li><strong>功能</strong>：该函数用于获取输入句子的 ELMo 词向量。</li>
+<li><strong>步骤</strong>：<ul>
+<li>使用 <code>batch_to_ids</code> 函数将句子列表转换为字符 ID。</li>
+<li>将字符 ID 输入到 ELMo 模型中，获取词向量表示。</li>
+<li>返回 ELMo 生成的词向量。</li>
+</ul>
+</li>
+</ul>
+<h4 id="加载数据并生成标签-load-data-and-labels"><a href="#加载数据并生成标签-load-data-and-labels" class="headerlink" title="加载数据并生成标签 load_data_and_labels"></a>加载数据并生成标签 <code>load_data_and_labels</code></h4><pre><code class="lang-python">def load_data_and_labels(positive_data_file, negative_data_file):
+    positive_examples = list(open(positive_data_file, &quot;r&quot;, encoding=&#39;utf-8&#39;).readlines())
+    positive_examples = [s.strip() for s in positive_examples]
+    negative_examples = list(open(negative_data_file, &quot;r&quot;, encoding=&#39;utf-8&#39;).readlines())
+    negative_examples = [s.strip() for s in negative_examples]
+
+    x_text = positive_examples + negative_examples
+    x_text = [clean_str(sent) for sent in x_text]
+    x_text = list(map(lambda x: x.split(), x_text))
+
+    positive_labels = [1 for _ in positive_examples]
+    negative_labels = [0 for _ in negative_examples]
+    y = np.array(positive_labels + negative_labels)
+    return [x_text, y]
+</code></pre>
+<ul>
+<li><strong>功能</strong>：该函数用于加载正面和负面数据，并生成相应的标签。</li>
+<li><strong>步骤</strong>：<ul>
+<li>读取正面和负面数据文件的内容，并去除每行的首尾空白字符。</li>
+<li>将正面和负面示例合并为一个列表 <code>x_text</code>。</li>
+<li>对每个句子应用 <code>clean_str</code> 函数进行清理，并将句子分割成单词列表。</li>
+<li>为正面示例生成标签 <code>1</code>，为负面示例生成标签 <code>0</code>，并将它们合并为 NumPy 数组 <code>y</code>。</li>
+<li>返回清理后的文本和标签。</li>
+</ul>
+</li>
+</ul>
+<h4 id="举例解释"><a href="#举例解释" class="headerlink" title="举例解释"></a>举例解释</h4><p>好的，让我们结合上面给出的代码和数据例子，详细说明数据集是如何经过处理的。假设我们有以下两个文本文件：</p>
+<ul>
+<li><p><strong>正面数据文件 (<code>rt-polarity.pos</code>)</strong>:</p>
+<pre><code>I love this movie!
+This film is fantastic.
+What a great experience!
+</code></pre></li>
+<li><p><strong>负面数据文件 (<code>rt-polarity.neg</code>)</strong>:</p>
+<pre><code>I hate this movie.
+This film is terrible.
+What a bad experience.
+</code></pre></li>
+</ul>
+<ol>
+<li><p><strong>加载数据</strong>:<br>使用 <code>load_data_and_labels</code> 函数加载正面和负面数据文件。</p>
+<pre><code class="lang-python">positive_data_file = &quot;rt-polarity.pos&quot;
+negative_data_file = &quot;rt-polarity.neg&quot;
+x_text, y = load_data_and_labels(positive_data_file, negative_data_file)
+</code></pre>
+<ul>
+<li><strong>读取文件</strong>:<ul>
+<li><code>positive_examples</code> 将包含：<pre><code>[&#39;I love this movie!\n&#39;, &#39;This film is fantastic.\n&#39;, &#39;What a great experience!\n&#39;]
+</code></pre></li>
+<li><code>negative_examples</code> 将包含：<pre><code>[&#39;I hate this movie.\n&#39;, &#39;This film is terrible.\n&#39;, &#39;What a bad experience.\n&#39;]
+</code></pre></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>清理数据</strong>:<br>在 <code>load_data_and_labels</code> 函数中，调用 <code>clean_str</code> 函数对每个句子进行清理。</p>
+<ul>
+<li><p><strong>清理过程</strong>:</p>
+<ul>
+<li>对于正面示例：<ul>
+<li><code>I love this movie!</code> → <code>i love this movie !</code></li>
+<li><code>This film is fantastic.</code> → <code>this film is fantastic .</code></li>
+<li><code>What a great experience!</code> → <code>what a great experience !</code></li>
+</ul>
+</li>
+<li>对于负面示例：<ul>
+<li><code>I hate this movie.</code> → <code>i hate this movie .</code></li>
+<li><code>This film is terrible.</code> → <code>this film is terrible .</code></li>
+<li><code>What a bad experience.</code> → <code>what a bad experience .</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>最终的 <code>x_text</code></strong>:</p>
+<pre><code>[
+  [&#39;i&#39;, &#39;love&#39;, &#39;this&#39;, &#39;movie&#39;, &#39;!&#39;],
+  [&#39;this&#39;, &#39;film&#39;, &#39;is&#39;, &#39;fantastic&#39;, &#39;.&#39;],
+  [&#39;what&#39;, &#39;a&#39;, &#39;great&#39;, &#39;experience&#39;, &#39;!&#39;],
+  [&#39;i&#39;, &#39;hate&#39;, &#39;this&#39;, &#39;movie&#39;, &#39;.&#39;],
+  [&#39;this&#39;, &#39;film&#39;, &#39;is&#39;, &#39;terrible&#39;, &#39;.&#39;],
+  [&#39;what&#39;, &#39;a&#39;, &#39;bad&#39;, &#39;experience&#39;, &#39;.&#39;]
+]
+</code></pre></li>
+</ul>
+</li>
+<li><p><strong>生成标签</strong>:</p>
+<ul>
+<li>正面示例的标签为 <code>1</code>，负面示例的标签为 <code>0</code>。</li>
+<li><code>y</code> 将包含：<pre><code>[1, 1, 1, 0, 0, 0]
+</code></pre></li>
+</ul>
+</li>
+<li><p><strong>返回结果</strong>:<br><code>load_data_and_labels</code> 函数返回清理后的文本和标签：</p>
+<pre><code class="lang-python">return [x_text, y]
+</code></pre>
+</li>
+<li><p><strong>初始化 ELMo 词向量</strong>:<br>使用 <code>init_elmo</code> 函数初始化 ELMo 模型。</p>
+<pre><code class="lang-python">elmo_model = init_elmo()
+</code></pre>
+</li>
+<li><p><strong>获取 ELMo 词向量</strong>:<br>使用 <code>get_elmo</code> 函数获取每个句子的 ELMo 词向量表示。</p>
+<pre><code class="lang-python">embeddings = get_elmo(elmo_model, x_text)
+</code></pre>
+<ul>
+<li><p><strong>输入</strong>: <code>sentence_lists</code> 是一个包含多个句子的列表，每个句子又是一个单词列表。例如：</p>
+<pre><code>sentence_lists = [
+    [&#39;i&#39;, &#39;love&#39;, &#39;this&#39;, &#39;movie&#39;, &#39;!&#39;],
+    [&#39;this&#39;, &#39;film&#39;, &#39;is&#39;, &#39;fantastic&#39;, &#39;.&#39;],
+    [&#39;what&#39;, &#39;a&#39;, &#39;great&#39;, &#39;experience&#39;, &#39;!&#39;],
+    [&#39;i&#39;, &#39;hate&#39;, &#39;this&#39;, &#39;movie&#39;, &#39;.&#39;],
+    [&#39;this&#39;, &#39;film&#39;, &#39;is&#39;, &#39;terrible&#39;, &#39;.&#39;],
+    [&#39;what&#39;, &#39;a&#39;, &#39;bad&#39;, &#39;experience&#39;, &#39;.&#39;]
+]
+</code></pre></li>
+<li><p><strong>处理过程</strong>:</p>
+<ul>
+<li><code>batch_to_ids</code> 是 AllenNLP 库中的一个函数，用于将一批句子转换为字符 ID，以便 ELMo 模型可以处理。这通常是通过查找一个预定义的字典（词汇表）来完成的。</li>
+<li>例如，单词 “i” 可能被转换为字符 ID <code>[73]</code>，”love” 可能被转换为 <code>[108, 111, 118, 101]</code>，等等。</li>
+</ul>
+</li>
+<li><p><strong>输出</strong>: 最终，<code>character_ids</code> 将是一个包含多个句子的字符 ID 列表，格式如下：</p>
+<pre><code>character_ids = [
+    [[73], [108, 111, 118, 101], [116, 104, 105, 115], [109, 111, 118, 105, 101], [33]],
+    [[116, 104, 105, 115], [102, 105, 108, 109], [105, 115], [102, 97, 110, 116, 97, 115, 116, 105, 99], [46]],
+    ...
+]
+</code></pre><p>这里每个句子都被转换为一个字符 ID 的列表。</p>
+</li>
+<li><p><strong>输入</strong>: <code>character_ids</code> 是上一步生成的字符 ID 列表。</p>
+<ul>
+<li><strong>处理过程</strong>:<ul>
+<li>ELMo 模型会使用这些字符 ID 来计算每个句子的上下文嵌入。模型会考虑每个单词在句子中的位置以及上下文信息，从而生成更丰富的嵌入表示。</li>
+<li>这个过程通常涉及深度学习中的前向传播，模型会通过多个层（如 LSTM 或 GRU）来处理输入数据。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li><strong>输出</strong>: <code>embeddings</code> 将是一个包含每个句子的嵌入表示的字典，格式如下：<pre><code>embeddings = &#123;
+    &#39;elmo_representations&#39;: [
+        # 第一个元素是句子的嵌入表示
+        [[...], [...], [...], ...],  # 第一个句子的嵌入
+        [[...], [...], [...], ...],  # 第二个句子的嵌入
+        ...
+    ],
+    ...
+&#125;
+</code></pre>这里，<code>elmo_representations</code> 是一个列表，其中每个元素都是一个句子的嵌入表示，通常是一个高维向量（例如，1024维）。</li>
+</ul>
+<h3 id="模型训练"><a href="#模型训练" class="headerlink" title="模型训练"></a>模型训练</h3><p>模型训练部分实现了一个文本分类模型的训练和评估过程。它使用了 <code>TextCNN</code> 模型，并结合了 <code>ELMo</code> 预训练模型生成的词嵌入。以下是对代码的详细解释：</p>
+<h4 id="TextDataset-类"><a href="#TextDataset-类" class="headerlink" title="TextDataset 类"></a><code>TextDataset</code> 类</h4><pre><code class="lang-python">class TextDataset(Dataset):
+    def __init__(self, x, y):
+        self.data = list(zip(x, y))
+
+    def __len__(self):
+        return len(self.data)
+
+    def __getitem__(self, idx):
+        assert idx &lt; len(self)
+        return self.data[idx]
+</code></pre>
+<ul>
+<li><strong><code>TextDataset</code></strong>：这是一个自定义数据集类，继承自 PyTorch 的 <code>Dataset</code> 类。它将输入数据 <code>x</code> 和标签 <code>y</code> 组合成一个列表，并提供了获取数据长度和特定索引数据的方法。</li>
+<li><strong><code>__init__</code></strong>：构造函数，将输入 <code>x</code> 和 <code>y</code> 合并为一个列表。</li>
+<li><strong><code>__len__</code></strong>：返回数据集的长度。</li>
+<li><strong><code>__getitem__</code></strong>：返回指定索引的数据。</li>
+</ul>
+<h4 id="collate-fn-函数"><a href="#collate-fn-函数" class="headerlink" title="collate_fn 函数"></a><code>collate_fn</code> 函数</h4><pre><code class="lang-python">def collate_fn(batch):
+    data, label = zip(*batch)
+    return data, label
+</code></pre>
+<ul>
+<li><strong><code>collate_fn</code></strong>：这是一个用于将多个样本打包成一个批次的函数。在数据加载过程中，它会将 <code>batch</code> 中的数据和标签分离，并返回两个分别包含数据和标签的列表。</li>
+</ul>
+<h3 id="3-Block-类"><a href="#3-Block-类" class="headerlink" title="3. Block 类"></a>3. <code>Block</code> 类</h3><pre><code class="lang-python">class Block(nn.Module):
+    def __init__(self, kernel_s, embeddin_num, max_len, hidden_num):
+        super().__init__()
+        self.cnn = nn.Conv2d(in_channels=1, out_channels=hidden_num, kernel_size=(kernel_s, embeddin_num))
+        self.act = nn.ReLU()
+
+    def forward(self, batch_emb):
+        c = self.cnn(batch_emb)
+        a = self.act(c)
+        a = a.squeeze(dim=-1)
+        m = a.mean(dim=2)
+        return m
+</code></pre>
+<ul>
+<li><strong><code>Block</code></strong>：这是一个卷积神经网络（CNN）块，用于处理输入的嵌入表示。</li>
+<li><strong><code>__init__</code></strong>：初始化函数，设置卷积层和激活函数。<ul>
+<li><strong><code>self.cnn</code></strong>：一个2D卷积层，<code>in_channels=1</code> 表示输入的通道数为1，<code>out_channels=hidden_num</code> 表示输出通道数为隐藏单元数，<code>kernel_size=(kernel_s, embeddin_num)</code> 设置卷积核的大小。</li>
+<li><strong><code>self.act</code></strong>：ReLU 激活函数。</li>
+</ul>
+</li>
+<li><strong><code>forward</code></strong>：前向传播函数，计算卷积操作后应用 ReLU 激活函数，然后将最后一个维度压缩并沿着时间步（序列长度）进行平均。</li>
+</ul>
+<h3 id="4-TextCNNModel-类"><a href="#4-TextCNNModel-类" class="headerlink" title="4. TextCNNModel 类"></a>4. <code>TextCNNModel</code> 类</h3><pre><code class="lang-python">class TextCNNModel(nn.Module):
+    def __init__(self, max_len, class_num, hidden_num, elmo_model):
+        super().__init__()
+        self.elmo_model = elmo_model
+        self.emb_num = 512
+        self.block1 = Block(2, self.emb_num, max_len, hidden_num)
+        self.block2 = Block(3, self.emb_num, max_len, hidden_num)
+        self.block3 = Block(4, self.emb_num, max_len, hidden_num)
+        self.classifier = nn.Linear(hidden_num * 3, class_num)
+        self.loss_fun = nn.CrossEntropyLoss()
+
+    def forward(self, batch_idx):
+        batch_emb = get_elmo(self.elmo_model, batch_idx)
+        batch_emb = torch.unsqueeze(batch_emb, dim=1)
+
+        b1_result = self.block1(batch_emb)
+        b2_result = self.block2(batch_emb)
+        b3_result = self.block3(batch_emb)
+        feature = torch.cat([b1_result, b2_result, b3_result], dim=1)
+        pre = self.classifier(feature)
+        return pre
+</code></pre>
+<ul>
+<li><strong><code>TextCNNModel</code></strong>：这是整个文本分类模型的核心，包含了多个 <code>Block</code> 模块和一个全连接层进行分类。</li>
+<li><strong><code>__init__</code></strong>：初始化函数，定义了3个卷积块，每个块使用不同的卷积核大小（2、3、4），以及最后的全连接分类器。</li>
+<li><strong><code>forward</code></strong>：前向传播函数，依次通过 ELMo 获得词嵌入，通过不同的卷积块处理，并将结果拼接后输入全连接层进行分类。</li>
+</ul>
+<h4 id="train-and-evaluate-函数"><a href="#train-and-evaluate-函数" class="headerlink" title="train_and_evaluate 函数"></a><code>train_and_evaluate</code> 函数</h4><pre><code class="lang-python">def train_and_evaluate(model, train_loader, dev_loader, opt, loss_fn, device, epochs, save_model_best):
+    train_losses, dev_losses, dev_accuracies = [], [], []
+    acc_max = 0
+
+    for epoch in range(epochs):
+        model.train()
+        loss_sum, count = 0, 0
+        print(f&quot;**** Epoch &#123;epoch+1&#125; ****&quot;)
+        for batch_index, batch_data  in enumerate(train_loader):
+            x, labels = batch_data
+            batch_label = torch.LongTensor(labels)
+            batch_text = list(x)
+            batch_label = batch_label.to(device)
+            pred = model(batch_text)
+
+            loss = loss_fn(pred, batch_label)
+            opt.zero_grad()
+            loss.backward()
+            opt.step()
+            loss_sum += loss.item()
+            count += 1
+
+            if batch_index % 1000 == 20:
+                msg = &quot;[&#123;0&#125;/&#123;1:5d&#125;]\tTrain_Loss:&#123;2:.4f&#125;&quot;
+                print(msg.format(epoch + 1, batch_index + 1, loss_sum / count))
+                train_losses.append(loss_sum / count)
+                loss_sum, count = 0.0, 0
+
+        model.eval()
+        dev_loss_sum, count = 0, 0
+        all_pred, all_true = [], []
+        with torch.no_grad():
+            for batch_index, batch_data  in enumerate(dev_loader):
+                x, labels = batch_data
+                batch_label = torch.LongTensor(labels)
+                batch_text = list(x)
+                batch_label = batch_label.to(device)
+                pred = model(batch_text)
+                dev_loss_sum += loss_fn(pred, batch_label).item()
+                pred = torch.argmax(pred, dim=1)
+                all_pred.extend(pred.cpu().numpy())
+                all_true.extend(batch_label.cpu().numpy())
+                count += 1
+
+        dev_losses.append(dev_loss_sum / count)
+        acc = accuracy_score(all_true, all_pred)
+        dev_accuracies.append(acc)
+        print(f&quot;Epoch &#123;epoch+1&#125;, Dev Loss: &#123;dev_loss_sum / count:.4f&#125;, Dev Accuracy: &#123;acc:.4f&#125;&quot;)
+
+        if acc &gt; acc_max:
+            acc_max = acc
+            torch.save(model.state_dict(), save_model_best)
+            print(&quot;Saved best model&quot;)
+
+        print(&quot;*&quot; * 50)
+
+    # 保存损失和准确率图像
+    plt.figure(figsize=(10, 5))
+    plt.subplot(1, 2, 1)
+    plt.plot(train_losses, label=&quot;Train Loss&quot;)
+    plt.plot(dev_losses, label=&quot;Validation Loss&quot;)
+    plt.title(&quot;Loss over Epochs&quot;)
+    plt.xlabel(&quot;Epoch&quot;)
+    plt.ylabel(&quot;Loss&quot;)
+    plt.legend()
+
+    plt.subplot(1, 2, 2)
+    plt.plot(dev_accuracies, label=&quot;Validation Accuracy&quot;)
+    plt.title(&quot;Accuracy over Epochs&quot;)
+    plt.xlabel(&quot;Epoch&quot;)
+    plt.ylabel(&quot;Accuracy&quot;)
+    plt.legend()
+
+    plt.tight_layout()
+    plt.savefig(&quot;training_metrics.png&quot;)
+    plt.show()
+</code></pre>
+<ul>
+<li><p><strong>训练过程</strong>：</p>
+<ul>
+<li>每个 epoch 循环内，模型设置为训练模式 (<code>model.train()</code>)。</li>
+<li>对每个批次数据，通过模型前向传播计算预测结果 <code>pred</code>，并计算损失 <code>loss</code>。</li>
+<li>反向传播 (<code>loss.backward()</code>) 更新模型参数。</li>
+<li>每 1000 个批次打印一次当前的训练损失。</li>
+</ul>
+</li>
+<li><p><strong>评估过程</strong>：</p>
+<ul>
+<li>模型设置为评估模式 (<code>model.eval()</code>)，不更新模型参数。</li>
+<li>对开发集（验证集）进行前向传播，计算验证损失和准确率。</li>
+<li>如果当前 epoch 的验证准确率超过之前的最大值，则保存当前模型。</li>
+</ul>
+</li>
+<li><p><strong>结果展示</strong>：在训练结束后，代码还会生成并保存训练过程中损失和准确率的图表，方便分析模型性能。</p>
+</li>
+</ul>
+<h4 id="举例解释-1"><a href="#举例解释-1" class="headerlink" title="举例解释"></a>举例解释</h4><p>给定<code>x</code>和<code>y</code>的初始值如下：</p>
+<pre><code class="lang-python">x = [
+  [&#39;i&#39;, &#39;love&#39;, &#39;this&#39;, &#39;movie&#39;, &#39;!&#39;],
+  [&#39;this&#39;, &#39;film&#39;, &#39;is&#39;, &#39;fantastic&#39;, &#39;.&#39;],
+  [&#39;what&#39;, &#39;a&#39;, &#39;great&#39;, &#39;experience&#39;, &#39;!&#39;],
+  [&#39;i&#39;, &#39;hate&#39;, &#39;this&#39;, &#39;movie&#39;, &#39;.&#39;],
+  [&#39;this&#39;, &#39;film&#39;, &#39;is&#39;, &#39;terrible&#39;, &#39;.&#39;],
+  [&#39;what&#39;, &#39;a&#39;, &#39;bad&#39;, &#39;experience&#39;, &#39;.&#39;]
+]
+
+y = [1, 1, 1, 0, 0, 0]
+</code></pre>
+<p>我们来看<code>x</code>和<code>y</code>在这个训练流程中的详细变化过程。</p>
+<ol>
+<li><p>初始化数据集</p>
+<p>首先，<code>x</code>和<code>y</code>被传入<code>TextDataset</code>类的构造函数中创建一个数据集实例。</p>
+<pre><code class="lang-python">class TextDataset(Dataset):
+    def __init__(self, x, y):
+        self.data = list(zip(x, y))
+
+    def __len__(self):
+        return len(self.data)
+
+    def __getitem__(self, idx):
+        assert idx &lt; len(self)
+        return self.data[idx]
+</code></pre>
+<ul>
+<li><p><strong>构造函数 (<code>__init__</code>)</strong>：<code>x</code>和<code>y</code>被打包成一个元组列表<code>self.data</code>，其中每个元组包含一个句子和相应的标签，例如：<code>[([&#39;i&#39;, &#39;love&#39;, &#39;this&#39;, &#39;movie&#39;, &#39;!&#39;], 1), ([&#39;this&#39;, &#39;film&#39;, &#39;is&#39;, &#39;fantastic&#39;, &#39;.&#39;], 1), ...]</code>。</p>
+</li>
+<li><p><strong><code>__len__</code> 方法</strong>：返回数据集的长度，<code>len(x)</code>为<code>6</code>。</p>
+</li>
+<li><p><strong><code>__getitem__</code> 方法</strong>：接收索引<code>idx</code>并返回对应的数据项，比如<code>idx=0</code>时，返回<code>([&#39;i&#39;, &#39;love&#39;, &#39;this&#39;, &#39;movie&#39;, &#39;!&#39;], 1)</code>。</p>
+</li>
+</ul>
+</li>
+<li><p>数据加载和批处理</p>
+<p>在训练过程中，<code>DataLoader</code>会使用<code>TextDataset</code>实例生成批量数据。</p>
+<pre><code class="lang-python">train_loader = DataLoader(dataset, batch_size=2, shuffle=True, collate_fn=collate_fn)
+</code></pre>
+<p><code>collate_fn</code>会将<code>DataLoader</code>中的一个批次的数据（<code>batch</code>）组合成两个列表：<code>data</code>（句子）和<code>label</code>（标签），并返回它们。假设<code>batch_size=2</code>，一个批次的输出可能是：</p>
+<pre><code class="lang-python">batch = [
+  ([&#39;i&#39;, &#39;love&#39;, &#39;this&#39;, &#39;movie&#39;, &#39;!&#39;], 1),
+  ([&#39;this&#39;, &#39;film&#39;, &#39;is&#39;, &#39;fantastic&#39;, &#39;.&#39;], 1)
+]
+</code></pre>
+<p>在<code>collate_fn</code>中：</p>
+<pre><code class="lang-python">def collate_fn(batch):
+    data, label = zip(*batch)
+    return data, label
+</code></pre>
+<p><code>data</code>会是<code>([&#39;i&#39;, &#39;love&#39;, &#39;this&#39;, &#39;movie&#39;, &#39;!&#39;], [&#39;this&#39;, &#39;film&#39;, &#39;is&#39;, &#39;fantastic&#39;, &#39;.&#39;])</code>，<code>label</code>会是<code>(1, 1)</code>。</p>
+<ul>
+<li><code>*batch</code> 的操作在 Python 中被称为解包（unpacking），它会将一个可迭代对象中的元素解开，并分别传递给一个函数。可以形象理解为<code>for item in batch:</code>将每个item传给<code>zip</code></li>
+<li><code>zip</code>会将<code>*batch</code> 传入的每个<code>item</code>遍历一次分别再次包装起来。可以形象理解为<code>class1.push(item[0]),...</code></li>
+</ul>
+</li>
+<li><p>通过ELMo模型生成嵌入表示</p>
+<p>在<code>TextCNNModel</code>类的<code>forward</code>方法中：</p>
+<pre><code class="lang-python">def forward(self, batch_idx):
+    batch_emb = get_elmo(self.elmo_model, batch_idx)
+    batch_emb = torch.unsqueeze(batch_emb, dim=1)
+</code></pre>
+<p><code>batch_idx</code>传入的是<code>collate_fn</code>返回的<code>data</code>（即句子的列表），然后通过<code>get_elmo</code>函数生成ELMo的嵌入。假设<code>get_elmo</code>的输出是一个张量，每个句子对应一个维度为<code>(max_len, emb_num)</code>的嵌入表示，其中<code>max_len</code>是句子的最大长度，<code>emb_num</code>是每个词的嵌入维度。</p>
+<p><code>torch.unsqueeze</code>将<code>batch_emb</code>的形状从<code>(batch_size, max_len, emb_num)</code>扩展为<code>(batch_size, 1, max_len, emb_num)</code>，其中<code>1</code>表示一个额外的通道维度。</p>
+<p><code>data</code>（两个句子）被送入 <code>get_elmo(self.elmo_model, batch_idx)</code> 函数中，获取 ELMo 嵌入向量。假设每个单词生成的嵌入向量是 512 维，句子的最大长度为 13（这是句子长度对齐后的固定值）。因此，<code>batch_emb</code> 的维度为：</p>
+<pre><code>torch.Size([2, 13, 512])
+</code></pre><ul>
+<li>2 表示批次中的 2 条数据。</li>
+<li>13 表示每个句子有 13 个 token，句子长度不足的被 padding 补齐。</li>
+<li><p>512 表示每个 token 的 ELMo 嵌入向量维度。</p>
+<p><code>batch_emb</code> 通过 <code>torch.unsqueeze(batch_emb, dim=1)</code> 增加一个新的维度，这个新的维度表示输入的“通道数”（<code>in_channels</code>），通常用于卷积操作中。添加后，<code>batch_emb</code> 的维度变为：</p>
+</li>
+</ul>
+<pre><code>torch.Size([2, 1, 13, 512])
+</code></pre><ul>
+<li>1 表示输入通道数（单通道）。</li>
+</ul>
+</li>
+<li><p>卷积和特征提取</p>
+<p><code>TextCNNModel</code>包含三个卷积块，每个块使用不同的卷积核大小（2、3、4）来提取不同尺度的特征：</p>
+<pre><code class="lang-python">b1_result = self.block1(batch_emb)
+b2_result = self.block2(batch_emb)
+b3_result = self.block3(batch_emb)
+</code></pre>
+<p>每个卷积块输出的形状为<code>(batch_size, hidden_num, max_len - kernel_size + 1)</code>，然后通过<code>mean(dim=2)</code>在时间维度上取平均值，使每个卷积块的输出成为一个大小为<code>(batch_size, hidden_num)</code>的张量。</p>
+<p>在 <code>Block</code> 模型中，首先会通过一个 2D 卷积层处理数据。假设卷积核大小是 <code>(2, 512)</code>，即在句子长度方向（13 这个维度）滑动，处理两个单词的窗口，同时覆盖整个 512 维的嵌入向量。</p>
+<p>经过卷积操作后，假设卷积层的输出维度为 <code>torch.Size([2, 2, new_len, 1])</code>，然后使用 <code>squeeze(dim=-1)</code> 删除最后的维度，剩下的维度变为：</p>
+<pre><code>torch.Size([2, 2, new_len])
+</code></pre><ul>
+<li><code>2</code> 表示批次大小。</li>
+<li>第二个 <code>2</code> 是卷积核个数（<code>hidden_num</code>）。</li>
+<li><code>new_len</code> 是经过卷积和激活函数后的句子长度，取决于卷积核大小和 padding 方式。</li>
+</ul>
+<p>最后，通过<code>torch.cat</code>将三个卷积块的输出拼接在一起，形成一个大小为<code>(batch_size, hidden_num * 3)</code>的特征张量。</p>
+</li>
+<li><p>分类和损失计算</p>
+<p>拼接后的特征张量被传递给全连接层<code>self.classifier</code>进行分类，输出的预测张量<code>pre</code>具有大小<code>(batch_size, class_num)</code>。在训练过程中，通过交叉熵损失函数<code>self.loss_fun</code>计算预测结果与真实标签之间的损失。</p>
+</li>
+</ol>
+<h2 id="实验习题"><a href="#实验习题" class="headerlink" title="实验习题"></a>实验习题</h2><ol>
+<li>简述为何要执行<code>embeddings = torch.unsqueeze(embeddings, dim=1)</code>，包括<code>unsqueeze</code>操作的效果，及对<code>embedding</code>进行<code>unsqueeze</code>操作的理由。</li>
+</ol>
+<p>执行 <code>embeddings = torch.unsqueeze(embeddings, dim=1)</code> 的目的是在张量中增加一个新的维度，通常用于将数据格式调整为符合某些操作（如卷积层）的输入要求。</p>
+<ol>
+<li><p><code>unsqueeze</code> 操作的效果</p>
+<p><code>torch.unsqueeze</code> 的作用是在指定的维度上增加一个大小为 1 的维度。假设 <code>embeddings</code> 原本的形状为 <code>[batch_size, seq_len, embedding_dim]</code>，执行 <code>unsqueeze</code> 操作后，新的形状将变为 <code>[batch_size, 1, seq_len, embedding_dim]</code>。具体来说：</p>
+<ul>
+<li><p>原始维度 <code>[batch_size, seq_len, embedding_dim]</code>：</p>
+<ul>
+<li><code>batch_size</code>: 批次大小，即一次处理的数据样本数量。</li>
+<li><code>seq_len</code>: 每个样本的序列长度（即句子中的单词数）。</li>
+<li><code>embedding_dim</code>: 每个单词的嵌入向量维度。</li>
+</ul>
+</li>
+<li><p><strong><code>unsqueeze</code> 后的维度 <code>[batch_size, 1, seq_len, embedding_dim]</code></strong>：</p>
+<ul>
+<li>在 <code>dim=1</code> 的位置插入了一个大小为 1 的维度，这个新的维度通常被解释为“通道”维度。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>对 <code>embedding</code> 进行 <code>unsqueeze</code> 操作的理由</p>
+<ul>
+<li><strong>兼容卷积操作</strong>：在处理文本数据时，有时需要对嵌入进行卷积操作（通常在图像处理领域使用），卷积操作一般要求输入数据具有“通道”维度。通过在嵌入数据上添加一个通道维度 <code>[batch_size, 1, seq_len, embedding_dim]</code>，可以将嵌入作为单通道数据传递给卷积层。</li>
+<li><strong>增加模型灵活性</strong>：添加这个通道维度可以让模型在未来的改进中更容易扩展。例如，可以增加多个嵌入通道（如将多个不同的预训练嵌入结合起来），或在卷积层前进行其他复杂操作。</li>
+<li><strong>一致性</strong>：在神经网络中，尤其是处理多维数据（如图像或序列）的网络结构时，保持输入数据的维度一致性非常重要。通过 <code>unsqueeze</code> 操作，可以确保所有输入在通道维度上是一致的，从而简化了后续操作。</li>
+</ul>
+</li>
+</ol>
+
+    </div>
+    
+    
+    
+    
+    <div id="comment">
+        <div id="giscus-container" class="giscus"></div>
+    </div>
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2024 Aircraft
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Aircraft
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+<script
+    src="https://giscus.app/client.js"
+    data-repo="Aircraft-carrier/git-discussions-"
+    data-repo-id="R_kgDOMSMEYQ"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOMSMEYc4CglYu"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="light_tritanopia"
+    data-lang="zh-CN"
+    crossorigin
+    async
+></script>
+
+
+
+
+
+
+
+
+
+    
+
+    <canvas
+        id="fireworks"
+        style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 32767"
+    ></canvas>
+    <script src="https://s4.zstatic.net/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="/js/fireworks.min.js"></script>  
+
+    <canvas
+        id="background"
+        style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: -1"
+    ></canvas>
+    <script src="/js/background.min.js"></script>
+
+    <div id="cursor"></div>
+    <link rel="stylesheet" href="/css/cursor.min.css" />
+    <script src="/js/cursor.min.js"></script>
+
+</body>
+</html>
