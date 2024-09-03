@@ -3,7 +3,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8" />
-    <title>SpringBoot 2 | Aircraft</title>
+    <title>Axios 请求实例配置 | Aircraft</title>
     <meta name="author" content="Aircraft" />
     <meta name="description" content="谁替我上学 我可以替你睡觉" />
     <meta name="keywords" content="" />
@@ -156,22 +156,22 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>SpringBoot 2</h1>
+        <h1>Axios 请求实例配置</h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2024/7/21
+            2024/9/3
         </span>
         
         <span class="category">
-            <a href="/categories/Learning-Notes/">
+            <a href="/categories/Learning/">
                 <span class="icon">
                     <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
-                Learning Notes
+                Learning
             </a>
         </span>
         
@@ -184,22 +184,8 @@
             
             <span class="tag">
                 
-                <a href="/tags/SpringBoot/" style="color: #ffa2c4">
-                    SpringBoot
-                </a>
-            </span>
-            
-            <span class="tag">
-                
-                <a href="/tags/Vue3/" style="color: #03a9f4">
-                    Vue3
-                </a>
-            </span>
-            
-            <span class="tag">
-                
-                <a href="/tags/Maven/" style="color: #ff7d73">
-                    Maven
+                <a href="/tags/axio/" style="color: #00a596">
+                    axio
                 </a>
             </span>
             
@@ -208,130 +194,59 @@
     </div>
     
     <div class="content" v-pre>
-        <h1 id="SpringBoot"><a href="#SpringBoot" class="headerlink" title="SpringBoot"></a>SpringBoot</h1><p><a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1LMQD7FangseCC-GV1iLw2A?pwd=zzl1">网盘</a><br><a target="_blank" rel="noopener" href="https://aircraft-carrier.github.io/2024/07/11/SpringBoot_1/">SpringBoot 1</a></p>
-<p><a target="_blank" rel="noopener" href="https://springdoc.cn/spring-boot/">Spring Boot 中文文档 (springdoc.cn)</a></p>
-<h2 id="🏜️依赖和配置文件"><a href="#🏜️依赖和配置文件" class="headerlink" title="🏜️依赖和配置文件"></a>🏜️依赖和配置文件</h2><h3 id="依赖文件："><a href="#依赖文件：" class="headerlink" title="依赖文件："></a>依赖文件：</h3><p><code>pom.xml</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/b3ae8c360218f1775f25093b35563e1.png" alt=""></p>
-<p><code>Maven</code>坐标</p>
-<p>Maven坐标是Maven项目管理工具用来唯一标识项目的一种标识方式，它由三个主要部分组成：group ID（组织ID）、artifact ID（项目ID）和version（版本号）。</p>
-<ol>
-<li><p>Group ID（组织ID）：表示项目所属的组织或者团队，通常是组织的域名倒序，例如com.example。</p>
-</li>
-<li><p>Artifact ID（项目ID）：表示项目的唯一标识符，通常用于区分不同的项目，例如app或者library。</p>
-</li>
-<li><p>Version（版本号）：表示项目的具体版本信息，用于区分不同的项目版本，通常采用数字或字母组合，例如1.0.0。</p>
-</li>
-</ol>
-<p>Maven坐标的格式为：groupID:artifactID:version。通过这种方式，Maven可以识别并下载项目依赖的jar包，保证项目构建的依赖关系和版本控制。</p>
-<p><a target="_blank" rel="noopener" href="https://mvnrepository.com/">Maven Repository</a></p>
-<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240721145419238.png" alt=""></p>
-<p>配置本地仓库：将</p>
-<p><code>D:\java_env\apache-maven-3.9.8\conf</code>下<code>settings.xml</code>中添加：</p>
-<pre><code class="lang-xml">&lt;localRepository&gt;/path/to/local/repo&lt;/localRepository&gt;
+        <h1 id="Axios-请求实例配置"><a href="#Axios-请求实例配置" class="headerlink" title="Axios 请求实例配置"></a>Axios 请求实例配置</h1><h2 id="导入依赖"><a href="#导入依赖" class="headerlink" title="导入依赖"></a>导入依赖</h2><pre><code class="lang-javascript">import axios from &#39;axios&#39;;
+import &#123; ElMessage &#125; from &#39;element-plus&#39;;
+import &#123; useTokenStore &#125; from &#39;@/stores/token.js&#39;;
+import router from &#39;@/router&#39;;
 </code></pre>
-<p>远程仓库：</p>
-<p>中央仓库不修改：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/795295e7a7f098aadf1c168557e3305.png" alt=""></p>
-<p>添加镜像仓库：</p>
-<p><code>D:\java_env\apache-maven-3.9.8\conf</code>下<code>settings.xml</code>中添加：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/7c5a3e294f0a42ab28071d300efb54e.png" alt=""></p>
-<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240721155851872.png" alt=""></p>
-<h3 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h3><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV14z4y1N7pg?p=5&amp;vd_source=d3bc4c959fab1a2090edcb9ed0b9d2e5">配置文件学习</a></p>
-<ul>
-<li><code>application.properties</code>配置</li>
+<h2 id="创建-Axios-实例"><a href="#创建-Axios-实例" class="headerlink" title="创建 Axios 实例"></a>创建 Axios 实例</h2><pre><code class="lang-javascript">const baseURL = &#39;/api&#39;;
+const instance = axios.create(&#123; baseURL &#125;);
+</code></pre>
+<h2 id="添加请求拦截器"><a href="#添加请求拦截器" class="headerlink" title="添加请求拦截器"></a>添加请求拦截器</h2><p>在发送请求之前，检查并添加 <code>token</code> 以进行身份验证。</p>
+<pre><code class="lang-javascript">instance.interceptors.request.use(
+    (config) =&gt; &#123;
+        const tokenStore = useTokenStore();
+        if (tokenStore.token) &#123;
+            config.headers.Authorization = tokenStore.token;
+        &#125;
+        return config;
+    &#125;,
+    (err) =&gt; &#123;
+        return Promise.reject(err);
+    &#125;
+);
+</code></pre>
+<h3 id="功能说明"><a href="#功能说明" class="headerlink" title="功能说明"></a>功能说明</h3><ul>
+<li><strong>Token 添加</strong>: 在请求头中添加 <code>Authorization</code> 字段，附带用户的 <code>token</code>。</li>
+<li><strong>错误处理</strong>: 如果请求配置出错，将错误传递到后续处理。</li>
 </ul>
-<p><a target="_blank" rel="noopener" href="https://springdoc.cn/spring-boot/application-properties.html#appendix.application-properties">官方ApplicationProperties文档</a></p>
-<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240721110855853.png" alt=""></p>
-<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240721111615954.png" alt=""></p>
-<pre><code class="lang-yml">spring.application.name=springboot_quickstart
-server.port=9090
-server.servlet.context-path=/start
-spring.datasource.url=jdbc:mysql://localhost:3306/your_database  
-spring.datasource.username=your_username  
-spring.datasource.password=your_password  
-spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+<h2 id="添加响应拦截器"><a href="#添加响应拦截器" class="headerlink" title="添加响应拦截器"></a>添加响应拦截器</h2><p>在接收到服务器响应后，根据业务逻辑处理响应结果。</p>
+<pre><code class="lang-javascript">instance.interceptors.response.use(
+    (result) =&gt; &#123;
+        if (result.data.code === 0) &#123;
+            return result.data;
+        &#125; else &#123;
+            ElMessage.error(result.data.msg ? result.data.msg : &#39;服务异常&#39;);
+            return Promise.reject(result.data);
+        &#125;
+    &#125;,
+    (err) =&gt; &#123;
+        if (err.response.status === 401) &#123;
+            ElMessage.error(&#39;请先登录&#39;);
+            router.push(&#39;/login&#39;);
+        &#125; else &#123;
+            ElMessage.error(&#39;服务异常&#39;);
+        &#125;
+        return Promise.reject(err);
+    &#125;
+);
 </code></pre>
-<blockquote>
-<p>使用‘  .  ’来做层级划分</p>
-</blockquote>
-<ul>
-<li><code>application.yml</code>配置</li>
+<h3 id="功能说明-1"><a href="#功能说明-1" class="headerlink" title="功能说明"></a>功能说明</h3><ul>
+<li><strong>成功状态处理</strong>: 如果状态码为 <code>0</code>，则返回业务数据。</li>
+<li><strong>失败状态处理</strong>: 根据返回的状态码显示错误信息，未登录时跳转到登录页面。</li>
 </ul>
-<pre><code class="lang-yml">server:
-  port: 9191
-  servlet:
-    context-path: /start2
-
-spring:
-  datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/mybatis
-    username: root
-    password: 1234
+<h2 id="导出-Axios-实例"><a href="#导出-Axios-实例" class="headerlink" title="导出 Axios 实例"></a>导出 Axios 实例</h2><pre><code class="lang-javascript">export default instance;
 </code></pre>
-<blockquote>
-<p>使用换行做层级划分</p>
-</blockquote>
-<ul>
-<li><p>书写三方技术需要的信息根据官方文档</p>
-</li>
-<li><p>自定义配置信息</p>
-</li>
-</ul>
-<p>获取自定义配置信息</p>
-<pre><code class="lang-java">/* 写死 */
-public class EmailProperties &#123;
-    // 发件人邮箱
-    public String user = &quot;2451752823@qq.com&quot;;
-
-    // 授权码
-    public String code = &quot;daafadededadxa&quot;;
-
-    // 发件人邮箱对应服务
-    public String host = &quot;smtp.qq.com&quot;;
-
-    // 发送邮箱前，是否进行身份认证
-    private boolean auth = true;
-&#125;
-/* 配置文件输入 */
-public class EmailProperties &#123;
-    // 发件人邮箱
-    @value(&quot;$&#123;email.user&#125;&quot;)
-    public String user;
-
-    // 授权码
-    @value(&quot;$&#123;email.code&#125;&quot;)
-    public String code;
-
-    ...
-&#125;
-/* 前缀注解 */
-@ConfigurationProperties(prefix = &quot;email&quot;)
-public class EmailProperties &#123;
-    // 发件人邮箱
-    public String user;
-
-    // 授权码
-    public String code;
-
-    ...
-&#125;
-</code></pre>
-<p><code>application.yml</code></p>
-<pre><code class="lang-yml">email:
-    user: 2451752823@qq.com
-    code: daafadededadxa
-    host: smtp.qq.com
-    auth: true
-
-habbies:
-    - 打篮球
-    - 游泳
-</code></pre>
-<blockquote>
-<p>配置信息存放在配置文件中，而不是直接写道java类中，再修改配置的使用就不需要重新调试运行</p>
-</blockquote>
-<p><a target="_blank" rel="noopener" href="https://aircraft-carrier.github.io/2024/07/22/SpringBoot-3/">SpringBoot 3</a></p>
 
     </div>
     
