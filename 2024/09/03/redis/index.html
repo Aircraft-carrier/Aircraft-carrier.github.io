@@ -3,7 +3,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8" />
-    <title>Categories: Paper | Aircraft</title>
+    <title>redis做后端拦截器 | Aircraft</title>
     <meta name="author" content="Aircraft" />
     <meta name="description" content="谁替我上学 我可以替你睡觉" />
     <meta name="keywords" content="" />
@@ -37,6 +37,10 @@
 
 
 <script src="/js/lib/preview.js"></script>
+
+
+
+
 
 
 
@@ -150,38 +154,20 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <div id="archives">
-    
-    <div class="categories-tags">
-        
-        
-        
-        <span>
-            <a href="/categories/Paper/" style="background: linear-gradient(120deg, #9abbf7 0%, #ffbbf4 100%)">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Paper
-            </a>
+            <div class="article">
+    <div>
+        <h1>redis做后端拦截器</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2024/9/3
         </span>
         
-        
-        
-        
-        
-        <span>
-            <a href="/categories/Learning-Notes/" style="background: #ff7d73">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Learning Notes
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/categories/Learning/" style="background: #03a9f4">
+        <span class="category">
+            <a href="/categories/Learning/">
                 <span class="icon">
                     <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
@@ -190,184 +176,89 @@
         </span>
         
         
-        
-        <span>
-            <a href="/categories/Database/" style="background: #00bcd4">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Database
-            </a>
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/redis/" style="color: #00bcd4">
+                    redis
+                </a>
+            </span>
+            
         </span>
-        
-        
-        
-        <span>
-            <a href="/categories/Learning/Introduction/" style="background: #ff7d73">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Introduction
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/categories/Blog/" style="background: #ffa2c4">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Blog
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/categories/codeforces/" style="background: #00a596">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                codeforces
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/categories/Database/Learning-Notes/" style="background: #00bcd4">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Learning Notes
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/categories/General/" style="background: #ffa2c4">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                General
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/categories/Learning/visualization/" style="background: #ff7d73">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                visualization
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/categories/Machine-Learning/" style="background: #03a9f4">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Machine Learning
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/categories/Machine-Learning/Hung-yi-Lee/" style="background: #ffa2c4">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Hung-yi Lee
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/categories/Machine-Learning/Hung-yi-Lee/Pytorch/" style="background: #00a596">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Pytorch
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/categories/Learning/heartSeg/" style="background: #00bcd4">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                heartSeg
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/categories/Learning/heartSeg/project/" style="background: #00a596">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                project
-            </a>
-        </span>
-        
         
     </div>
     
-    <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2024/7/4</div>
-            <a href="/2024/07/04/Bayesian-Crowd-Counting/">
-                <h3>Bayesian-Crowd-Counting</h3>
-            </a>
-            <div class="info">
-                
-                <span class="category">
-                    <a href="/categories/Paper/">
-                        <span class="icon">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </span>
-                        Paper
-                    </a>
-                </span>
-                
-                
-                <span class="tags">
-                    <span class="icon">
-                        <i class="fa-solid fa-tags fa-fw"></i>
-                    </span>
-                    
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/Crowd-Counting/" style="color: #00bcd4">
-                            Crowd-Counting
-                        </a>
-                    </span>
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/Bayesian/" style="color: #03a9f4">
-                            Bayesian
-                        </a>
-                    </span>
-                    
-                </span>
-                
-            </div>
-        </div>
+    <div class="content" v-pre>
+        <h1 id="LoginInterceptor-类"><a href="#LoginInterceptor-类" class="headerlink" title="LoginInterceptor 类"></a>LoginInterceptor 类</h1><h2 id="包路径"><a href="#包路径" class="headerlink" title="包路径"></a>包路径</h2><pre><code class="lang-java">package com.itheima.interceptors;
+</code></pre>
+<h2 id="类定义"><a href="#类定义" class="headerlink" title="类定义"></a>类定义</h2><pre><code class="lang-java">@Component
+public class LoginInterceptor implements HandlerInterceptor &#123;
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
+</code></pre>
+<h2 id="预处理方法"><a href="#预处理方法" class="headerlink" title="预处理方法"></a>预处理方法</h2><pre><code class="lang-java">    @Override
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception &#123;
+        // 令牌验证
+        String token = request.getHeader(&quot;Authorization&quot;);
+        // 验证 token
+        try &#123;
+            // 从 Redis 中获取相同的 token
+            ValueOperations&lt;String, String&gt; operations = stringRedisTemplate.opsForValue();
+            String redisToken = operations.get(token);
+            if (redisToken == null) &#123;
+                // token 已经失效了
+                throw new RuntimeException();
+            &#125;
+            Map&lt;String, Object&gt; claims = JwtUtil.parseToken(token);
+
+            // 把业务数据存储到 ThreadLocal 中
+            ThreadLocalUtil.set(claims);
+            // 放行
+            return true;
+        &#125; catch (Exception e) &#123;
+            // HTTP 响应状态码为 401
+            response.setStatus(401);
+            // 不放行
+            return false;
+        &#125;
+    &#125;
+</code></pre>
+<h2 id="完成后处理方法"><a href="#完成后处理方法" class="headerlink" title="完成后处理方法"></a>完成后处理方法</h2><pre><code class="lang-java">    @Override
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception &#123;
+        // 清空 ThreadLocal 中的数据
+        ThreadLocalUtil.remove();
+    &#125;
+&#125;
+</code></pre>
+<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><ul>
+<li><strong>功能</strong>: <code>LoginInterceptor</code> 类是一个 Spring MVC 的拦截器，主要用于验证用户请求中的 JWT 令牌。</li>
+<li><strong>依赖</strong>: 使用了 <code>StringRedisTemplate</code> 来从 Redis 中获取存储的令牌。</li>
+<li><strong>方法</strong>:<ul>
+<li><code>preHandle</code>: 在请求处理之前执行，验证请求中的 JWT 令牌，并将解析后的信息存储在 <code>ThreadLocal</code> 中。</li>
+<li><code>afterCompletion</code>: 在请求处理完成后执行，清空 <code>ThreadLocal</code> 中的数据，以避免内存泄漏。</li>
+</ul>
+</li>
+</ul>
+<h2 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h2><ul>
+<li>如果令牌失效或验证失败，拦截器将返回 HTTP 状态码 401，表示未授权。</li>
+</ul>
+
     </div>
+    
+    
+    
+    
+    <div id="comment">
+        <div id="giscus-container" class="giscus"></div>
+    </div>
+    
+    
+    
     
 </div>
 
@@ -399,6 +290,33 @@
         
     </div>
     <script src="/js/main.js"></script>
+    
+    
+<script
+    src="https://giscus.app/client.js"
+    data-repo="Aircraft-carrier/git-discussions-"
+    data-repo-id="R_kgDOMSMEYQ"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOMSMEYc4CglYu"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="light_tritanopia"
+    data-lang="zh-CN"
+    crossorigin
+    async
+></script>
+
+
+
+
+
+
+
+
+
     
 
     <canvas

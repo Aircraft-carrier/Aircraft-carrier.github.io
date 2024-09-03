@@ -3,7 +3,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8" />
-    <title>Categories: Paper | Aircraft</title>
+    <title>Aircraft</title>
     <meta name="author" content="Aircraft" />
     <meta name="description" content="谁替我上学 我可以替你睡觉" />
     <meta name="keywords" content="" />
@@ -41,6 +41,8 @@
 
 
 
+
+<script src="/js/lib/home.js"></script>
 
 <link rel="stylesheet" href="/css/main.css" />
 
@@ -150,104 +152,42 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <div id="archives">
-    
-    <div class="categories-tags">
-        
-        
-        
-        <span>
-            <a href="/categories/Paper/" style="background: linear-gradient(120deg, #9abbf7 0%, #ffbbf4 100%)">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Paper
-            </a>
+            <div id="home-head">
+    <div
+        id="home-background"
+        ref="homeBackground"
+        data-images="/images/background.jpg,/images/background5.jpg,/images/background6.jpg,/images/background7.jpg"
+    ></div>
+    <div id="home-info" @click="homeClick">
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="info">
+            <div class="wrap">
+                <h1>Aircraft</h1>
+                <h3>zsh</h3>
+                <h5>谁替我上学 我可以替你睡觉</h5>
+            </div>
         </span>
+    </div>
+</div>
+<div
+    id="home-posts-wrap"
+    ref="homePostsWrap"
+    true
+>
+    <div id="home-posts">
         
+
+<div class="post">
+    <a href="/2017/01/01/hello-world/">
+        <h2 class="post-title">Hello World</h2>
+    </a>
+    <div class="category-and-date">
         
-        
-        
-        
-        <span>
-            <a href="/categories/Learning-Notes/" style="background: #ff7d73">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Learning Notes
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/categories/Learning/" style="background: #03a9f4">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Learning
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/categories/Database/" style="background: #00bcd4">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Database
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/categories/Learning/Introduction/" style="background: #ff7d73">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Introduction
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/categories/Blog/" style="background: #ffa2c4">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Blog
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/categories/codeforces/" style="background: #00a596">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                codeforces
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/categories/Database/Learning-Notes/" style="background: #00bcd4">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Learning Notes
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/categories/General/" style="background: #ffa2c4">
+        <span class="category">
+            <a href="/categories/General/">
                 <span class="icon">
                     <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
@@ -255,118 +195,110 @@
             </a>
         </span>
         
-        
-        
-        <span>
-            <a href="/categories/Learning/visualization/" style="background: #ff7d73">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                visualization
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/categories/Machine-Learning/" style="background: #03a9f4">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Machine Learning
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/categories/Machine-Learning/Hung-yi-Lee/" style="background: #ffa2c4">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Hung-yi Lee
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/categories/Machine-Learning/Hung-yi-Lee/Pytorch/" style="background: #00a596">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Pytorch
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/categories/Learning/heartSeg/" style="background: #00bcd4">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                heartSeg
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/categories/Learning/heartSeg/project/" style="background: #00a596">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                project
-            </a>
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2017/1/1
         </span>
         
         
     </div>
-    
-    <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2024/7/4</div>
-            <a href="/2024/07/04/Bayesian-Crowd-Counting/">
-                <h3>Bayesian-Crowd-Counting</h3>
-            </a>
-            <div class="info">
-                
-                <span class="category">
-                    <a href="/categories/Paper/">
-                        <span class="icon">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </span>
-                        Paper
-                    </a>
-                </span>
-                
-                
-                <span class="tags">
-                    <span class="icon">
-                        <i class="fa-solid fa-tags fa-fw"></i>
-                    </span>
-                    
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/Crowd-Counting/" style="color: #00bcd4">
-                            Crowd-Counting
-                        </a>
-                    </span>
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/Bayesian/" style="color: #03a9f4">
-                            Bayesian
-                        </a>
-                    </span>
-                    
-                </span>
-                
-            </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>Hello World</p>
+
+            
         </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/Introduction/" style="color: #03a9f4">Introduction</a>
+        </span>
+        
+    </div>
+    <a href="/2017/01/01/hello-world/" class="go-post">阅读全文</a>
+</div>
+
+
+        <div class="page-current">
+    
+    <a class="page-num" href="/page/3/">
+        <i class="fa-solid fa-caret-left fa-fw"></i>
+    </a>
+    <a class="page-num" href="/">1</a>
+    <span class="page-omit">...</span>
+    
+    <span class="current">4</span>
+    
+    
+    
+    
+</div>
+
+    </div>
+    
+    <div id="home-card">
+        <div id="card-style">
+    <div id="card-div">
+        <div class="avatar">
+            <img src="/images/avatar.jpg" alt="avatar" />
+        </div>
+        <div class="name">Aircraft</div>
+        <div class="description">
+            <p>好热~~~啊！<br>…</p>
+
+        </div>
+        
+        <div class="icon-links">
+            
+            <span class="icon-link">
+                <a target="_blank" rel="noopener" href="https://github.com/Aircraft-carrier">
+                    <i
+                        class="fa-brands fa-github fa-fw"
+                    ></i>
+                </a>
+            </span>
+            
+            <span class="icon-link">
+                <a target="_blank" rel="noopener" href="https://www.weibo.com/u/7562264534">
+                    <i
+                        class="fa-brands fa-weibo fa-fw"
+                    ></i>
+                </a>
+            </span>
+            
+        </div>
+        
+        
+        <div class="friend-links">
+            
+            <div class="friend-link">
+                <a target="_blank" rel="noopener" href="https://argvchs.github.io">Argvchs</a>
+            </div>
+            
+            <div class="friend-link">
+                <a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_74314859?spm=1010.2135.3001.5421">CSDN</a>
+            </div>
+            
+            <div class="friend-link">
+                <a target="_blank" rel="noopener" href="https://aircraft-carrier.netlify.app/">Netlify</a>
+            </div>
+            
+        </div>
+        
+    </div>
+</div>
+
     </div>
     
 </div>
