@@ -3,7 +3,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8" />
-    <title>vue 2 | Aircraft</title>
+    <title>重装 MySQL - ubuntu | Aircraft</title>
     <meta name="author" content="Aircraft" />
     <meta name="description" content="谁替我上学 我可以替你睡觉" />
     <meta name="keywords" content="" />
@@ -156,22 +156,22 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>vue 2</h1>
+        <h1>重装 MySQL - ubuntu</h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2024/7/24
+            2024/9/7
         </span>
         
         <span class="category">
-            <a href="/categories/Learning-Notes/">
+            <a href="/categories/Learning/">
                 <span class="icon">
                     <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
-                Learning Notes
+                Learning
             </a>
         </span>
         
@@ -184,8 +184,8 @@
             
             <span class="tag">
                 
-                <a href="/tags/Vue3/" style="color: #00a596">
-                    Vue3
+                <a href="/tags/mysql/" style="color: #03a9f4">
+                    mysql
                 </a>
             </span>
             
@@ -194,41 +194,192 @@
     </div>
     
     <div class="content" v-pre>
-        <h1 id="Vue"><a href="#Vue" class="headerlink" title="Vue"></a>Vue</h1><p><a target="_blank" rel="noopener" href="https://cn.vuejs.org/guide/introduction.html">Vue深入文档</a></p>
-<h2 id="1-JavaScript-导入导出"><a href="#1-JavaScript-导入导出" class="headerlink" title="1 JavaScript 导入导出"></a>1 JavaScript 导入导出</h2><p><strong>简单导入</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240724171031052.png" alt=""></p>
-<p><strong>按需导入</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240724171124075.png" alt=""></p>
-<h2 id="2-环境准备"><a href="#2-环境准备" class="headerlink" title="2 环境准备"></a>2 环境准备</h2><h3 id="2-1-介绍"><a href="#2-1-介绍" class="headerlink" title="2.1 介绍"></a>2.1 介绍</h3><p><code>create-vue</code>是Vue官方提供的最新的脚手架工具，用于快速生成一个工程化的Vue项目。</p>
-<p><strong>提供功能</strong>：统一的目录结构，本地调试，热部署，单元测试，集成打包</p>
-<p><strong>依赖环境</strong>：NodeJS </p>
-<h3 id="2-2-安装NodeJs"><a href="#2-2-安装NodeJs" class="headerlink" title="2.2 安装NodeJs"></a>2.2 安装NodeJs</h3><p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240724171601624.png" alt=""></p>
-<h3 id="2-3-npm"><a href="#2-3-npm" class="headerlink" title="2.3 npm"></a>2.3 npm</h3><p>npm（Node Package Manager）是NodeJS的软件包管理器。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240724171732908.png" alt=""></p>
-<h2 id="3-Vue项目创建"><a href="#3-Vue项目创建" class="headerlink" title="3 Vue项目创建"></a>3 Vue项目创建</h2><ul>
-<li>创建一个工程化的Vue项目，执行命令：<code>npm init vue@latest</code></li>
-</ul>
-<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240724172048973.png" alt=""></p>
+        <h1 id="重装MySQL"><a href="#重装MySQL" class="headerlink" title="重装MySQL"></a>重装MySQL</h1><p>重装 MySQL 的步骤如下，确保在执行这些步骤之前备份任何重要数据，因为重装过程可能会删除现有的数据库和配置。</p>
+<h2 id="重装-MySQL-的步骤"><a href="#重装-MySQL-的步骤" class="headerlink" title="重装 MySQL 的步骤"></a>重装 MySQL 的步骤</h2><ol>
+<li><p><strong>卸载现有的 MySQL</strong>：</p>
 <ul>
-<li>进入项目目录，执行命令安装当前项目的依赖：<code>npm install</code></li>
+<li>首先，您需要卸载当前安装的 MySQL。使用以下命令：</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240724180230484.png" alt=""></p>
+<pre><code class="lang-bash">sudo apt-get remove --purge mysql-server mysql-client mysql-common mysql-server-core-* mysql-client-core-*
+</code></pre>
 <ul>
-<li>Vue项目-目录结构</li>
+<li>这将删除 MySQL 服务器、客户端及其所有配置文件。</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240724180325500.png" alt=""></p>
+</li>
+<li><p><strong>删除 MySQL 数据目录</strong>：</p>
 <ul>
-<li>首次打开页面</li>
+<li>卸载后，您可能还需要删除 MySQL 的数据目录，以确保没有残留数据。默认情况下，数据目录位于 <code>/var/lib/mysql</code>。使用以下命令：</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240724180402160.png" alt=""></p>
-<h2 id="4-Vue项目开发"><a href="#4-Vue项目开发" class="headerlink" title="4 Vue项目开发"></a>4 Vue项目开发</h2><ul>
-<li>各文件的关系</li>
-</ul>
-<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240724180637877.png" alt=""></p>
+<pre><code class="lang-bash">sudo rm -rf /var/lib/mysql
+</code></pre>
 <ul>
-<li>根组件各个模块的功能</li>
+<li>如果您使用了自定义数据目录（如 <code>/data/mysql</code>），请确保也删除该目录。</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240724180752154.png" alt=""></p>
+</li>
+<li><p><strong>删除 MySQL 配置文件</strong>：</p>
+<ul>
+<li>您还可以删除 MySQL 的配置文件，通常位于 <code>/etc/mysql</code>：</li>
+</ul>
+<pre><code class="lang-bash">sudo rm -rf /etc/mysql
+</code></pre>
+</li>
+<li><p><strong>更新包列表</strong>：</p>
+<ul>
+<li>在重新安装之前，更新您的包列表：</li>
+</ul>
+<pre><code class="lang-bash">sudo apt-get update
+</code></pre>
+</li>
+<li><p><strong>重新安装 MySQL</strong>：</p>
+<ul>
+<li>使用以下命令重新安装 MySQL：</li>
+</ul>
+<pre><code class="lang-bash">sudo apt-get install mysql-server
+</code></pre>
+<ul>
+<li>在安装过程中，您可能会被要求设置 MySQL 的 root 密码。</li>
+</ul>
+</li>
+<li><p><strong>初始化 MySQL 数据目录</strong>（如果需要）：</p>
+<ul>
+<li>在某些情况下，您可能需要手动初始化数据目录。可以使用以下命令：</li>
+</ul>
+<pre><code class="lang-bash">sudo mysqld --initialize --user=mysql --datadir=/var/lib/mysql
+</code></pre>
+</li>
+<li><p><strong>启动 MySQL 服务</strong>：</p>
+<ul>
+<li>安装完成后，启动 MySQL 服务：</li>
+</ul>
+<pre><code class="lang-bash">sudo systemctl start mysql
+</code></pre>
+<ul>
+<li>确保 MySQL 服务在启动后正常运行：</li>
+</ul>
+<pre><code class="lang-bash">sudo systemctl status mysql
+ps -ef | grep mysql
+</code></pre>
+</li>
+<li><p><strong>设置 MySQL 开机自启</strong>：</p>
+<ul>
+<li>如果您希望 MySQL 在系统启动时自动启动，可以使用以下命令：</li>
+</ul>
+<pre><code class="lang-bash">sudo systemctl enable mysql
+</code></pre>
+</li>
+</ol>
+<h2 id="运行安全配置脚本"><a href="#运行安全配置脚本" class="headerlink" title="运行安全配置脚本"></a>运行安全配置脚本</h2><pre><code class="lang-bash">sudo mysql_secure_installation
+</code></pre>
+<h2 id="修改用户名和密码"><a href="#修改用户名和密码" class="headerlink" title="修改用户名和密码"></a>修改用户名和密码</h2><ol>
+<li><p>查看mysql自动设置的随机账号与密码</p>
+<p>MySQL安装后，会为用户自动设置一个随机的账号和密码，所以我们需要先查看账号与密码。</p>
+<pre><code class="lang-bash">sudo cat /etc/mysql/debian.cnf
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/971.png" alt=""></p>
+<pre><code># Automatically generated for Debian scripts. DO NOT TOUCH!
+[client]
+host     = localhost
+user     = debian-sys-maint
+password = f9pXLcJcv5kEY5LK
+socket   = /var/run/mysqld/mysqld.sock
+[mysql_upgrade]
+host     = localhost
+user     = debian-sys-maint
+password = f9pXLcJcv5kEY5LK
+socket   = /var/run/mysqld/mysqld.sock
+</code></pre></li>
+<li><p>用默认账号密码登录mysql</p>
+<pre><code class="lang-bash">sudo mysql -udebian-sys-maint -p
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/972.png" alt=""></p>
+<pre><code class="lang-bash">sudo ls -l /var/run/mysqld/
+</code></pre>
+<ul>
+<li>查看 <code>/var/run/mysqld/</code> 目录及 <code>mysqld.sock</code> 文件的权限：</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/973.png" alt=""></p>
+</li>
+<li><p>找到账号密码有关的数据库</p>
+<pre><code class="lang-sql">show databases;   # 查看数据库
+use mysql;   # 选择mysql数据库名
+</code></pre>
+</li>
+<li><p>密码强度查询</p>
+<pre><code class="lang-sql">SHOW VARIABLES LIKE &#39;validate_password%&#39;;
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/974.png" alt=""></p>
+<ul>
+<li><p>修改密码策略为更宽松的级别</p>
+<pre><code class="lang-sql">SET GLOBAL validate_password.policy = LOW;
+</code></pre>
+</li>
+<li><p>设置密码长度的最低要求</p>
+<pre><code class="lang-sql">SET GLOBAL validate_password.length = 6;
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p>更改用户名和密码</p>
+<pre><code class="lang-sql"># 将字段置为空
+update user set authentication_string=&#39;&#39; where user=&#39;root&#39;;  
+
+# 修改密码
+alter user &#39;root&#39;@&#39;localhost&#39; identified with mysql_native_password by &#39;123456&#39;;   
+# xxxxxx需设置自己的密码
+
+# 修改用户名
+update user set user=&#39;xxxxx&#39; where user=&#39;root&#39;;   # xxxxx需填写自己的用户名
+</code></pre>
+<ul>
+<li><p>确认是否更改成功</p>
+<pre><code class="lang-sql">SELECT user, host, authentication_string FROM mysql.user WHERE user=&#39;root&#39;;
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/975.png" alt=""></p>
+</li>
+</ul>
+</li>
+<li><p>重新加载权限表</p>
+<p>手动修改了 mysql 数据库中的权限表（如 user、db 等），需要执行以下命令。</p>
+<pre><code class="lang-sql">flush privileges;
+</code></pre>
+</li>
+<li><p>退出MySQL</p>
+<pre><code class="lang-sql">quit;
+</code></pre>
+</li>
+<li><p>以新账户密码登录mysql</p>
+<pre><code class="lang-bash">mysql -u root -p
+</code></pre>
+</li>
+</ol>
+<h2 id="Navicat-Premium连接数据库"><a href="#Navicat-Premium连接数据库" class="headerlink" title="Navicat Premium连接数据库"></a>Navicat Premium连接数据库</h2><ol>
+<li><p>配置 MySQL 的网络访问</p>
+<p>确保 MySQL 配置允许从远程地址连接。打开 MySQL 配置文件（通常是 <code>/etc/mysql/mysql.conf.d/mysqld.cnf</code> 或 <code>/etc/my.cnf</code>），并检查 <code>bind-address</code> 设置：</p>
+<pre><code class="lang-bash">sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/976.png" alt=""></p>
+</li>
+<li><p>修改<code>mysqld.cnf</code>配置</p>
+<p><code>bind-address = 127.0.0.1 -&gt; 0.0.0.0</code></p>
+</li>
+<li><p>执行后需重启 MySQL 服务：</p>
+<pre><code class="lang-bash">sudo systemctl restart mysql
+</code></pre>
+</li>
+<li><p>确保防火墙规则允许 MySQL 端口</p>
+<p>如果正在使用 UFW 作为防火墙工具，需要确保 3306 端口（MySQL 默认端口）是打开的：</p>
+<pre><code class="lang-bash">sudo ufw allow 3306
+</code></pre>
+</li>
+<li><p>添加权限</p>
+<pre><code class="lang-sql">UPDATE mysql.user SET host=&#39;%&#39; WHERE user=&#39;root&#39; AND host=&#39;localhost&#39;;  
+FLUSH PRIVILEGES;
+</code></pre>
+</li>
+<li><p>配置连接</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/977.png" alt=""></p>
+</li>
+</ol>
 
     </div>
     
