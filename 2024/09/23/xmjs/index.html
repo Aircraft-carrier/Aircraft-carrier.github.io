@@ -3,7 +3,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8" />
-    <title>SpringBoot 1 | Aircraft</title>
+    <title>项目介绍 | Aircraft</title>
     <meta name="author" content="Aircraft" />
     <meta name="description" content="谁替我上学 我可以替你睡觉" />
     <meta name="keywords" content="" />
@@ -156,22 +156,22 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>SpringBoot 1</h1>
+        <h1>项目介绍</h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2024/7/11
+            2024/9/23
         </span>
         
         <span class="category">
-            <a href="/categories/Learning-Notes/">
+            <a href="/categories/Learning/">
                 <span class="icon">
                     <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
-                Learning Notes
+                Learning
             </a>
         </span>
         
@@ -184,15 +184,8 @@
             
             <span class="tag">
                 
-                <a href="/tags/SpringBoot/" style="color: #ff7d73">
-                    SpringBoot
-                </a>
-            </span>
-            
-            <span class="tag">
-                
-                <a href="/tags/Vue3/" style="color: #03a9f4">
-                    Vue3
+                <a href="/tags/hello/" style="color: #ffa2c4">
+                    hello
                 </a>
             </span>
             
@@ -201,38 +194,22 @@
     </div>
     
     <div class="content" v-pre>
-        <h1 id="SpringBoot"><a href="#SpringBoot" class="headerlink" title="SpringBoot"></a>SpringBoot</h1><p><a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1LMQD7FangseCC-GV1iLw2A?pwd=zzl1">网盘</a><br><a target="_blank" rel="noopener" href="https://springdoc.cn/spring-boot/">Spring Boot 中文文档 (springdoc.cn)</a></p>
-<h2 id="🍍入门"><a href="#🍍入门" class="headerlink" title="🍍入门"></a>🍍入门</h2><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV14z4y1N7pg?p=3&amp;vd_source=d3bc4c959fab1a2090edcb9ed0b9d2e5">spring-boot工程创建</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV14z4y1N7pg?p=4&amp;vd_source=d3bc4c959fab1a2090edcb9ed0b9d2e5">Maven工程创建</a></p>
-<ul>
-<li>创建Maven工程</li>
-<li>导入spring-boot-stater-web起步依赖</li>
-</ul>
-<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240721105429328.png" alt=""></p>
-<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240721105524536.png" alt=""></p>
-<ul>
-<li>编写<code>Controller</code></li>
-</ul>
-<pre><code class="lang-java">@RestController
-public class HelloController &#123;
-    @RequestMapping(&quot;/hello&quot;)
-    public String hello()&#123;
-        System.out.println(&quot;Hello World ~&quot;);
-        return &quot;hello World ~&quot;;
-    &#125;
-&#125;
-</code></pre>
-<ul>
-<li>提供一个启动类</li>
-</ul>
-<pre><code class="lang-java">@SpringBootApplication
-public class SpringbootStartApplication &#123;
-    public static void main(string[] args) &#123;
-        SpringApplication.run(SpringbootStartApplication.class,args);
-    &#125;
-&#125;
-</code></pre>
-<p><a target="_blank" rel="noopener" href="https://aircraft-carrier.github.io/2024/07/21/SpringBoot-2/">SpringBoot 2</a></p>
+        <h1 id="心颖精割——基于飞桨的-Heart—DualSeg-及瘢痕检测智能诊疗平台"><a href="#心颖精割——基于飞桨的-Heart—DualSeg-及瘢痕检测智能诊疗平台" class="headerlink" title="心颖精割——基于飞桨的 Heart—DualSeg 及瘢痕检测智能诊疗平台"></a>心颖精割——基于飞桨的 Heart—DualSeg 及瘢痕检测智能诊疗平台</h1><center><div style='height:2mm;'></div><div style="font-size:14pt;">张维浩、郑书航、林子健、文馨逸</div></center>
+<center><span style="font-size:9pt;line-height:9mm"><i>2024 yyds</i></span>
+</center>
+
+<p>🌟 Welcome to Our Project! 🌟</p>
+<p>这是我们项目简介的博客，欢迎你的加入！我们期待与您一起探索和创造更多的可能性！🚀✨</p>
+<h2 id="展示页面网址"><a href="#展示页面网址" class="headerlink" title="展示页面网址"></a>展示页面网址</h2><p>网页地址 ： <a target="_blank" rel="noopener" href="http://www.heartseg.cn/">http://www.heartseg.cn/</a></p>
+<p>测试账号：</p>
+<pre><code>用户名：测试用户s
+密码是：123456
+</code></pre><p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240923102148539.png" alt="image-20240923102148539"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240923101825508.png" alt="image-20240923101825508"></p>
+<h2 id="B站视频"><a href="#B站视频" class="headerlink" title="B站视频"></a>B站视频</h2><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1vssUe7E3D/?vd_source=d3bc4c959fab1a2090edcb9ed0b9d2e5">视频1</a>  <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1vssUe7EdZ/?spm_id_from=333.999.0.0&amp;vd_source=d3bc4c959fab1a2090edcb9ed0b9d2e5">视频2</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240923102046988.png" alt="image-20240923102046988"></p>
+<h2 id="创意报告书"><a href="#创意报告书" class="headerlink" title="创意报告书"></a>创意报告书</h2><p><a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/xlbs.pdf">pdf下载</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/image-20240923102523618.png" alt="image-20240923102523618"></p>
 
     </div>
     
