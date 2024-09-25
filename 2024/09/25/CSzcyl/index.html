@@ -1,0 +1,558 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>CSzcyl | Aircraft</title>
+    <meta name="author" content="Aircraft" />
+    <meta name="description" content="谁替我上学 我可以替你睡觉" />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>AIRCRAFT</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;AIRCRAFT</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>CSzcyl</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2024/9/25
+        </span>
+        
+        <span class="category">
+            <a href="/categories/Learning/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Learning
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/cszc/" style="color: #ffa2c4">
+                    cszc
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h1 id="计算机组成原理-硬件电路整理"><a href="#计算机组成原理-硬件电路整理" class="headerlink" title="计算机组成原理 | 硬件电路整理"></a>计算机组成原理 | 硬件电路整理</h1><ul>
+<li>桶形移位器原理图</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/52fe63ac7092055f0c0ea4bd114966be.png" alt="在这里插入图片描述"><br>    桶形移位器是纯组合逻辑电路，该电路巧妙地利用5个二路选择器串联构成，移位参数$y$的5个二进制位、为$y_1,y_2,y_3,y_4,y_5$分别连接到5个二路选择器的选择控制端，而二路选择器的两个输入端分别对应前一级二路选择器的输出，以及该输出按当前选择控制位对应权值进行移位后的结果。图中虚线所示的路径为x&lt;&lt;5的运算路径。相比位运算的一级逻辑门电路实现，移位运算逻辑需要5个二路选择器的时间延迟，一个二路选择器需要2级基本门电路延迟，所以 32 位可变移位器的时间延迟为10级门电路延迟，时间略长。</p>
+<ul>
+<li>全加器逻辑框图</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/31390a7c3f41f44bc10bd2ff49c4d996.png" alt="在这里插入图片描述"></p>
+<script type="math/tex; mode=display">
+S_i=X_i \oplus Y_i \oplus C_i
+\\
+C_{i+1}=X_iY_i+(X_i+Y_i)C_i
+\\
+C_{i+1}=X_iY_i+(X_i \oplus Y_i)C_i</script><p>​    对于$n$位串行加法器，高位的全加器必须等待低位进位后才能开始运算，注意当进位信号产生时，已经经过了5T，考虑组合逻辑电路的并行性，所有位的$X_i \oplus Y_i$都已并行运算完毕，此时只需要经过一个异或门时间延迟 3T就可以得到当前位的和，再经过2T的时间延迟就可以生成进位输出信号。</p>
+<ul>
+<li>多位可控加减法电路逻辑框图</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/e12af8050f9b76f9b24bf645738286c0.png" alt="在这里插入图片描述"><br>    图所示是多位可控加减法电路逻辑框图，该电路在n位串行加法器中引入$Sub$控制信号，操作数$Y$的所有位$Y_i$均与$Sub$信号进行异或后被送入$n$位串行加法器。当$Sub=0$时，送入加法器的是$Y$本身;当$Sub=1$时，送入加法器的是$Y$的反码。另外 $Sub$ 连接到加法器最低位的进位输入，实现了对$Y$操作数逐位取反、末位加1的求补过程，从而完成减法操作。而当$Sub=0$时低位进位为0，不影响加法结果的正确性。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/ea02176c0224db9db491f22215b8b5b4.png" alt="在这里插入图片描述"></p>
+<ul>
+<li>可级联的4位先行进位电路</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/967e2941ae8348af21bfa3f676e2da23.png" alt="在这里插入图片描述"><br>假设 $G<em>i=X_iY_i,P_i=X_i \oplus Y_i$。当$G_i=1$时,$C</em>{i+1}$一定为1,所以将$G$,称为<strong>进位生成函数</strong>;当$P<em>i=1$时也就是$X_i、Y_i$相异时,进位输入信号$C_i$才能传递到进位输出$C</em>{i+1}$处,所以将$P_i$称为<strong>进位传递函数</strong>,有了进位生成函数和传递函数，有如下公式:</p>
+<script type="math/tex; mode=display">
+S_i=P_i \oplus C_i   \quad C_{i+1}=G_i+P_iC_i\\
+C_n=G_{n-1}+P_{n-1}G_{n-2}+P_{n-1}P_{n-2}G_{n-3}...P_{n-1}P_{n-2}...P_1P_0C_0</script><p>$G<em>$称为成组进位生成函数，$P</em>$生成成组进位传递函数。</p>
+<ul>
+<li>4位快速加法器</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/e4110f9656b0479d0e2308c82f89e79a.png" alt="在这里插入图片描述"></p>
+<ul>
+<li>16位组内并行、组间并行加法器</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/556b2b87a2f5b10266fdae649c319651.png" alt="在这里插入图片描述"></p>
+<p>注意图中所有4位快速加法器产生成组生成的进位函数$G^<em>,P^</em>$的时间延迟为5T，而先行进位电路的时间延迟为$2T$，所以生成$C<em>4、C_8、C</em>{12}、C_{16}$的时间延迟为7T。当这些信号就绪后，此时4位快速加法器内部的与门异或门电路已经运算完毕，需要2T生成进位输出信号，需要5T输出和数，因此，整个电路的关键时间延迟为和数信号的时间延迟12T。相比16位组内并行、组间串行加法器，其关键时间延迟少了2T。如果采用这种方式进一步级联构成 64位快速加法器，则时间延迟为16T。</p>
+<ul>
+<li>实现原码一位乘法的逻辑框图</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/60365686d09647ef583b681230b829ea.png" alt="在这里插入图片描述"></p>
+<p>​    图中$n$位寄存器$R<em>0$存放部分积$P,n$位寄存器$R_1$,存放乘数$y$，最低位$y_n$为判断位。注意寄存器是时序逻辑，需要连接时钟信号，用蓝色表示，当使能控制端 $En=1$，时钟触发时输入端数据会载入寄存器。$n$位加法器实现部分积的累加$P=P+y_n|x|$一个操作数来自$R_0$中的部分积$P$,另一个操作数为$y_n|x|$，由$y_n$通过多路选择器选择实现。加法器进位输出$C</em>{out}$、运算结果以及寄存器$y$的值    同步算术右移一位，移位结果的高$n$位数据$P_{new}$送入$R_0$,的输入端，低$n$位数据$y$送入$R_1$,的输入端。<br>​    控制逻辑受时钟驱动，负责循环计数和算术移位结果的载入控制，加法器和算术移位逻辑是组合逻辑，会自动进行累加与算术右移操作。但运算结果必须由控制逻辑控制使能端并配合时钟才能载入寄存器$R_0、R_1$中，控制逻辑必须保证前$n$个时钟$En=1$，第$n+1$个时钟之后$En=0$，这样$2n$位乘积会最终锁存在$R_0、R_1$,这两个$n$位寄存器中。</p>
+<blockquote>
+<p>原码一位乘(n+1位乘)：符号位不参与运算，需单独计算符号位；数值为加一次，右移一次，总共进行n次最终结果为2n位加符号位2n+1位。</p>
+</blockquote>
+<ul>
+<li>补码一位乘法的逻辑框图</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/1bbc13290072fcfc950a02a5ca64f0c1.png" alt="在这里插入图片描述"></p>
+<p>补码一位乘法器和原码一位乘法器逻辑结果十分相似，有几处不同。如$R<em>0$有$n+1$包括符号位，$R_1$有$n+2$位包括符号位和补充的$y</em>{n+1}$。运算器输入添加了一个多路选择逻辑，$y<em>ny</em>{n+1}$为00或11时输入为0，当$y<em>ny</em>{n+1}$为01时输入为$[x]<em>补$,当$y_ny</em>{n+1}$为10时输入为$\overline{[x]<em>补}$同时$c</em>{in}=y<em>n \overline{y</em>{n+1}}$即输入$-[x]<em>补=[-x]</em>补$</p>
+<blockquote>
+<p>补码一位乘法(n+1位乘)：符号位参与运算，不需要单独计算符号位；</p>
+<p>计算$[x]<em>补,[-x]</em>补=[[x]<em>补]</em>补,[y]<em>补$，同时$[y]</em>补$添加一位$y_{n+1}=0$，</p>
+<p>加n+1次，右移n次，最后一次加不右移。结果2n+1位符号位包含在数值运算结果中。</p>
+<script type="math/tex; mode=display">
+\{P,y\}=\{(P+(y_{n+1}-y_{n})[x]_补)，y\}/2</script></blockquote>
+<ul>
+<li>无符号数阵列乘法器</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/1f0f46e9bdf9a7e79781e4e9cc1c21a5.png" alt="在这里插入图片描述"></p>
+<ul>
+<li>原码不恢复余数法硬件逻辑框图</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/c2474a4443bcf43939b1785992736c85.png" alt="在这里插入图片描述"><br>如果$R<em>1 ≥ 0$，上商位$q_i=1$，则将余数$R$左移一位再减除数$y$，得到新余数$R</em>{i+1}$，具体计算过程如下:</p>
+<script type="math/tex; mode=display">
+R_{i+1}=2R_i-y \quad (R_i \geq 0)</script><p>如果$R<em>i&lt;0$，上商位$q_i=0$，应将余数$R_i$先加上除数$y$然后恢复余数，再左移一位后减除数$y$得到新余数$R</em>{i+1}$，具体计算过程如下:</p>
+<script type="math/tex; mode=display">
+R_{i+1}=2\underbrace{(R_i+y)}_{\text{恢复余数}}-y=2R_i+y  \quad (R_i < 0)</script><p>实现原码不恢复余数法的硬件逻辑框图如图所示。其中寄存器$Reg<em>0$,在除法开始前存放被除数$x$，在运算过程中存放余数$R$;商存放在$Reg_1$中。加法器进行什么运算由商寄存器最低位$Q_n$决定$Q_n$的值是上一步运算所上的商。当$Q_n=1$时，下一步减$|y|$，这里减法采用反码末位加1 的方式实现;当 $Q_n=0$时，则下一步进行加$|y|$的操作。注意$Q_n$初始值应该为1，以保证第一次运算为减法。而当前运算的上商位由加法器进位位$C</em>{out}$决定，和数、$Q$、加法器进位位$C<em>{out}$同步左移后，高位部分$P</em>{new}$被送入余数寄存器R中，低位部分$Q<em>{new}$被送入商寄存器$Q$中，在时钟到来时载入，这样每次新的上商位$C</em>{out}$都可以加载到商寄存器$Q$的$Q_n$位。</p>
+<blockquote>
+<p>原码恢复余数法(n+1位除)：商初始化n+1位包括符号位(最后一位运算过程中不会变)，符号位单独计算$x<em>0 \oplus y_0$。原码除法需要计算$|x|,[|y|]</em>补,[-|y_补|]$。加n+1次，左移n次，最后一次加不左移。结果商n位，加符号位n+1位和一个n+1位的余数。</p>
+<p>注意：运算结果中余数如果位负数，需要一次余数恢复。</p>
+</blockquote>
+<ul>
+<li>基本算数逻辑运算单元</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/84b764ee27454d956f4445a52494ed45.png" alt="在这里插入图片描述"></p>
+<ul>
+<li>n位ALU</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/516e51cdd029b2f4e3729d0ef43560aa.png" alt="在这里插入图片描述"></p>
+<ul>
+<li>六管SRAM存储单元</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/361e30834687991219038ec721b69156.png" alt="在这里插入图片描述"></p>
+<ol>
+<li><p>电路状态</p>
+<p>假设 A 点为高电位，根据 MOS管特性，栅极高电位则源级和漏极导通，低电位则截止，所以 A 点高电位使$T_2$, 管导通，B点与接地端导通，变成低电位;而B点的低电位又使$T_1$管截止A 点的高电位和漏极接地端隔离。这样$T_1、T_2$,管一个截止、一个导通，A点高电位，B 点低电位，形成一个稳定的状态，用来存储数据“1”。由于电路是对称的，因此当B点为高电位时，A 点则为低电位，也可以构成另一个稳态，可用这个状态表示数据“0”。注意带电情况下，A、B 点电平信号相同时的状态都是不稳定状态，电路最终会变成稳定状态。</p>
+</li>
+<li><p>信息保持</p>
+<p>当不对存储单元进行读写操作时，不用给出行、列选通信号，门控管$T_5$~$T_8$截止，电源Vcc通过负载管 $T_3、T_4$,不断为$T_1$ 或$T_2$,提供电流，以保存信息。只要电源不断，存储单元的状态就一直保持不变，并且在读出时也不破坏原有数据。</p>
+</li>
+</ol>
+<ul>
+<li>SRAM存储单元行列扩展</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/32aac6afdfe5d525b8f3560b8456aa8c.png" alt="在这里插入图片描述"></p>
+<ul>
+<li>4096×4位的静态MOS存储器结构框图</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/aaba5ccb2ac0f80312f1b499b5b2a0ae.png" alt="在这里插入图片描述"></p>
+<ol>
+<li><p>地址译码器</p>
+<p>存储器中地址译码器的作用是将地址翻译成驱动存储单元门控管的行、列选通信号，并选中相应的存储单元，这里采用的是双译码结构。</p>
+</li>
+<li><p>驱动器</p>
+<p>每个行译码输出信号都要同时驱动这一行上所有位存储体的$T_5、T_6$。两个门控管，考虑4个存储阵列并发，每一根行译码输出信号线要驱动64x2x4=512个门控管，负载较大，因此用驱动器来增强其负载能力。而每一个列译码器的输出信号要打开$T_7、T_8$两个门控管，4位存储体需要驱动8个门控管，所以也需要增加Y向驱动器增强其负载能力。</p>
+</li>
+<li><p>片选信号和读写控制电路</p>
+<p>由于一块集成芯片的容量有限，要组成一个大容量的存储器，往往需要将多块芯片连接起来使用。此时，存储器被访问时并不是所有的芯片都会同时工作，通过片选信号可以很好地解决存储芯片的选择问题。只有片选信号$\overline{CS}$有效的存储芯片才能进行读或写操作。读或写操作通过CPU发出读写命令控制$\overline{WE}$来实现。</p>
+</li>
+</ol>
+<ul>
+<li>Intel 2114 结构</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/fc7349b8c57d864e597fbe2a025cee2f.png" alt="在这里插入图片描述"><br>行选通后该行的所有信号可以同时传送的列I/O电路中。</p>
+<p>$IO_1$~ $IO_4$,用于连接双向数据总线。这里利用三态门进行数据总线的传输方向控制。由片选信号$\overline{CS}$和写使能信号$\overline{WE}$控制左右两组三态门的写入或读出。写入时，$\overline{CS}$和$\overline{WE}$均有效(低电平)W端为高电平，打开左侧的一组三态门，数据总线上的数据经输入数据控制逻辑写入存储器。读出时，$\overline{WE}$无效(高电平)，R端为高电平，右边的一组三态门被打开，数据从存储器读出并由列 I/O电路送入数据总线。由于读和写是分时的，W和R信号互斥，因此数据总线上的数据不会出现混乱。</p>
+<ul>
+<li>单管DRAM内部电路</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/89fd8ee9be7cbd2ea1da64669bdb9b47.png" alt="在这里插入图片描述"></p>
+<ol>
+<li><p>预充操作</p>
+<p>给出预充信号，由预充电路将位线$D$和$\overline{D}$预充到 Vcc/2的电压后撤除预充信号，此时位线上的寄生电容保持Vcc/2的电压;预充的目的是加速读取的过程，类似将跷跷板支撑到一定的高度方便跷跷板一上一下。</p>
+</li>
+<li><p>访问操作</p>
+<p>给出行选通信号，$T_1$管导通，存储电容和位线上的寄生电容进行电荷重分配，假设存储电容上有电荷，存储数据“1”则位线D上的电压将略大于 Vc2;反之如果存储电容上没有电荷，则位线D上的电压将略低于 Vcc/2。</p>
+</li>
+<li><p>信号检测</p>
+<p>启动读出放大检测电路，将SAN接地，SAP电压为Vcc，由于左侧电压略高，跷跷板电路平衡被打破，$T<em>{n2}、T</em>{p1}$。相对而言更容易导通，交叉连接的 MOS 管形成正反馈，电路稳定后$D$线上的电压上为稳定的逻辑“1”高电平 Vc，而$\overline{D}$线上则为逻辑“0”低电平。</p>
+</li>
+<li><p>数据恢复</p>
+<p>经过信号检测阶段后，位线$D$变成稳定的逻辑“1”高电平Vcc，该电平会给存储电容进行充电，使得存储电容的电荷恢复到之前的状态;由于同一行上所有列都可以并发进行前4步的操作，因此同一行上的所有存储单元中的数据都会被刷新一遍，读操作可以实现行刷新的功能;由于数据恢复过程的时间延迟较长，因此通常将多列的读取并发进行以提高读性能，也就是按行进行批量读取。</p>
+</li>
+<li><p>数据输出</p>
+<p>给出列选通信号，位线$D$和$\overline{D}$上的数据就可以输出到外部;由此可知 DRAM 的行选通和列选通信号并不是同时给出的，因此DRAM 存储器通常将行、列地址复用，以减少地址引脚数目;完成数据的读操作后，撤除行选通信号，关闭读出放大检测电路。</p>
+</li>
+</ol>
+<ul>
+<li>动态MOS存储器芯片2116的逻辑符号及内部结构</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/fab97d8e657cd876806bf2630ffe1d4f.png" alt="在这里插入图片描述"><br>2116表示16Kx1位存储芯片，其采用地址复用技术，分别由行地址选通信号$\overline{RAS}$和列地址选通信号$\overline{CAS}$先后将7位地址$A_0$~$A_6$分别锁存到行地址锁存器与列地址锁存器中。存储矩阵为128x128结构;7条行地址线也可作为刷新地址，刷新时用于地址计数，逐行刷新。</p>
+<p>行、列地址译码后均产生128条选择线。选中某行时，该行的128个存储元都被选通到放大再生电路中，在那里每个存储单元会进行预充、访问、检测、恢复的过程。而列译码器中只选通 128个放大器中的一个，将读出的信息送入输出缓冲器中。</p>
+<blockquote>
+<p> 从前面的分析可看出，DRAM的结构大体与SRAM 存储芯片相似，二者的不同点如下</p>
+<ol>
+<li>地址线一般采用复用技术，即CPU分时传送行、列地址，并分别由行选通信号$\overline{RAS}$和列选通信号$\overline{CAS}$选通。</li>
+<li>DRAM无片选信号，通常可由$\overline{RAS}$和$\overline{CAS}$选通信号代替)</li>
+<li>数据输入($D<em>{IN}$)和数据输出($D</em>{out}$)分开且可锁存。</li>
+</ol>
+</blockquote>
+<ul>
+<li>CAM基本原理</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/4679b010741305155c12e12577bf3db9.png" alt="在这里插入图片描述"></p>
+<ul>
+<li>全相联映射的硬件逻辑实现框图</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/2c88122888b48a0335832fbc1949c155.png" alt="在这里插入图片描述"></p>
+<ul>
+<li>直接相联映射的硬件逻辑实现框图</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/6ff71dac4e7382a5ab861a9609e98894.png" alt="在这里插入图片描述"></p>
+<ul>
+<li>组相连映射的硬件逻辑实现框图</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/c18bd5dba8f98117d3a88a816d9cd1aa.png" alt="在这里插入图片描述"></p>
+<ul>
+<li>基于TLB的虚拟地址到物理地址的转换</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/72519b6f2920e52e517337cbe9b1734f.png" alt="在这里插入图片描述"></p>
+<ul>
+<li>CPU基本组成</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/7ad5a1f376b76b3a0cc34ee27b0d34f7.png" alt="在这里插入图片描述"><br>    CPU 执行指令的过程就是 CPU 控制信息流的过程，操作控制器是控制的决策机构，其产生的微操作控制信号序列就是控制流。信息流的控制就是将操作控制器生成的微操作控制信号序 列送到各功能部件的控制门、多路选择器、触发器或锁存器处，依时间先后顺序打开或关闭某 些特定的门电路，使数据信息按完成指令功能需要经过的路径——数据通路从一个功能部件传 送到另一个功能部件，实现对数据加工处理的控制。</p>
+<ul>
+<li>数据通路与时钟周期</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/afb311dc31ae27efb7e1e3c7cb1d9045.png" alt="在这里插入图片描述"><br>​    <strong>数据处理单元</strong>由组合逻辑电路构成，其输出只与当前的输入有关，负责对数据进行加工处理，如 ALU、符号扩展单元、译码器等。<strong>状态存储单元</strong>（状态单元）是指带有存储功能的单元，如存储器和寄存器。状态单元一般包含输入端、写使能控制端、时钟输入端和输出端。数据只有在写使能信号有效且时钟脉冲到来时才能写入状态单元（边沿触发)，如果每个时钟脉冲都写入数据，则不需要设置写使能控制端。</p>
+<blockquote>
+<p>CPU 的主要功能是执行指令，控制数据信息的流动，实现数据的存储、处理和传输。而这 些都依赖于数据通路的建立，通用数据通路模型可以利用一个数据处理单元连接两个状态单元 的方式构成</p>
+</blockquote>
+<p>假设状态单元 1 和状态单元 2 分别对应寄存器 A 和 B，各自的写使能信号一直有效，由于时钟上跳沿时两寄存器会同时锁存新值，从时钟上跳沿时刻到寄存器 A 输出稳定的时间称为寄存器延迟 $T<em>{clk_to_q}$，数据处理单元对寄存器 A 的输出数据进行处理加工时有一个关键路径延迟 $T</em>{max}$（所有输出信号稳定的延迟）。根据寄存器的时序特性，寄存器 B 要将寄存器 A 经过组合逻 辑传递过来的数据正确锁存，在下一个时钟上跳沿到来之前，还需要让输入数据保持一段稳定 时间 $T_{setup}$（寄存器建立时间），另外时钟上跳沿到来之后输入数据还需要一段稳定时间 Thold（寄 存器保持时间）</p>
+<ul>
+<li>单总线结构的计算机框图</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/0a51c1a2469ca85ba6636d37b7fecfbd.png" alt="在这里插入图片描述"><br>对单总线结构而言，总线 上可以有多个模块同时接收数据，但某一时刻只能有一个模块向总线发送数据，否则会出现数据 冲突。因此，连接到总线上的部件都需要进行输出控制，以防止总线上出现数据冲突。</p>
+<ul>
+<li>单周期MIPS处理器的数据通路高层视图</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/aca4bc63cd8a459209fc3f96d0684287.png" alt="在这里插入图片描述"></p>
+<p>最为典型的专用数据通路结构就是单周期 MIPS 处理器，单<strong>周期 MIPS 处理器是指所有指令在一个时钟周期内完成的 MIPS 处理器</strong>尽管不同指令的执行时间可能不同，但基于木桶原理，单周期处理器的时钟周期取决于执行速度最慢的指令。由于只能在一个时钟周期内完成指令的取出和执行操作， 指令执行过程中数据通路的任何资源都不能被重复使用，都应该是<strong>专用的数据通路</strong>，需要被<strong>多次使用的资源（如加法器）都需要设置多个</strong>；取指令和取操作数操作都需要访问存储器，因此将指令和数据分别存放在指令存储器和 数据存储器中，以避免资源冲突。这是设计单周期处理器中的数据通路时必须考虑的重要环节。</p>
+<ul>
+<li>多周期MIPS处理器的数据通路高层视图<br><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/aad8913fbe2a64a9fed5755303ad1657.png" alt="在这里插入图片描述"></li>
+</ul>
+<p>所谓多周期方式是指根据指令执行所需要的功能操作，将一条指令的执行过程细分为若干 个更小的步骤，每个时钟周期执行其中一部分操作，并将操作结果暂存在相关寄存器中，供下 一个时钟周期进行处理，直至指令执行完毕。与单周期数据通路不同的是，多周期数据通路中 的功能部件单元可在一条指令执行过程的不同时钟周期中被多次使用。这种共享复用方式一方 面能提高硬件实现效率，另一方面也对处理器结构提出了与单周期不同的需求。</p>
+<ul>
+<li>传统三级时序逻辑硬布线模型</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/6862cfacaff956ad0de40dfd7c53bbf7.png" alt="在这里插入图片描述"></p>
+<ul>
+<li>采用ROM实现的地址转移逻辑</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/642dc8b67ce172323c710ab947bfd092.png" alt="在这里插入图片描述"></p>
+<ul>
+<li>支持动态分支预测的MIPS五段流水</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/33b75a99c0c30be0630a87e831ae8720.png" alt="在这里插入图片描述"></p>
+<ul>
+<li>I/O接口通用结构</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/4815a115914f5b12105a5f75001703d0.png" alt="在这里插入图片描述"></p>
+<ol>
+<li>数据缓冲寄存器(DBR):用于缓冲数据，以匹配 CPU与外部设备之间的速度差异。CPU 执行输入操作时，DBR 存放从IO设备读取的数据，该数据将被CPU通过总线读取并送入CPU寄存器中;执行输出操作时 DBR暂存CPU送来的数据，该数据最终会被输出至具体外部设备。</li>
+<li>设备状态寄存器(DSR):用于反馈设备状态，常见的状态信息如设备忙、设备就绪设备错误等。在程序查询方式中，CPU通过读取状态寄存器来判断设备的状态，以确定程序下一步操作。</li>
+<li>设备命令寄存器(DCR):用于接收CPU发送的设备控制命令,如设备复位、设备识别读写控制等，不同设备所能支持的命令不同，简单设备甚至没有命令寄存器，如简单的键盘输入和字符终端输出设备。有时状态和命令寄存器是合二为一的。</li>
+<li>设备存储器:这部分并不是必需的，常用于设备自身的运算和处理，如显卡中的显存。</li>
+<li>地址译码器:用于识别地址总线上的地址是否是当前IO接口连接的外部设备。</li>
+<li>数据格式转换逻辑:进行串并或并串传送的转换。</li>
+</ol>
+<ul>
+<li>中断查询方式的I/O接口</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/989f5a728486ff27c178e9136176fa11.png" alt="在这里插入图片描述"></p>
+<ol>
+<li>当CPU通过I/O指令启动输入设备时，指令的设备码字段通过地址线送至设备选择电路。</li>
+<li>若该接口的设备码与地址线上的代码吻合，其输出SEL有效。</li>
+<li>I/O指令的启动命令经过“与非”门将工作触发器B置“1”,将完成触发器D置“0”。</li>
+<li>由B触发器启动设备工作。</li>
+<li>输入设备将数据送至数据缓冲寄存器。</li>
+<li>由设备发设备工作结束信号,将D置“1”,B 置“0”,表示外设准备就绪。</li>
+<li>D触发器以“准备就绪”状态通知 CPU,表示“数据缓冲满”。</li>
+<li>CPU执行输入指令,将数据缓冲寄存器中的数据送至CPU的通用寄存器,再存入主存相关单元。</li>
+</ol>
+<ul>
+<li>中断请求的硬件支持</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/e0e74601bdbe886477c6326b8d03ee08.png" alt="在这里插入图片描述"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/c47f2f93055f31050e8da11aee1d5016.png" alt="在这里插入图片描述"></p>
+<ul>
+<li>中断排队器</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/dbd97115a57bdd50c1f2589050898e3d.png" alt="在这里插入图片描述"></p>
+<p><strong>链式排队器</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/01dd39303e596cb1b161efd6cc7e3c2b.png" alt="在这里插入图片描述"><br><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/f13d398dc76f0c74ea99c4e448395ed8.png" alt="在这里插入图片描述"></p>
+<ul>
+<li>硬件关中断</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/269e0dc5537d8fe5506751a93ff46170.png" alt="在这里插入图片描述"></p>
+<p>一条指令执行周期结束后，CPU发出中断查询信号，此时EINT为1表示允许中断，各中断源经过IMP（中断屏蔽）送至排队器，排队器选择响应优先级最高的信号输出到向量地址形成部件。同时进行一步硬件关中断的操作，EINT的RS触发器Q端1和排队器传递来的有中断请求1传到INT为RS触发器S端置Q为1(INT的R端应该为始终为1)代表进入中断周期,INT的Q端传到EINT的R端至EINT的Q为0。</p>
+<ul>
+<li>程序中断方式的接口</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/3ebab38e9da87b93f3fe66589595e6d1.png" alt="在这里插入图片描述"></p>
+<p>输入为例：启动命令→启动设备→输入数据→设备结束→中断查询→中断请求→中断响应→中断地址。</p>
+<ol>
+<li>由CPU发启动I/O设备命令，将接口中的B置“1”，D置“0”;</li>
+<li>接口启动输入设备开始工作;</li>
+<li>输入设备将数据送入数据缓冲寄存器;</li>
+<li>输入设备向接口发出“设备工作结束”信号，将D置“1”，B置“0”，标志设备准备就绪;</li>
+<li>当设备准备就绪(D=1)。且本设备未被屏蔽(MASK=0)时，在指令执行阶段的结束时刻，由CPU发出中断查询信号;</li>
+<li>设备中断请求触发器INTR 被置“1”，标志设备向CPU提出中断请求。与此同时，INTR送至排队器,进行中断判优;</li>
+<li>若CPU允许中(EINT=1)，设备又被排队选中，即进入中断响应阶段，由中断响应信号INTA 将队器输出送至编码器形成向量地址;</li>
+<li>向量地址送至PC，作为下一条指令的地址;</li>
+<li>由于向量地址中存放的是一条无条件转移指令，故这条指令执行结束后，即无条件转至该设备的服务程序入口地址，开始执行中断服务程序，进入中断服务阶段，通过输入指令将数据缓冲寄存器的输入数据送至 CPU的通用寄存器，再存入主存相关单元;</li>
+<li>中断服务程序的最后一条指令是中断返回指令，当其执行结束时，即中断返回至原程序的断点处。至此，一个完整的程序中断处理过程即告结束。</li>
+</ol>
+<ul>
+<li>DMA基本结构</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/c4548cabeff313854447c0300001df2a.png" alt="在这里插入图片描述"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/3040559a076014f9b19b9eec01591bfb.png" alt="在这里插入图片描述"></p>
+<p>CPU暂停方式输送数据<br><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/f2b1de6604bb04ba56993bf7bc80a894.png" alt="在这里插入图片描述"></p>
+<p>周期挪用方式传送数据<br><img src="https://cdn.jsdelivr.net/gh/Aircraft-carrier/PicGOO/images/082f2dc95539f2f723823db31accd9a3.png" alt="在这里插入图片描述"></p>
+
+    </div>
+    
+    
+    
+    
+    <div id="comment">
+        <div id="giscus-container" class="giscus"></div>
+    </div>
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2024 Aircraft
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Aircraft
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+<script
+    src="https://giscus.app/client.js"
+    data-repo="Aircraft-carrier/git-discussions-"
+    data-repo-id="R_kgDOMSMEYQ"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOMSMEYc4CglYu"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="light_tritanopia"
+    data-lang="zh-CN"
+    crossorigin
+    async
+></script>
+
+
+
+
+
+
+
+
+
+    
+
+    <canvas
+        id="fireworks"
+        style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 32767"
+    ></canvas>
+    <script src="https://s4.zstatic.net/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="/js/fireworks.min.js"></script>  
+
+    <canvas
+        id="background"
+        style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: -1"
+    ></canvas>
+    <script src="/js/background.min.js"></script>
+
+    <div id="cursor"></div>
+    <link rel="stylesheet" href="/css/cursor.min.css" />
+    <script src="/js/cursor.min.js"></script>
+
+</body>
+</html>
